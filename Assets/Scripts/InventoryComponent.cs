@@ -4,10 +4,9 @@ using System.Collections.Generic;
 public class InventoryComponent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject leftHandObj;
-    public GameObject rightHandObj;
+    public List<InventorySlot> inventorySlotList;
 
-    public List<InventorySlot> itemSlotList = new List<InventorySlot>(2);
+    public InventorySlot twoHandedSlot;
     void Start()
     {
         
@@ -19,7 +18,41 @@ public class InventoryComponent : MonoBehaviour
         
     }
 
-    void AddItemToArray()
+    void AddItemToArray(ItemPickup this_item)
+    {
+        
+        bool is_two_sized = false;
+
+        is_two_sized = this_item.itemData.numSlotsUsed == 2;
+
+        
+        if(is_two_sized)
+        {
+            foreach (InventorySlot this_slot in inventorySlotList)
+            {
+                if(!this_slot.SetSlotOccupied(this_item))
+                {
+
+                }
+            }
+        }
+        foreach (InventorySlot this_slot in inventorySlotList)
+        {
+                
+            if (this_slot.SetSlotOccupied(this_item) && this_item.itemData.numSlotsUsed == 1)
+            {
+                PickupItem(this_item);
+                this_item.SetObjectToFollow(this_slot.gameObject);
+                //incoming_item.
+
+                break;
+            }
+
+        }
+        
+    }
+
+    void SwitchHands()
     {
 
     }
@@ -27,5 +60,9 @@ public class InventoryComponent : MonoBehaviour
     void InitializeSlots()
     {
 
+    }
+    void PickupItem(ItemPickup item_to_pickup)
+    {
+        item_to_pickup.transform.parent = transform;
     }
 }
