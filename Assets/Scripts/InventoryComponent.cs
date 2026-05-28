@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 public class InventoryComponent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,7 +19,7 @@ public class InventoryComponent : MonoBehaviour
         
     }
 
-    void AddItemToArray(ItemPickup this_item)
+    public void AddItemToArray(ItemPickup this_item)
     {
         
         bool is_two_sized = false;
@@ -30,19 +31,26 @@ public class InventoryComponent : MonoBehaviour
         {
             foreach (InventorySlot this_slot in inventorySlotList)
             {
-                if(!this_slot.SetSlotOccupied(this_item))
+                if(this_slot.GetSlotIsOccupied())
                 {
-
+                    return;
                 }
             }
+            foreach (InventorySlot this_slot in inventorySlotList)
+            {
+                this_slot.SetSlotOccupied(this_item);
+                PickupItem(this_item, twoHandedSlot);
+                //this_item.SetObjectToFollow(twoHandedSlot.gameObject);
+            }
         }
+        else 
         foreach (InventorySlot this_slot in inventorySlotList)
         {
                 
             if (this_slot.SetSlotOccupied(this_item) && this_item.itemData.numSlotsUsed == 1)
             {
-                PickupItem(this_item);
-                this_item.SetObjectToFollow(this_slot.gameObject);
+                PickupItem(this_item, this_slot);
+                
                 //incoming_item.
 
                 break;
@@ -57,12 +65,11 @@ public class InventoryComponent : MonoBehaviour
 
     }
 
-    void InitializeSlots()
+    
+    void PickupItem(ItemPickup item_to_pickup, InventorySlot slot_to_attach_to)
     {
-
-    }
-    void PickupItem(ItemPickup item_to_pickup)
-    {
-        item_to_pickup.transform.parent = transform;
+        item_to_pickup.transform.parent = slot_to_attach_to.transform;
+        item_to_pickup.transform.forward = transform.forward;
+        item_to_pickup.SetObjectToFollow(slot_to_attach_to.gameObject);
     }
 }

@@ -7,13 +7,20 @@ public class ItemPickup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
 
+    private Collider myCollider;
+    
     private GameObject objectToFollow;
 
 
     public UnityEvent ev_Activated;
     void Start()
     {
-        itemData.ev_DroppedItem.AddListener(DropItemBehavior);
+        myCollider = GetComponent<Collider>();
+        if(itemData)
+        {
+            itemData.ev_DroppedItem.AddListener(DropItemBehavior);
+        }
+        
     }
 
     // Update is called once per frame
@@ -30,12 +37,15 @@ public class ItemPickup : MonoBehaviour
     public void DropItemBehavior()
     {
         transform.parent = null;
+        myCollider.enabled = true;
     }
     void InterpolateToObject()
     {
         if (objectToFollow)
         {
-            transform.DOMove(objectToFollow.transform.position, Time.deltaTime * 20.0f);
+            
+            transform.DOMove(objectToFollow.transform.position, Time.deltaTime * 1.0f / (Time.deltaTime * 2.0f));
+            
         }
     }
 
@@ -43,4 +53,17 @@ public class ItemPickup : MonoBehaviour
     {
         objectToFollow = new_object_to_follow;
     }
+    //DEBUG replace with interaction system
+    private void OnTriggerEnter(Collider other)
+    {
+        InventoryComponent inventory_obj = other.GetComponent<InventoryComponent>();
+        print(other);
+        if (inventory_obj)
+        {
+            print("Picking up item");
+            inventory_obj.AddItemToArray(this);
+            myCollider.enabled = false;
+        }
+    }
+    
 }

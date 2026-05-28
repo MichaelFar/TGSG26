@@ -31,4 +31,8 @@ public class InventorySlot : MonoBehaviour
         isOccupied = false;
         itemData.ev_DroppedItem.Invoke();
     }
+    public bool GetSlotIsOccupied()
+    {
+        return isOccupied;
+    }
 }
