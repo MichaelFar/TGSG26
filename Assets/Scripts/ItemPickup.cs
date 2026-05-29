@@ -7,15 +7,18 @@ public class ItemPickup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
 
-    private Collider myCollider;
+    public Collider myCollider;
     
+    private Rigidbody myRigidBody;
+
     private GameObject objectToFollow;
 
-
+    public bool isHeld = false;
     public UnityEvent ev_Activated;
     void Start()
     {
         myCollider = GetComponent<Collider>();
+        myRigidBody = GetComponent<Rigidbody>();
         if(itemData)
         {
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
@@ -36,15 +39,19 @@ public class ItemPickup : MonoBehaviour
 
     public void DropItemBehavior()
     {
-        transform.parent = null;
+        objectToFollow = null;
         myCollider.enabled = true;
+        isHeld = false;
+        myRigidBody.useGravity = true;
     }
     void InterpolateToObject()
     {
         if (objectToFollow)
         {
-            
-            transform.DOMove(objectToFollow.transform.position, Time.deltaTime * 1.0f / (Time.deltaTime * 2.0f));
+
+            //Tween move_tween = transform.DOMove(objectToFollow.transform.position, Time.deltaTime * 3.0f / (Time.deltaTime ));
+            transform.forward = objectToFollow.transform.forward;
+            transform.position = Vector3.Lerp(transform.position, objectToFollow.transform.position, Time.deltaTime * 5.0f);
             
         }
     }
@@ -52,17 +59,20 @@ public class ItemPickup : MonoBehaviour
     public void SetObjectToFollow(GameObject new_object_to_follow)
     {
         objectToFollow = new_object_to_follow;
+        
+        //InterpolateToObject();
     }
     //DEBUG replace with interaction system
     private void OnTriggerEnter(Collider other)
     {
         InventoryComponent inventory_obj = other.GetComponent<InventoryComponent>();
         print(other);
-        if (inventory_obj)
+        if (inventory_obj && !isHeld)
         {
             print("Picking up item");
             inventory_obj.AddItemToArray(this);
             myCollider.enabled = false;
+            myRigidBody.useGravity = false;
         }
     }
     
