@@ -28,6 +28,11 @@ public class FPSCam : MonoBehaviour
 		yRotation += mouseX;
 
 		xRotation -= mouseY;
+		xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+		// In Unity to apply rotation u have to apply a Quaternion
+		transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+		Rotation.rotation = Quaternion.Euler(0, yRotation, 0);
 	}
 
 
