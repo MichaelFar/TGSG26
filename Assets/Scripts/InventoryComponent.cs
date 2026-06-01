@@ -8,9 +8,23 @@ public class InventoryComponent : MonoBehaviour
     public List<InventorySlot> inventorySlotList;
 
     public InventorySlot twoHandedSlot;
+
+    private InventorySlot activeSlot;
+    private InventorySlot dropSlot;
+
+
+    private Vector3 leftSlotPosition;
+    private Vector3 rightSlotPosition;
+    private int activeSlotIndex = 1;
+
+    private enum e_Hands {LeftHand, RightHand};
     void Start()
     {
-        
+        activeSlot = inventorySlotList[activeSlotIndex];
+        dropSlot = inventorySlotList[1 - activeSlotIndex];
+
+        rightSlotPosition = activeSlot.transform.localPosition;
+        leftSlotPosition = dropSlot.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -44,67 +58,60 @@ public class InventoryComponent : MonoBehaviour
                     return;
                 }
             }
-            foreach (InventorySlot this_slot in inventorySlotList)
-            {
-                //this_slot.SetSlotOccupied(this_item);
-
-                //this_item.SetObjectToFollow(twoHandedSlot.gameObject);
-            }
+            
             PickupItem(this_item, twoHandedSlot);
+            activeSlot = twoHandedSlot;
         }
         else if (!twoHandedSlot.GetSlotIsOccupied())
         {
+            if(!activeSlot.isOccupied)
+            {
+                PickupItem(this_item, activeSlot);
+            }
+            else if(!dropSlot.isOccupied)
+            {
+                PickupItem(this_item, dropSlot);
+            }
+            /*
             foreach (InventorySlot this_slot in inventorySlotList)
             {
 
                 if (!this_slot.GetSlotIsOccupied())
                 {
+                    
                     //this_slot.SetSlotOccupied(this_item);
+                    
+                    //activeSlot = this_slot;
                     PickupItem(this_item, this_slot);
                     print("Adding item to slot " + this_slot);
                     break;
                 }
 
             }
+            */
         }
         
     }
 
     void SwitchHands()
     {
-        if (twoHandedSlot.GetSlotIsOccupied())
+        if (twoHandedSlot.GetSlotIsOccupied() || CheckIfHandsEmpty())
         {
             return;
         }
 
-        //GameObject object_follow_left_hand = inventorySlotList[0].gameObject;
-        //GameObject object_follow_right_hand = inventorySlotList[1].gameObject;
-        int index = 0;
-        
-        print("Swapping items");
+        Vector3 stored_pos = Vector3.zero;
 
-        List<InventorySlot> copy_slot_list = inventorySlotList;
+        stored_pos = inventorySlotList[0].transform.position;
+        inventorySlotList[0].transform.position = inventorySlotList[1].transform.position;
+        inventorySlotList[1].transform.position = stored_pos;
 
-        for (int i = 0; i < inventorySlotList.Count;i++)
-        {
-            index = i;
-            int next_index = index + 1;
-            if (next_index == inventorySlotList.Count)
-            {
-                next_index = 0;
-            }
-            if (inventorySlotList[index].GetSlotIsOccupied())
-            {
-                //inventorySlotList[index].isOccupied = false;
-                PickupItem(inventorySlotList[index].GetHeldItem(), inventorySlotList[next_index]);
-                //inventorySlotList[index].GetHeldItem().SetObjectToFollow(inventorySlotList[next_index].gameObject);
-            }
-        }
-        
-        
+       
+
+        ChangeActiveSlotIndex();
         //inventorySlotList[0].GetHeldItem().SetObjectToFollow(object_follow_right_hand);
         //inventorySlotList[1].GetHeldItem().SetObjectToFollow(object_follow_left_hand);
-
+        dropSlot = inventorySlotList[1 - activeSlotIndex];
     }
 
     
@@ -122,19 +129,56 @@ public class InventoryComponent : MonoBehaviour
         if(twoHandedSlot.GetSlotIsOccupied())
         {
             twoHandedSlot.RemoveItemFromSlot();
+            foreach(InventorySlot i in inventorySlotList)
+            {
+                if(GetWhichHand(i) == e_Hands.RightHand)
+                {
+                    activeSlot = i;
+                    return;
+                }
+            }
+        }
+        else if(CheckIfHandsEmpty())
+        {
+            SwitchHands();
         }
         else
         {
-            foreach (InventorySlot this_slot in inventorySlotList)
+            if (!dropSlot.isOccupied)
             {
-                if(this_slot.GetSlotIsOccupied())
-                {
-                    this_slot.RemoveItemFromSlot();
-                    print("Dropping item");
-                    return;
-                }
-                
+                activeSlot.RemoveItemFromSlot();
             }
-        }    
+            else
+            {
+                dropSlot.RemoveItemFromSlot();
+            }
+
+        }
+        
+    }
+    private void ChangeActiveSlotIndex()
+    {
+        activeSlotIndex = 1 - activeSlotIndex;
+        activeSlot = inventorySlotList[activeSlotIndex];
+    }
+    private bool CheckIfHandsEmpty()
+    {
+        foreach (InventorySlot i in inventorySlotList)
+        {
+            if(i.isOccupied)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private e_Hands GetWhichHand(InventorySlot slot_to_check)
+    {
+        if(slot_to_check.transform.localPosition == rightSlotPosition)
+        {
+            return e_Hands.RightHand;
+        }
+        return e_Hands.LeftHand;
     }
 }
