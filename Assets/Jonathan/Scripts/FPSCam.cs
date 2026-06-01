@@ -21,6 +21,10 @@ public class FPSCam : MonoBehaviour
 
 	private void Update()
 	{
+		//will check if game is paused first
+		if (GameManager.GamePaused)
+			return;
+
 		//Collects the input from the mouse
 		float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
 		float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
@@ -34,7 +38,4 @@ public class FPSCam : MonoBehaviour
 		transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
 		Rotation.rotation = Quaternion.Euler(0, yRotation, 0);
 	}
-
-
-
 }
