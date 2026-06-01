@@ -2,6 +2,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/*
+Contributor(s): Timmie Xiong
+Brief Description: Just a testing script to test interaction with objects
+Date: 5/25/26
+*/
+
 public class InteractionTester : MonoBehaviour
 {
     public GameObject testTarget;
@@ -14,10 +20,11 @@ public class InteractionTester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             IInteractable interactable = testTarget.GetComponent<IInteractable>();
-            interactable?.Interact();
+            //checks if interacted item is not null
+            interactable?.OnInteract();
         }
     }
 }

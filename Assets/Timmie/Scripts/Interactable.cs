@@ -8,5 +8,5 @@ Date: 5/25/26
 
 public interface IInteractable
 {
-    void Interact();
+    void OnInteract();
 }

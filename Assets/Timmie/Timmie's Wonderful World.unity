@@ -570,13 +570,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995083993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0.681382, z: -0, w: 0.73192805}
+  m_LocalPosition: {x: 17.06, y: 4.48, z: -2.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -85.903, z: 0}
 --- !u!114 &995083997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +750,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestPlayer
   InputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  lookAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0206956c-3937-49f9-9b22-ca9d8c1d79de
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  lookAmt: {x: 0, y: 0}
 --- !u!54 &1900513486
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -809,6 +819,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69c8ab49816f38a4fae64d106992995e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
+  openSpeed: 5
+  endLocation: {x: 0, y: 0, z: 0}
+  moveOffset: {x: 0, y: 10, z: 0}
 --- !u!65 &2120247811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -896,8 +909,8 @@ Transform:
   m_GameObject: {fileID: 2120247809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.27, z: -3.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.621, z: -3.55}
+  m_LocalScale: {x: -0.1271, y: 3.1383, z: 2.035}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
