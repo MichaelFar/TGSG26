@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-
-    // Update is called once per frame
     void Update()
     {
+        /*
+        // old method for getting input from player || Simplified
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Debug.Log("Pause");
-        }
+        }*/
     }
 }
