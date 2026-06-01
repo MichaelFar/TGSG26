@@ -75,5 +75,9 @@ public class ItemPickup : MonoBehaviour
             myRigidBody.useGravity = false;
         }
     }
+    public GameObject GetDestinationObject()
+    {
+        return objectToFollow;
+    }
     
 }

@@ -12,19 +12,15 @@ public class InventorySlot : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
     }
 
-    public bool SetSlotOccupied(ItemPickup incoming_item)
+    public bool AddItemToSlot(ItemPickup incoming_item)
     {
-        if(isOccupied)
-        {
-            return false;
-        }
-        else
-        {
-            isOccupied = true;
-            itemData = incoming_item.itemData;
-            itemHeld = incoming_item;
-            return true;
-        }
+        
+        
+        isOccupied = true;
+        itemData = incoming_item.itemData;
+        itemHeld = incoming_item;
+        return true;
+        
     }
 
     public void RemoveItemFromSlot()
@@ -42,5 +38,9 @@ public class InventorySlot : MonoBehaviour
     public bool GetSlotIsOccupied()
     {
         return isOccupied;
+    }
+    public ItemPickup GetHeldItem()
+    {
+        return itemHeld;
     }
 }
