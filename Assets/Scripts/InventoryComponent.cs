@@ -32,7 +32,7 @@ public class InventoryComponent : MonoBehaviour
     {
         if (Input.GetButtonUp("Drop Item"))
         {
-           // print("Dropping item");
+           
             DropItem();
         }
         if(Input.GetButtonUp("Switch Hands"))
@@ -72,27 +72,11 @@ public class InventoryComponent : MonoBehaviour
             {
                 PickupItem(this_item, dropSlot);
             }
-            /*
-            foreach (InventorySlot this_slot in inventorySlotList)
-            {
-
-                if (!this_slot.GetSlotIsOccupied())
-                {
-                    
-                    //this_slot.SetSlotOccupied(this_item);
-                    
-                    //activeSlot = this_slot;
-                    PickupItem(this_item, this_slot);
-                    print("Adding item to slot " + this_slot);
-                    break;
-                }
-
-            }
-            */
+            
         }
         
     }
-
+    //Swaps the slot positions
     void SwitchHands()
     {
         if (twoHandedSlot.GetSlotIsOccupied() || CheckIfHandsEmpty())
@@ -106,11 +90,8 @@ public class InventoryComponent : MonoBehaviour
         inventorySlotList[0].transform.position = inventorySlotList[1].transform.position;
         inventorySlotList[1].transform.position = stored_pos;
 
-       
-
         ChangeActiveSlotIndex();
-        //inventorySlotList[0].GetHeldItem().SetObjectToFollow(object_follow_right_hand);
-        //inventorySlotList[1].GetHeldItem().SetObjectToFollow(object_follow_left_hand);
+        
         dropSlot = inventorySlotList[1 - activeSlotIndex];
     }
 
