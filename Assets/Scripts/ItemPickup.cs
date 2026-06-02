@@ -7,13 +7,23 @@ public class ItemPickup : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
 
+    public Collider myCollider;
+    
+    private Rigidbody myRigidBody;
+
     private GameObject objectToFollow;
 
-
+    public bool isHeld = false;
     public UnityEvent ev_Activated;
     void Start()
     {
-        itemData.ev_DroppedItem.AddListener(DropItemBehavior);
+        myCollider = GetComponent<Collider>();
+        myRigidBody = GetComponent<Rigidbody>();
+        if(itemData)
+        {
+            itemData.ev_DroppedItem.AddListener(DropItemBehavior);
+        }
+        
     }
 
     // Update is called once per frame
@@ -29,18 +39,45 @@ public class ItemPickup : MonoBehaviour
 
     public void DropItemBehavior()
     {
-        transform.parent = null;
+        objectToFollow = null;
+        myCollider.enabled = true;
+        isHeld = false;
+        myRigidBody.useGravity = true;
     }
     void InterpolateToObject()
     {
         if (objectToFollow)
         {
-            transform.DOMove(objectToFollow.transform.position, Time.deltaTime * 20.0f);
+
+            //Tween move_tween = transform.DOMove(objectToFollow.transform.position, Time.deltaTime * 3.0f / (Time.deltaTime ));
+            transform.forward = objectToFollow.transform.forward;
+            transform.position = Vector3.Lerp(transform.position, objectToFollow.transform.position, Time.deltaTime * 5.0f);
+            
         }
     }
 
     public void SetObjectToFollow(GameObject new_object_to_follow)
     {
         objectToFollow = new_object_to_follow;
+        
+        //InterpolateToObject();
     }
+    //DEBUG replace with interaction system
+    private void OnTriggerEnter(Collider other)
+    {
+        InventoryComponent inventory_obj = other.GetComponent<InventoryComponent>();
+        print(other);
+        if (inventory_obj && !isHeld)
+        {
+            print("Picking up item");
+            inventory_obj.AddItemToArray(this);
+            myCollider.enabled = false;
+            myRigidBody.useGravity = false;
+        }
+    }
+    public GameObject GetDestinationObject()
+    {
+        return objectToFollow;
+    }
+    
 }

@@ -8,6 +8,10 @@ public class MoveCamera : MonoBehaviour
     public Transform playerBody;
 
     float xRotation = 0f;
+
+   // float smoothMouseX;
+
+    //float smoothMod = 10.0f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,7 +27,7 @@ public class MoveCamera : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
+        //smoothMouseX = Mathf.Lerp(smoothMouseX, mouseX, smoothMod * Time.deltaTime);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
     }
