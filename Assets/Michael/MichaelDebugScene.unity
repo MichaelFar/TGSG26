@@ -382,6 +382,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4961024555977666670, guid: 0eb1c6fdb819bb844a16335c45ad72fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 886072427}
+    - targetCorrespondingSourceObject: {fileID: 4961024555977666670, guid: 0eb1c6fdb819bb844a16335c45ad72fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 886072430}
   m_SourcePrefab: {fileID: 100100000, guid: 0eb1c6fdb819bb844a16335c45ad72fe, type: 3}
 --- !u!1 &886072423 stripped
 GameObject:
@@ -409,6 +412,18 @@ MonoBehaviour:
   - {fileID: 1825960317}
   - {fileID: 1216789226}
   twoHandedSlot: {fileID: 637322083}
+--- !u!114 &886072430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886072423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32436e09dea33047bce910cd44e8f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
 --- !u!114 &1216789226 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3765969748757478342, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
