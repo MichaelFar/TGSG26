@@ -10,7 +10,7 @@ public class TestItem : MonoBehaviour, IInteractable
 {
     public UnityEvent itemPickUp;
 
-    public void OnInteract()
+    public void OnInteract(GameObject interacting_object)
     {
         print("Picked up item");
         itemPickUp.Invoke();

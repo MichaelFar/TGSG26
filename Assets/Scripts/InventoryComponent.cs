@@ -1,3 +1,10 @@
+/*
+Contributor(s): Michael farrar
+Brief Description: Component that attaches to the player object, handles picking up, dropping, swapping, and using items
+Date: 6/2/2026
+*/
+
+
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;

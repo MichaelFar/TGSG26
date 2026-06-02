@@ -29,7 +29,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
                 //checks if interacted item is not null
-                interactable?.OnInteract();
+                interactable?.OnInteract(gameObject);
             }
 
         }

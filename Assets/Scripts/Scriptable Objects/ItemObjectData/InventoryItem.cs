@@ -1,3 +1,9 @@
+/*
+Contributor(s): Michael Farrar
+Brief Description: Item data that goes onto item pickups, used for various item pickups
+Date: 6/2/2026
+*/
+
 using UnityEngine;
 using UnityEngine.Events;
 using GlobalDataTypes;
@@ -9,6 +15,6 @@ public class InventoryItemData : ScriptableObject
 
     public int numSlotsUsed = 1;
 
-    public UnityEvent ev_DroppedItem;//Invoked by inventory slot class
+    public UnityEvent ev_DroppedItem;
     
 }

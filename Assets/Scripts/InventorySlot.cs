@@ -1,3 +1,9 @@
+/*
+Contributor(s): Michael Farrar
+Brief Description: Code for inventory slots, used by the inventory component
+Date:
+*/
+
 using UnityEngine;
 
 
