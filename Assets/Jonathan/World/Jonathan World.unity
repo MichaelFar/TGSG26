@@ -131,11 +131,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225596779}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28076b2561c12244ea267004959adb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+--- !u!114 &225596784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225596779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32436e09dea33047bce910cd44e8f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
 --- !u!1 &537456334
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!143 &1520912501
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1000,6 +1012,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4961024555977666670, guid: 0eb1c6fdb819bb844a16335c45ad72fe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 225596783}
+    - targetCorrespondingSourceObject: {fileID: 4961024555977666670, guid: 0eb1c6fdb819bb844a16335c45ad72fe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 225596784}
   m_SourcePrefab: {fileID: 100100000, guid: 0eb1c6fdb819bb844a16335c45ad72fe, type: 3}
 --- !u!1 &2077895696
 GameObject:
