@@ -110,7 +110,7 @@ public class InventoryComponent : MonoBehaviour
         item_to_pickup.transform.forward = transform.forward;
         slot_to_attach_to.AddItemToSlot(item_to_pickup);
         item_to_pickup.SetObjectToFollow(slot_to_attach_to.gameObject);
-        item_to_pickup.isHeld = true;
+        //item_to_pickup.isHeld = true;
     }
 
     void DropItem()
@@ -178,6 +178,10 @@ public class InventoryComponent : MonoBehaviour
     public InventorySlot GetOffHandSlot()
     {
         return dropSlot;
+    }
+    public InventorySlot GetTwoHandedSlot()
+    {
+        return twoHandedSlot;
     }
     public e_ItemTypes GetItemTypeInSlot(InventorySlot this_slot)
     {

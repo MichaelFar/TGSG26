@@ -20,7 +20,7 @@ public class InventorySlot : MonoBehaviour
 
     public bool AddItemToSlot(ItemPickup incoming_item)
     {
-        
+        incoming_item.isHeld = true;
         
         isOccupied = true;
         itemData = incoming_item.itemData;
@@ -44,6 +44,7 @@ public class InventorySlot : MonoBehaviour
 
     public void DeleteItemFromSlot()
     {
+        print("Deleting item");
         isOccupied = false;
         //itemHeld.DropItemBehavior();
 

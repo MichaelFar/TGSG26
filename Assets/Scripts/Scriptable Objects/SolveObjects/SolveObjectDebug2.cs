@@ -1,0 +1,27 @@
+/*
+Contributor(s): Michael Farrar
+Brief Description: Inherits from Solve Object, test object for deleting the associated item when used to solve
+Date: 6/5/2026
+*/
+using UnityEngine;
+
+using UnityEngine.Events;
+[CreateAssetMenu(fileName = "SolveObjectDebug2", menuName = "Scriptable Objects/SolveObjectDebug2")]
+public class SolveObjectDebug2 : SolveObject
+{
+
+
+    //public UnityEvent ev_OnSolve;
+    
+    public override bool OnSolve()
+    {
+        if(base.OnSolve())
+        {
+            slotToAffect.RemoveItemFromSlot();
+        }
+        
+        return true;
+    }
+
+    
+}
