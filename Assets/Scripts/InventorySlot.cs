@@ -41,6 +41,20 @@ public class InventorySlot : MonoBehaviour
         
         itemData = null;
     }
+
+    public void DeleteItemFromSlot()
+    {
+        isOccupied = false;
+        //itemHeld.DropItemBehavior();
+
+        Destroy(itemHeld.gameObject);
+
+        itemHeld = null;
+
+
+        itemData = null;
+
+    }
     public bool GetSlotIsOccupied()
     {
         return isOccupied;

@@ -9,6 +9,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using GlobalDataTypes;
 public class InventoryComponent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -168,5 +169,18 @@ public class InventoryComponent : MonoBehaviour
             return e_Hands.RightHand;
         }
         return e_Hands.LeftHand;
+    }
+
+    public InventorySlot GetActiveSlot()
+    {
+        return activeSlot;
+    }
+    public InventorySlot GetOffHandSlot()
+    {
+        return dropSlot;
+    }
+    public e_ItemTypes GetItemTypeInSlot(InventorySlot this_slot)
+    {
+        return this_slot.GetHeldItem().itemData.thisItemType;
     }
 }

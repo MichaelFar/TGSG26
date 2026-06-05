@@ -5,6 +5,7 @@ Date: 6/2/2026
 */
 
 using DG.Tweening;
+using GlobalDataTypes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -68,21 +69,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
         
         //InterpolateToObject();
     }
-    //DEBUG replace with interaction system
-    private void OnTriggerEnter(Collider other)
-    {
-        /*
-        InventoryComponent inventory_obj = other.GetComponent<InventoryComponent>();
-        print(other);
-        if (inventory_obj && !isHeld)
-        {
-            print("Picking up item");
-            inventory_obj.AddItemToArray(this);
-            myCollider.enabled = false;
-            myRigidBody.useGravity = false;
-        }
-        */
-    }
+    
     public GameObject GetDestinationObject()
     {
         return objectToFollow;
@@ -98,6 +85,18 @@ public class ItemPickup : MonoBehaviour, IInteractable
             inventory_obj.AddItemToArray(this);
             myCollider.enabled = false;
             myRigidBody.useGravity = false;
+        }
+    }
+
+    public e_ItemTypes GetItemType()
+    {
+        if (itemData)
+        {
+            return itemData.thisItemType;
+        }
+        else
+        {
+            return e_ItemTypes.NoType;
         }
     }
 }
