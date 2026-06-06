@@ -1,8 +1,15 @@
+/*
+Contributor(s): Michael Farrar
+Brief Description: Item component that attaches to an item that can be picked up by the inventory
+Date: 6/2/2026
+*/
+
 using DG.Tweening;
+using GlobalDataTypes;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ItemPickup : MonoBehaviour
+public class ItemPickup : MonoBehaviour, IInteractable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
@@ -62,11 +69,16 @@ public class ItemPickup : MonoBehaviour
         
         //InterpolateToObject();
     }
-    //DEBUG replace with interaction system
-    private void OnTriggerEnter(Collider other)
+    
+    public GameObject GetDestinationObject()
     {
-        InventoryComponent inventory_obj = other.GetComponent<InventoryComponent>();
-        print(other);
+        return objectToFollow;
+    }
+
+    public void OnInteract(GameObject object_interacting)
+    {
+        InventoryComponent inventory_obj = object_interacting.GetComponent<InventoryComponent>();
+        //print(other);
         if (inventory_obj && !isHeld)
         {
             print("Picking up item");
@@ -75,9 +87,16 @@ public class ItemPickup : MonoBehaviour
             myRigidBody.useGravity = false;
         }
     }
-    public GameObject GetDestinationObject()
+
+    public e_ItemTypes GetItemType()
     {
-        return objectToFollow;
+        if (itemData)
+        {
+            return itemData.thisItemType;
+        }
+        else
+        {
+            return e_ItemTypes.NoType;
+        }
     }
-    
 }

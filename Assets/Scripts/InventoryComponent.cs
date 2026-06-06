@@ -1,7 +1,15 @@
+/*
+Contributor(s): Michael farrar
+Brief Description: Component that attaches to the player object, handles picking up, dropping, swapping, and using items
+Date: 6/2/2026
+*/
+
+
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using GlobalDataTypes;
 public class InventoryComponent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,7 +110,7 @@ public class InventoryComponent : MonoBehaviour
         item_to_pickup.transform.forward = transform.forward;
         slot_to_attach_to.AddItemToSlot(item_to_pickup);
         item_to_pickup.SetObjectToFollow(slot_to_attach_to.gameObject);
-        item_to_pickup.isHeld = true;
+        //item_to_pickup.isHeld = true;
     }
 
     void DropItem()
@@ -161,5 +169,22 @@ public class InventoryComponent : MonoBehaviour
             return e_Hands.RightHand;
         }
         return e_Hands.LeftHand;
+    }
+
+    public InventorySlot GetActiveSlot()
+    {
+        return activeSlot;
+    }
+    public InventorySlot GetOffHandSlot()
+    {
+        return dropSlot;
+    }
+    public InventorySlot GetTwoHandedSlot()
+    {
+        return twoHandedSlot;
+    }
+    public e_ItemTypes GetItemTypeInSlot(InventorySlot this_slot)
+    {
+        return this_slot.GetHeldItem().itemData.thisItemType;
     }
 }

@@ -1,3 +1,9 @@
+/*
+Contributor(s): Michael Farrar
+Brief Description: Code for inventory slots, used by the inventory component
+Date:
+*/
+
 using UnityEngine;
 
 
@@ -14,7 +20,7 @@ public class InventorySlot : MonoBehaviour
 
     public bool AddItemToSlot(ItemPickup incoming_item)
     {
-        
+        incoming_item.isHeld = true;
         
         isOccupied = true;
         itemData = incoming_item.itemData;
@@ -34,6 +40,21 @@ public class InventorySlot : MonoBehaviour
         
         
         itemData = null;
+    }
+
+    public void DeleteItemFromSlot()
+    {
+        print("Deleting item");
+        isOccupied = false;
+        //itemHeld.DropItemBehavior();
+
+        Destroy(itemHeld.gameObject);
+
+        itemHeld = null;
+
+
+        itemData = null;
+
     }
     public bool GetSlotIsOccupied()
     {
