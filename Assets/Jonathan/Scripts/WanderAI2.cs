@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
  
 
+/*Jonathan Aguilar | 6/6/26 | 
 /// Easy Setup:
 ///  1. Bake a NavMesh in your scene:  Window > AI > Navigation > Bake
 ///  2. Add a NavMeshAgent component to this GameObject.
@@ -11,7 +12,7 @@ using UnityEngine.AI;
 ///     OR leave it empty to use this object's starting position.
 ///  5. Adjust 'wanderRadius' to define how far the AI can roam from that centre.
 
-//Component needed is a type of NavMeshAgent
+//Component needed is a type of NavMeshAgent*/
 
 public class WanderAI2 : MonoBehaviour
 {
