@@ -21,11 +21,11 @@ public class TaskListUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isHeld = Keyboard.current.tabKey.IsPressed();
-        if (isHeld != isOpen)
+        bool is_held = Keyboard.current.tabKey.IsPressed();
+        if (is_held != isOpen)
         {
-            isOpen = isHeld;
-            taskListUIGroup.alpha = isHeld ? 1 : 0;
+            isOpen = is_held;
+            taskListUIGroup.alpha = is_held ? 1 : 0;
         }
     }
 }
