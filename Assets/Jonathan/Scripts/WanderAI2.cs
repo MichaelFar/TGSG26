@@ -89,7 +89,7 @@ public class WanderAI2 : MonoBehaviour
         return false;
     }
  
-    // This will draw the wander zone as a yellow wire sphere in the Scene view so you can see and adjust the radius without running the game.
+    // Draw the wander zone as a yellow wire sphere in the Scene view so you can see and adjust the radius without running the game.
     private void OnDrawGizmosSelected()
     {
         Vector3 centre = (homePoint != null) ? homePoint.position
