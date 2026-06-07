@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
  
-/// <summary>
 /// Simple wandering AI: moves forward, pauses, picks a new direction, repeat.
 /// Attach this script to any GameObject with a Rigidbody (or use transform-based movement).
-/// </summary>
+
 public class WonderAI : MonoBehaviour
 {
     [Header("Movement")]
