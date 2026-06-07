@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 323f1ea1bce78fe4c90b2286fa1997e2
+guid: 6185794ad33085a4a9f8446781cb8f15
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -125,5 +125,5 @@ AssetOrigin:
   productId: 18353
   packageName: Fantasy Skybox FREE
   packageVersion: 1.6.5
-  assetPath: Assets/Fantasy Skybox FREE/Panoramics/FS003/FS003_Night.png
+  assetPath: Assets/Alec/Fantasy Skybox FREE/Panoramics/FS003/FS003_Night_Moonless.png
   uploadId: 699843

@@ -11,6 +11,12 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Texture2D skyboxDay;
     [SerializeField] private Texture2D skyboxSunset;
 
+    [SerializeField] private Gradient gradientNightToSunrise;
+    [SerializeField] private Gradient gradientSunriseToDay;
+    [SerializeField] private Gradient gradientDayToSunset;
+    [SerializeField] private Gradient gradientSunsetToNight;
+    [SerializeField] private Light globalLight;
+
     private int minutes;
     public int Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
 
@@ -36,6 +42,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnMinutesChange(int value)
     {
+        globalLight.transform.Rotate(Vector3.up, (1f/1440f)*360f, Space.World);
         if(value>= 5)
         {
             Minutes = 0;
@@ -53,18 +60,22 @@ public class TimeManager : MonoBehaviour
         if (value == 2)
         {
             StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
+            StartCoroutine(LerpLight(gradientNightToSunrise, 10f));
         }
         else if (value == 5)
         {
             StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
+            StartCoroutine(LerpLight(gradientSunriseToDay, 10f));
         }
         else if (value == 8)
         {
             StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
+            StartCoroutine(LerpLight(gradientDayToSunset, 10f));
         }
         else if (value == 10)
         {
             StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
+            StartCoroutine(LerpLight(gradientSunsetToNight, 10f));
         }
     }
 
@@ -79,5 +90,15 @@ public class TimeManager : MonoBehaviour
             yield return null;
         }
         RenderSettings.skybox.SetTexture("_Texture1", b);
+    }
+
+    private IEnumerator LerpLight(Gradient lightGradient, float time)
+    {
+        for (float i = 0; i < time; i += Time.deltaTime)
+        {
+            globalLight.color = lightGradient.Evaluate(i / time);
+            RenderSettings.fogColor = globalLight.color;
+            yield return null;
+        }
     }
 }

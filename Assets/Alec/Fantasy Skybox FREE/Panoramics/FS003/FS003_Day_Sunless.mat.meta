@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: f4bb2358699d96a43b3bfb9dcd59213f
-timeCreated: 1434912371
-licenseType: Store
-TextScriptImporter:
+guid: 0f1401d983cde1c49a7f687a57e62c5a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 18353
   packageName: Fantasy Skybox FREE
   packageVersion: 1.6.5
-  assetPath: Assets/Alec/Fantasy Skybox FREE/ReleaseNotes.txt
+  assetPath: Assets/Alec/Fantasy Skybox FREE/Panoramics/FS003/FS003_Day_Sunless.mat
   uploadId: 699843
