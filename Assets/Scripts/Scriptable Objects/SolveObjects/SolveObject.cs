@@ -50,10 +50,7 @@ public class SolveObject : ScriptableObject
             
         }
     }
-    public void QueueForDeletion()
-    {
-        
-    }
+    
     public void SetSlotToAffect(InventorySlot affected_slot)
     {
         slotToAffect = affected_slot;

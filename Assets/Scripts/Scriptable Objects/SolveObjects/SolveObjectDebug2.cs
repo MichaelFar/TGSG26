@@ -10,14 +10,11 @@ using UnityEngine.Events;
 public class SolveObjectDebug2 : SolveObject
 {
 
-
-    //public UnityEvent ev_OnSolve;
-    
     public override bool OnSolve()
     {
         if(base.OnSolve())
         {
-            slotToAffect.RemoveItemFromSlot();
+            slotToAffect.DropItemFromSlot();
         }
         
         return true;

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fadaf12c6aca9a42a7806d037b8d2c2, type: 3}
   m_Name: SolveObjectDebug2
   m_EditorClassIdentifier: Assembly-CSharp::SolveObjectDebug2
-  requiredData: {fileID: 11400000, guid: 3a6deb1a144371e4a9c78dda6e9743bb, type: 2}
+  requiredData: {fileID: 11400000, guid: 517d534e65775a442a739e34d021c569, type: 2}
   triggerOnce: 1
   ev_OnSolve:
     m_PersistentCalls:
       m_Calls: []
-  hasBeenTriggered: 0
+  hasBeenTriggered: 1
+  requirementsMetToSolve: 1

@@ -82,21 +82,10 @@ public class ItemPickup : MonoBehaviour, IInteractable
         if (inventory_obj && !isHeld)
         {
             print("Picking up item");
-            inventory_obj.AddItemToArray(this);
+            inventory_obj.DetermineItemPickup(this);
             myCollider.enabled = false;
             myRigidBody.useGravity = false;
         }
     }
-
-    public e_ItemTypes GetItemType()
-    {
-        if (itemData)
-        {
-            return itemData.thisItemType;
-        }
-        else
-        {
-            return e_ItemTypes.NoType;
-        }
-    }
+    
 }
