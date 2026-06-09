@@ -15,7 +15,7 @@ public class Door : MonoBehaviour, IInteractable
     public Vector3 moveOffset;
     private Vector3 targetLocation;
     private bool isTriggered, isOpen, reachedTarget;
-    public void OnInteract()
+    public void OnInteract(GameObject interacting_object)
     {
         print("Interacted with Door");
         doorOpen.Invoke();
