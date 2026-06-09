@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 8089514218390040514}
   - component: {fileID: 1793595999063427027}
   - component: {fileID: 4490473151792420836}
+  - component: {fileID: 1459601288611457563}
   m_Layer: 0
   m_Name: First Person Player
   m_TagString: Untagged
@@ -399,6 +400,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32436e09dea33047bce910cd44e8f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
+--- !u!114 &1459601288611457563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582941962336725469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4a8a9695496c14fa66f5bb1935ab75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
 --- !u!1001 &2895297535400609858
 PrefabInstance:
   m_ObjectHideFlags: 0
