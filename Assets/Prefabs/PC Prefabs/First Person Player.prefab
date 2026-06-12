@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1339767474011858617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5636745487073776619}
   - component: {fileID: 4460680777704019469}
   - component: {fileID: 8130262977540685734}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 2256530775484422837}
   - component: {fileID: 2936443021853200516}
   - component: {fileID: 5549457653126262962}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 1793595999063427027}
   - component: {fileID: 4490473151792420836}
   - component: {fileID: 1459601288611457563}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: First Person Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,9 +420,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8784167699772035665}
     m_Modifications:
+    - target: {fileID: 2760791771383024977, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4407450774362552813, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
       propertyPath: m_Name
       value: TaskListUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407450774362552813, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4946912051175449323, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
       propertyPath: m_Pivot.x
@@ -522,6 +530,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8784167699772035665}
     m_Modifications:
+    - target: {fileID: 77894322801743903, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023356343243583378, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2839466833517554408, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -562,9 +578,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7550244656743312734, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8880309991270426646, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
       propertyPath: m_Name
       value: InventoryObj
+      objectReference: {fileID: 0}
+    - target: {fileID: 8880309991270426646, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

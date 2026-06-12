@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9060090973754209685}
   - component: {fileID: 386438661337127504}
   m_Layer: 0
-  m_Name: ItemPickup
+  m_Name: BucketItemPickupFilled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.971, z: 2.63}
-  m_LocalScale: {x: 0.34593, y: 0.34593, z: 0.34593}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.69186, y: 0.69186, z: 0.69186}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -70,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: -876546973899608171, guid: aee84ce0dab81b049bb88017d78a63cd, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1378d9c813d8d9429fb4e57db8c6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  itemData: {fileID: 11400000, guid: bf0cc9c5fd6f5dc4e9ec4e3a9c5b3364, type: 2}
+  itemData: {fileID: 11400000, guid: 67ce22d790e5b0a4f9fa4a53b04ae175, type: 2}
   myCollider: {fileID: 6187455729128900774}
   isHeld: 0
   ev_Activated:

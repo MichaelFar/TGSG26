@@ -22,15 +22,21 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     public bool isHeld = false;
     public UnityEvent ev_Activated;
-    void Start()
+    [HideInInspector]
+    public bool isInitialized = false;
+    private void Awake()
     {
         myCollider = GetComponent<Collider>();
         myRigidBody = GetComponent<Rigidbody>();
+    }
+    void Start()
+    {
+        
         if(itemData)
         {
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
-        
+        isInitialized = true;
     }
 
     // Update is called once per frame
@@ -47,9 +53,9 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public void DropItemBehavior()
     {
         objectToFollow = null;
-        myCollider.enabled = true;
+        SetColliderEnabled(true);
         isHeld = false;
-        myRigidBody.useGravity = true;
+        SetUseGravity(true);
     }
     void InterpolateToObject()
     {
@@ -83,9 +89,16 @@ public class ItemPickup : MonoBehaviour, IInteractable
         {
             print("Picking up item");
             inventory_obj.DetermineItemPickup(this);
-            myCollider.enabled = false;
-            myRigidBody.useGravity = false;
+            
         }
+    }
+    public void SetUseGravity(bool new_value)
+    {
+        myRigidBody.useGravity = new_value;
+    }
+    public void SetColliderEnabled(bool new_value)
+    {
+        myCollider.enabled = new_value;
     }
     
 }

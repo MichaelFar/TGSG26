@@ -6,19 +6,17 @@ Date: 6/5/2026
 using UnityEngine;
 
 using UnityEngine.Events;
-[CreateAssetMenu(fileName = "SolveObjectDebug", menuName = "Scriptable Objects/SolveObjectDebug")]
-public class SolveObjectMilkExample : SolveObject
+[CreateAssetMenu(fileName = "SolveObjectExample", menuName = "Scriptable Objects/SolveObjectExample")]
+public class SolveObjectExample : SolveObject
 {
-    //public GameObject milkObjectToSpawn;
 
-    //public UnityEvent ev_OnSolve;
-    
     public override bool OnSolve()
     {
         if(base.OnSolve())
         {
-            slotToAffect.DeleteItemFromSlot();
-            //Instantiate(milkObjectToSpawn);
+            //slotToAffect.DropItemFromSlot();
+            UnityEngine.MonoBehaviour.print("My custom behavior worked");
+            
         }
         
         return true;

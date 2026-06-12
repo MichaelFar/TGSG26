@@ -23,14 +23,21 @@ public class PlayerInteraction : MonoBehaviour
         Vector3 ray_origin = playerCam.ViewportToWorldPoint(new Vector3(.5f, .5f, 0f));
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
-            RaycastHit hit;
+            RaycastHit[] hits = Physics.RaycastAll(ray_origin, playerCam.transform.forward, interactionRange);
+
             Debug.DrawRay(ray_origin, playerCam.transform.forward * 10, Color.red, 2, false);
-            if (Physics.Raycast(ray_origin, playerCam.transform.forward, out hit, interactionRange))
+            foreach(RaycastHit hit in hits)
             {
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
                 //checks if interacted item is not null
-                interactable?.OnInteract(gameObject);
+                if (gameObject)
+                {
+
+
+                    interactable?.OnInteract(gameObject);
+                }
             }
+            
 
         }
     }

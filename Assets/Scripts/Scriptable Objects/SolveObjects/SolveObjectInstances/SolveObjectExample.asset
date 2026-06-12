@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f01cc453cf3194f93b20275ef12a12, type: 3}
+  m_Name: SolveObjectExample
+  m_EditorClassIdentifier: Assembly-CSharp::SolveObjectExample
+  requiredData: {fileID: 11400000, guid: bf0cc9c5fd6f5dc4e9ec4e3a9c5b3364, type: 2}
+  triggerOnce: 0
+  ev_OnSolve:
+    m_PersistentCalls:
+      m_Calls: []
+  hasBeenTriggered: 1
+  requirementsMetToSolve: 1
