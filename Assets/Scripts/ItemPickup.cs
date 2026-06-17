@@ -6,10 +6,11 @@ Date: 6/2/2026
 
 using DG.Tweening;
 using GlobalDataTypes;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ItemPickup : MonoBehaviour, IInteractable
+public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
@@ -28,6 +29,7 @@ public class ItemPickup : MonoBehaviour, IInteractable
     {
         myCollider = GetComponent<Collider>();
         myRigidBody = GetComponent<Rigidbody>();
+        
     }
     void Start()
     {
@@ -100,5 +102,14 @@ public class ItemPickup : MonoBehaviour, IInteractable
     {
         myCollider.enabled = new_value;
     }
-    
+
+    public Dictionary<string, string> GetSaveData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void InitializeSaveData()
+    {
+        throw new System.NotImplementedException();
+    }
 }

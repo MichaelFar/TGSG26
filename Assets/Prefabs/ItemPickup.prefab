@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6698066701525972511}
   - component: {fileID: 9060090973754209685}
   - component: {fileID: 386438661337127504}
+  - component: {fileID: 3048214232206645915}
   m_Layer: 0
   m_Name: ItemPickup
   m_TagString: Untagged
@@ -181,3 +182,16 @@ MonoBehaviour:
   ev_Activated:
     m_PersistentCalls:
       m_Calls: []
+  isInitialized: 0
+--- !u!114 &3048214232206645915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364898736719544289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver

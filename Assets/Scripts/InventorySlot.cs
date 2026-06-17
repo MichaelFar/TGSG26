@@ -4,10 +4,11 @@ Brief Description: Code for inventory slots, used by the inventory component
 Date:
 */
 
+using System.Collections.Generic;
 using UnityEngine;
 
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour,ISaveable
 {
     public bool isOccupied = false;
     public InventoryItemData itemData;
@@ -63,5 +64,15 @@ public class InventorySlot : MonoBehaviour
     public ItemPickup GetHeldItem()
     {
         return itemHeld;
+    }
+
+    public Dictionary<string, string> GetSaveData()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void InitializeSaveData()
+    {
+        throw new System.NotImplementedException();
     }
 }

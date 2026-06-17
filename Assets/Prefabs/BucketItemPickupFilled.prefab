@@ -175,9 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1378d9c813d8d9429fb4e57db8c6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  itemData: {fileID: 11400000, guid: 67ce22d790e5b0a4f9fa4a53b04ae175, type: 2}
+  itemData: {fileID: 11400000, guid: 9e71e334465f1304dbf5b5d1f04a408c, type: 2}
   myCollider: {fileID: 6187455729128900774}
   isHeld: 0
   ev_Activated:
     m_PersistentCalls:
       m_Calls: []
+  isInitialized: 0
