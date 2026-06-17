@@ -3,6 +3,6 @@ using UnityEngine;
 using BayatGames.SaveGameFree;
 public interface ISaveable
 {
-    public Dictionary<string, string> GetSaveData();
-    public void InitializeSaveData();
+    public void SaveData(string identifier);
+    public void InitializeSaveData(string identifier);
 }

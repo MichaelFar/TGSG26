@@ -9,7 +9,9 @@ public class ObjectDataSaver : MonoBehaviour
 
     private string objectID;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private List<SavePackage> managedComponents;
 
+    
     private void Awake()
     {
         objectID = name;
@@ -17,10 +19,17 @@ public class ObjectDataSaver : MonoBehaviour
     void Start()
     {
         SaveDataManager.Instance.AddObjectToList(this);
-        foreach (Component i in GetAllSaveableComponents())
+        if (SaveGame.Exists(objectID))
         {
-            print(i.name);
+            managedComponents = SaveGame.Load<List<SavePackage>>(objectID);
         }
+        else
+        {
+            managedComponents = GetAllSaveableComponents();
+        }
+            
+        
+        SaveGame.Save<List<SavePackage>>(objectID, managedComponents);
     }
 
     // Update is called once per frame
@@ -34,20 +43,51 @@ public class ObjectDataSaver : MonoBehaviour
         return objectID;
     }
 
-    public List<Component> GetAllSaveableComponents()
+    public List<SavePackage> GetAllSaveableComponents()
     {
         List<Component> list_to_check = GetComponents<Component>().ToList<Component>();
-        List<Component> list_to_return = new List<Component>();
+        List<SavePackage> list_to_return = new List<SavePackage>();
         foreach (Component i in list_to_check)
         {
             if(i is ISaveable)
             {
-                list_to_return.Add(i);
+                SavePackage new_package = new SavePackage(i.GetComponent<ISaveable>(), i, i.name);
+                
+                list_to_return.Add(new_package);
+                
             }
         }
 
         return list_to_return;
         
     }
+
+    public void RunSave()
+    {
+        foreach(SavePackage i in managedComponents)
+        {
+            i.saveableComponent?.SaveData(i.identifier);
+        }
+    }
+    public void RunLoad()
+    {
+        foreach (SavePackage i in managedComponents)
+        {
+            i.saveableComponent?.InitializeSaveData(i.identifier);
+        }
+    }
     
+    public struct SavePackage
+    {
+        public SavePackage(ISaveable new_saveable, Component new_component, string new_identifier)
+        {
+            saveableComponent = new_saveable;
+            relevantComponent = new_component;
+            identifier = new_identifier;
+        }
+        public ISaveable saveableComponent;
+        public Component relevantComponent;
+        public string identifier;
+    }
+
 }

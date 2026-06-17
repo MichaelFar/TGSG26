@@ -7,7 +7,7 @@ Date:
 using System.Collections.Generic;
 using UnityEngine;
 
-
+using BayatGames.SaveGameFree;
 public class InventorySlot : MonoBehaviour,ISaveable
 {
     public bool isOccupied = false;
@@ -66,13 +66,18 @@ public class InventorySlot : MonoBehaviour,ISaveable
         return itemHeld;
     }
 
-    public Dictionary<string, string> GetSaveData()
+    public void InitializeSaveData(string identifier)
     {
-        throw new System.NotImplementedException();
+        InventorySlot slot_data = SaveGame.Load<InventorySlot>(identifier);
+        
+
+        isOccupied = true;
+        itemData = slot_data.itemData;
+        itemHeld = slot_data.itemHeld;
     }
 
-    public void InitializeSaveData()
+    public void SaveData(string identifier)
     {
-        throw new System.NotImplementedException();
+        SaveGame.Save<InventorySlot>(identifier, this);
     }
 }

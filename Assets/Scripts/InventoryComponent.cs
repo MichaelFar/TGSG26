@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
 using GlobalDataTypes;
-public class InventoryComponent : MonoBehaviour, ISaveable
+public class InventoryComponent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public List<InventorySlot> inventorySlotList;
@@ -184,14 +184,6 @@ public class InventoryComponent : MonoBehaviour, ISaveable
     {
         return twoHandedSlot;
     }
-    public Dictionary<string, string> GetSaveData()
-    {
-        return new Dictionary<string, string>() { };
-    }
-
-    public void InitializeSaveData()
-    {
-
-    }
+    
 
 }

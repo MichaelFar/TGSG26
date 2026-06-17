@@ -4,6 +4,7 @@ Brief Description: Item component that attaches to an item that can be picked up
 Date: 6/2/2026
 */
 
+using BayatGames.SaveGameFree;
 using DG.Tweening;
 using GlobalDataTypes;
 using System.Collections.Generic;
@@ -103,13 +104,13 @@ public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
         myCollider.enabled = new_value;
     }
 
-    public Dictionary<string, string> GetSaveData()
+    public void InitializeSaveData(string identifier)
     {
         throw new System.NotImplementedException();
     }
 
-    public void InitializeSaveData()
+    public void SaveData(string identifier)
     {
-        throw new System.NotImplementedException();
+        SaveGame.Save<ItemPickup>(identifier, this);
     }
 }
