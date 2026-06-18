@@ -89,5 +89,8 @@ public class ObjectDataSaver : MonoBehaviour
         public Component relevantComponent;
         public string identifier;
     }
-
+    public void UpdateSaveList()
+    {
+        managedComponents = GetAllSaveableComponents();
+    }
 }

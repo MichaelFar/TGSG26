@@ -40,6 +40,7 @@ public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
         isInitialized = true;
+        SaveData(name);
     }
 
     // Update is called once per frame
@@ -112,5 +113,6 @@ public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
     public void SaveData(string identifier)
     {
         SaveGame.Save<ItemPickup>(identifier, this);
+        
     }
 }

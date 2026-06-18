@@ -13,6 +13,9 @@ public class SaveDataManager : MonoBehaviour
 
     private List<ObjectDataSaver> saveDataObjectList = new List<ObjectDataSaver>();
 
+    private string masterID = "MasterSave";
+
+    private bool isFrameOne = false;
 
     private void Awake()
     {
@@ -26,6 +29,33 @@ public class SaveDataManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        
+    }
+    private void Update()
+    {
+        if (!isFrameOne)
+        {
+            isFrameOne = true;
+            if(!SaveGame.Exists(masterID))
+            {
+                print("MasterList doesn't exist, creating it now");
+                SaveMasterList();
+                SaveAllSaveObjects();
+            }
+            else
+            {
+                print("MasterList exists");
+                print(SaveGame.SavePath);
+            }
+                
+        }
+        if(Input.GetKeyUp(KeyCode.Space ))
+        {
+            LoadAllSaveObjects();
+        }
+    }
     public void AddObjectToList(ObjectDataSaver new_data_saver)
     {
         if(saveDataObjectList.Contains(new_data_saver))
@@ -37,9 +67,29 @@ public class SaveDataManager : MonoBehaviour
             saveDataObjectList.Add(new_data_saver);
         }
         
-        
-        //print(new_data_saver.GetObjectID());
-        
+    }
+    public void SaveMasterList()
+    {
+        SaveGame.Save<List<ObjectDataSaver>>(masterID, saveDataObjectList);
+    }
+    public void LoadMasterList()
+    {
+        saveDataObjectList = SaveGame.Load<List<ObjectDataSaver>>(masterID, saveDataObjectList);
+    }
+
+    public void SaveAllSaveObjects()
+    {
+        foreach(ObjectDataSaver i in saveDataObjectList)
+        {
+            i.RunSave();
+        }
+    }
+    public void LoadAllSaveObjects()
+    {
+        foreach (ObjectDataSaver i in saveDataObjectList)
+        {
+            i.RunLoad();
+        }
     }
 
 

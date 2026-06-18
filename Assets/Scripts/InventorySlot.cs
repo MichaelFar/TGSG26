@@ -26,6 +26,7 @@ public class InventorySlot : MonoBehaviour,ISaveable
         isOccupied = true;
         itemData = incoming_item.itemData;
         itemHeld = incoming_item;
+        SaveData(name);
         return true;
         
     }
@@ -68,16 +69,24 @@ public class InventorySlot : MonoBehaviour,ISaveable
 
     public void InitializeSaveData(string identifier)
     {
-        InventorySlot slot_data = SaveGame.Load<InventorySlot>(identifier);
+        //InventorySlot slot_data = SaveGame.Load<InventorySlot>(identifier);
         
 
-        isOccupied = true;
-        itemData = slot_data.itemData;
-        itemHeld = slot_data.itemHeld;
+        
+        itemData = SaveGame.Load<InventoryItemData>(identifier);//slot_data.itemData;
+        itemHeld = SaveGame.Load<ItemPickup>(identifier);//slot_data.itemHeld;
+        if(itemData)
+        {
+            isOccupied = true;
+        }
+        
     }
 
     public void SaveData(string identifier)
     {
         SaveGame.Save<InventorySlot>(identifier, this);
+        //SaveGame.Save<bool>(identifier, isOccupied);
+        //SaveGame.Save<InventoryItemData>(identifier, itemData);
+       // SaveGame.Save<ItemPickup>(identifier, itemHeld);
     }
 }
