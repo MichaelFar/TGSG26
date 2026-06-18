@@ -6,7 +6,7 @@ public class PauseScreen : MonoBehaviour
 
     public GameObject PauseMenuUi;
 
-
+    public PauseMenu PauseMenuFunctionObject;
 
 
     void Update()
@@ -26,22 +26,32 @@ public class PauseScreen : MonoBehaviour
 
     public void Resume()
     {
-        Cursor.visible = false;
+
+        PauseMenuFunctionObject.SetGamePaused(false);
+
+        /*Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        PauseMenuUi.SetActive(false);
+        
         Time.timeScale = 1f;
+        */
+        PauseMenuUi.SetActive(false);
         GameIsPaused = false;
     }
 
     void Pause()
     {
         PauseMenuUi.SetActive(true);
-        Time.timeScale = 0f;
+
+        PauseMenuFunctionObject.SetGamePaused(true);
         GameIsPaused = true;
+
+        /*Time.timeScale = 0f;
+        
        
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        */
     }
 
     public void LoadMainMenu()
