@@ -4,5 +4,5 @@ using BayatGames.SaveGameFree;
 public interface ISaveable
 {
     public void SaveData(string identifier);
-    public void InitializeSaveData(string identifier);
+    public void LoadAndSetData(string identifier);
 }

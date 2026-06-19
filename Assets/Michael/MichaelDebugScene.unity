@@ -278,7 +278,6 @@ GameObject:
   - component: {fileID: 303058327}
   - component: {fileID: 303058326}
   - component: {fileID: 303058330}
-  - component: {fileID: 303058331}
   m_Layer: 0
   m_Name: PuzzleObject
   m_TagString: Untagged
@@ -409,18 +408,6 @@ MonoBehaviour:
   currentlyRequiredItemList: []
   radiantTaskList:
   - {fileID: 11400000, guid: 0e9855fc7844a4245b7f7c4763acba00, type: 2}
---- !u!114 &303058331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 303058325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1001 &363338493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,10 +549,6 @@ PrefabInstance:
     - target: {fileID: 4364898736719544289, guid: 95d8be247e6b4844481cd24c70fe2c87, type: 3}
       propertyPath: m_Name
       value: ItemPickup (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4364898736719544289, guid: 95d8be247e6b4844481cd24c70fe2c87, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1109,10 +1092,6 @@ PrefabInstance:
     - target: {fileID: 4364898736719544289, guid: 95d8be247e6b4844481cd24c70fe2c87, type: 3}
       propertyPath: m_Name
       value: ItemPickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 4364898736719544289, guid: 95d8be247e6b4844481cd24c70fe2c87, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

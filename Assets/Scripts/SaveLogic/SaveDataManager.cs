@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using BayatGames.SaveGameFree;
+using UnityEditor.Overlays;
 
 public class SaveDataManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class SaveDataManager : MonoBehaviour
     private static SaveDataManager _instance;
 
     private List<ObjectDataSaver> saveDataObjectList = new List<ObjectDataSaver>();
+
+    private List<MasterSaveStruct> saveDataStructList = new List<MasterSaveStruct>();
 
     private string masterID = "MasterSave";
 
@@ -33,31 +36,39 @@ public class SaveDataManager : MonoBehaviour
     {
         
     }
+
     private void Update()
     {
         if (!isFrameOne)
         {
+            SaveGame.Save<string>("stringtest", "Hello I have saved");
             isFrameOne = true;
+            
             if(!SaveGame.Exists(masterID))
             {
                 print("MasterList doesn't exist, creating it now");
                 SaveMasterList();
-                SaveAllSaveObjects();
+                //SaveAllSaveObjects();
             }
             else
             {
                 print("MasterList exists");
                 print(SaveGame.SavePath);
             }
-                
+            
         }
         if(Input.GetKeyUp(KeyCode.Space ))
         {
             LoadAllSaveObjects();
         }
+        if(Input.GetKeyUp(KeyCode.Keypad5))
+        {
+            SaveAllSaveObjects();
+        }
     }
     public void AddObjectToList(ObjectDataSaver new_data_saver)
     {
+        MasterSaveStruct new_save_object = new MasterSaveStruct(new_data_saver.GetObjectID(), new_data_saver.GetPathToAssociatedPrefab());
         if(saveDataObjectList.Contains(new_data_saver))
         {
             saveDataObjectList[saveDataObjectList.IndexOf(new_data_saver)] = new_data_saver;
@@ -66,15 +77,32 @@ public class SaveDataManager : MonoBehaviour
         {
             saveDataObjectList.Add(new_data_saver);
         }
-        
+
+        if (saveDataStructList.Contains(new_save_object))
+        {
+            saveDataStructList[saveDataStructList.IndexOf(new_save_object)] = new_save_object;
+        }
+        else
+        {
+            saveDataStructList.Add(new_save_object);
+        }
+        SaveMasterList();
     }
     public void SaveMasterList()
     {
-        SaveGame.Save<List<ObjectDataSaver>>(masterID, saveDataObjectList);
+        foreach(MasterSaveStruct i in saveDataStructList)
+        {
+            SaveGame.Save<string>(masterID, i.assetPath);
+        }
+        
     }
     public void LoadMasterList()
     {
-        saveDataObjectList = SaveGame.Load<List<ObjectDataSaver>>(masterID, saveDataObjectList);
+        saveDataStructList = SaveGame.Load<List<MasterSaveStruct>>(masterID, saveDataStructList);
+        foreach(MasterSaveStruct i in saveDataStructList)
+        {
+
+        }
     }
 
     public void SaveAllSaveObjects()
@@ -92,5 +120,16 @@ public class SaveDataManager : MonoBehaviour
         }
     }
 
+    struct MasterSaveStruct
+    {
+        public MasterSaveStruct(string id, string path)
+        {
+            objectID = id;
+            assetPath = path;
+        }
+        public string objectID;
+        public string assetPath;
+    }
+    
 
 }

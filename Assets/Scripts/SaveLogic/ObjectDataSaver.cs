@@ -1,9 +1,10 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 using BayatGames.SaveGameFree;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Events;
 public class ObjectDataSaver : MonoBehaviour
 {
 
@@ -11,10 +12,12 @@ public class ObjectDataSaver : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private List<SavePackage> managedComponents;
 
-    
+    private string filePathToHeldObjectPrefab = "";
     private void Awake()
     {
         objectID = name;
+        
+
     }
     void Start()
     {
@@ -27,8 +30,9 @@ public class ObjectDataSaver : MonoBehaviour
         {
             managedComponents = GetAllSaveableComponents();
         }
-            
         
+        filePathToHeldObjectPrefab = AssetDatabase.GetAssetPath(gameObject);//PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
+        print("My asset path is " + filePathToHeldObjectPrefab);
         SaveGame.Save<List<SavePackage>>(objectID, managedComponents);
     }
 
@@ -73,10 +77,19 @@ public class ObjectDataSaver : MonoBehaviour
     {
         foreach (SavePackage i in managedComponents)
         {
-            i.saveableComponent?.InitializeSaveData(i.identifier);
+            i.saveableComponent?.LoadAndSetData(i.identifier);
         }
     }
     
+    
+    public void UpdateSaveList()
+    {
+        managedComponents = GetAllSaveableComponents();
+    }
+    public string GetPathToAssociatedPrefab()
+    {
+        return filePathToHeldObjectPrefab;
+    }
     public struct SavePackage
     {
         public SavePackage(ISaveable new_saveable, Component new_component, string new_identifier)
@@ -89,8 +102,6 @@ public class ObjectDataSaver : MonoBehaviour
         public Component relevantComponent;
         public string identifier;
     }
-    public void UpdateSaveList()
-    {
-        managedComponents = GetAllSaveableComponents();
-    }
+
+
 }

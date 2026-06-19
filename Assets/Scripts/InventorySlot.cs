@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using BayatGames.SaveGameFree;
+using UnityEditor;
 public class InventorySlot : MonoBehaviour,ISaveable
 {
     public bool isOccupied = false;
     public InventoryItemData itemData;
 
     private ItemPickup itemHeld;
+    //public string filePathToHeldObjectPrefab = "";
     private void Start()
     {
         GetComponent<MeshRenderer>().enabled = false;
@@ -26,7 +28,8 @@ public class InventorySlot : MonoBehaviour,ISaveable
         isOccupied = true;
         itemData = incoming_item.itemData;
         itemHeld = incoming_item;
-        SaveData(name);
+        //filePathToHeldObjectPrefab = PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(itemHeld);
+        //SaveData(name);
         return true;
         
     }
@@ -67,11 +70,9 @@ public class InventorySlot : MonoBehaviour,ISaveable
         return itemHeld;
     }
 
-    public void InitializeSaveData(string identifier)
+    public void LoadAndSetData(string identifier)
     {
         //InventorySlot slot_data = SaveGame.Load<InventorySlot>(identifier);
-        
-
         
         itemData = SaveGame.Load<InventoryItemData>(identifier);//slot_data.itemData;
         itemHeld = SaveGame.Load<ItemPickup>(identifier);//slot_data.itemHeld;
@@ -84,7 +85,13 @@ public class InventorySlot : MonoBehaviour,ISaveable
 
     public void SaveData(string identifier)
     {
-        SaveGame.Save<InventorySlot>(identifier, this);
+        /*
+        incoming_item.isHeld = true;
+
+        isOccupied = true;
+        itemData = incoming_item.itemData;
+        itemHeld = incoming_item;
+        *///SaveGame.Save<InventorySlot>(identifier, this);
         //SaveGame.Save<bool>(identifier, isOccupied);
         //SaveGame.Save<InventoryItemData>(identifier, itemData);
        // SaveGame.Save<ItemPickup>(identifier, itemHeld);

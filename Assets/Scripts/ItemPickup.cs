@@ -40,7 +40,7 @@ public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
         isInitialized = true;
-        SaveData(name);
+        //SaveData(name);
     }
 
     // Update is called once per frame
@@ -105,7 +105,7 @@ public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
         myCollider.enabled = new_value;
     }
 
-    public void InitializeSaveData(string identifier)
+    public void LoadAndSetData(string identifier)
     {
         throw new System.NotImplementedException();
     }
