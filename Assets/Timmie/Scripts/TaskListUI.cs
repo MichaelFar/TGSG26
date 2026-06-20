@@ -16,16 +16,26 @@ public class TaskListUI : MonoBehaviour
     {
         taskListUIGroup = GetComponent<CanvasGroup>();
         taskListUIGroup.alpha = 0;
+
+        UIHandler.Instance.OnTaskListToggled += SetVisible;
+    }
+
+    void OnDestroy()
+    {
+        if (UIHandler.Instance != null)
+        {
+            UIHandler.Instance.OnTaskListToggled -= SetVisible;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool is_held = Keyboard.current.tabKey.IsPressed();
-        if (is_held != isOpen)
-        {
-            isOpen = is_held;
-            taskListUIGroup.alpha = is_held ? 1 : 0;
-        }
+
+    }
+
+    private void SetVisible(bool visible)
+    {
+        taskListUIGroup.alpha = visible ? 1 : 0;
     }
 }
