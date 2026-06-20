@@ -29,7 +29,7 @@ public class InventorySlot : MonoBehaviour
         
     }
 
-    public void RemoveItemFromSlot()
+    public void DropItemFromSlot()
     {
         //itemData.ev_DroppedItem.Invoke();
         itemHeld.DropItemBehavior();

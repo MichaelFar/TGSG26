@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
         input.Disable();
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (input.Menus.PauseGame.triggered)
         {
@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour
 
         }
     }
-
+    */
     public void SetGamePaused(bool paused)
     {
         gamePaused = paused;
