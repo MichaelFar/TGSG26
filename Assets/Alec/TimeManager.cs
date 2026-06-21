@@ -1,8 +1,9 @@
+using UnityEngine;
+using UnityEngine.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Gradient gradientSunsetToNight;
     [SerializeField] private Light globalLight;
 
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI nightText;
+
     private int minutes;
     public int Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
 
@@ -27,6 +31,12 @@ public class TimeManager : MonoBehaviour
     public int Days { get { return days; } set { days = value; } }
 
     private float tempSecond;
+    public UnityEvent ev_NightTime;
+    public UnityEvent dayOneEvent;
+    public UnityEvent dayTwoEvent;
+    public UnityEvent dayThreeEvent;
+    public UnityEvent dayFourEvent;
+    public UnityEvent dayFiveEvent;
 
     public void Update()
     {
@@ -36,6 +46,11 @@ public class TimeManager : MonoBehaviour
         {
             tempSecond = 0;
             Minutes++;
+        }
+
+        if (timeText != null)
+        {
+            timeText.text = days.ToString("00") + ":" + hours.ToString("00") + ":" + minutes.ToString("00");
         }
         
     }
@@ -52,30 +67,69 @@ public class TimeManager : MonoBehaviour
         {
             Hours = 0;
             Days++;
+            
         }
     }
 
     private void OnHoursChange(int value)
     {
+        bool isNight = value >= 8 || value < 2;
+
+        if (isNight == true)
+        {
+            nightText.text = "Night";
+            Invoke(nameof(ev_NightTime), 1f);
+        }
+        else
+        {
+            nightText.text = "Day";
+            CancelInvoke(nameof(ev_NightTime));
+        }
+
         if (value == 2)
         {
-            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
-            StartCoroutine(LerpLight(gradientNightToSunrise, 10f));
+            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
+            StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
         }
-        else if (value == 5)
+        else if (value == 4)
         {
-            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
-            StartCoroutine(LerpLight(gradientSunriseToDay, 10f));
+            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
+            StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
+        }
+        else if (value == 6)
+        {
+            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
+            StartCoroutine(LerpLight(gradientDayToSunset, 1f));
         }
         else if (value == 8)
         {
-            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
-            StartCoroutine(LerpLight(gradientDayToSunset, 10f));
+            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
+            StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
+            
         }
-        else if (value == 10)
+    }
+
+    private void OnDayChange(int value)
+    {
+        if (value == 1)
         {
-            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
-            StartCoroutine(LerpLight(gradientSunsetToNight, 10f));
+            Invoke(nameof(dayOneEvent), 1f);
+        }
+        else if (value == 2)
+        {
+            Invoke(nameof(dayTwoEvent), 1f);
+        }
+        else if (value == 3)
+        {
+            Invoke(nameof(dayThreeEvent), 1f);
+        }
+        else if (value == 4)
+        {
+            Invoke(nameof(dayFourEvent), 1f);
+        }
+        else if (value == 5)
+        {
+            Invoke(nameof(dayFiveEvent), 1f);
         }
     }
 
