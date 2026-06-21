@@ -20,6 +20,7 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI nightText;
+    [SerializeField] private TextMeshProUGUI dayChangeText;
 
     private int minutes;
     public int Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
@@ -28,15 +29,19 @@ public class TimeManager : MonoBehaviour
     public int Hours { get { return hours; } set { hours = value; OnHoursChange(value); } }
 
     private int days;
-    public int Days { get { return days; } set { days = value; } }
+    public int Days { get { return days; } set { days = value; OnDayChange(value);} }
 
     private float tempSecond;
     public UnityEvent ev_NightTime;
-    public UnityEvent dayOneEvent;
-    public UnityEvent dayTwoEvent;
-    public UnityEvent dayThreeEvent;
-    public UnityEvent dayFourEvent;
-    public UnityEvent dayFiveEvent;
+    public UnityEvent ev_dayTwoEvent;
+    public UnityEvent ev_dayThreeEvent;
+    public UnityEvent ev_dayFourEvent;
+    public UnityEvent ev_dayFiveEvent;
+
+    public void Start()
+    {
+        dayChangeText.text = "Day " + days.ToString();
+    }
 
     public void Update()
     {
@@ -57,6 +62,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnMinutesChange(int value)
     {
+//Change values to be able to be changed by the designer easily
         globalLight.transform.Rotate(Vector3.up, (1f/1440f)*360f, Space.World);
         if(value>= 5)
         {
@@ -78,14 +84,13 @@ public class TimeManager : MonoBehaviour
         if (isNight == true)
         {
             nightText.text = "Night";
-            Invoke(nameof(ev_NightTime), 1f);
+            ev_NightTime.Invoke();
         }
         else
         {
             nightText.text = "Day";
-            CancelInvoke(nameof(ev_NightTime));
         }
-
+//Change Value into percentage of Hours
         if (value == 2)
         {
             StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
@@ -111,25 +116,26 @@ public class TimeManager : MonoBehaviour
 
     private void OnDayChange(int value)
     {
+        dayChangeText.text = "Day " + value.ToString();
         if (value == 1)
         {
-            Invoke(nameof(dayOneEvent), 1f);
+            ev_dayOneEvent.Invoke();
         }
         else if (value == 2)
         {
-            Invoke(nameof(dayTwoEvent), 1f);
+            ev_dayTwoEvent.Invoke();
         }
         else if (value == 3)
         {
-            Invoke(nameof(dayThreeEvent), 1f);
+            ev_dayThreeEvent.Invoke();
         }
         else if (value == 4)
         {
-            Invoke(nameof(dayFourEvent), 1f);
+            ev_dayFourEvent.Invoke();
         }
         else if (value == 5)
         {
-            Invoke(nameof(dayFiveEvent), 1f);
+            ev_dayFiveEvent.Invoke();
         }
     }
 
