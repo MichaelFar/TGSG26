@@ -4,11 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using BayatGames.SaveGameFree;
 using UnityEditor.Overlays;
-
+using GlobalDataTypes;
+using System.Persistence;
+using UnityEngine.SceneManagement;
 public class SaveDataManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public string endDataSymbol = "---";
+    [SerializeField] public GameData gameData;
+    FileDataService dataService;
+
     public static SaveDataManager Instance { get { return _instance; } }
     private static SaveDataManager _instance;
 
@@ -30,15 +34,18 @@ public class SaveDataManager : MonoBehaviour
         {
             _instance = this;
         }
+        dataService = new FileDataService(new JsonSerializer());
+
     }
 
     private void Start()
     {
-        
+        NewGame();
     }
 
     private void Update()
     {
+        /*
         if (!isFrameOne)
         {
             SaveGame.Save<string>("stringtest", "Hello I have saved");
@@ -47,7 +54,7 @@ public class SaveDataManager : MonoBehaviour
             if(!SaveGame.Exists(masterID))
             {
                 print("MasterList doesn't exist, creating it now");
-                SaveMasterList();
+                //SaveMasterList();
                 //SaveAllSaveObjects();
             }
             else
@@ -65,6 +72,13 @@ public class SaveDataManager : MonoBehaviour
         {
             SaveAllSaveObjects();
         }
+        */
+    }
+    public void NewGame()
+    {
+        gameData = new GameData { identifier = "New game", currentLevelName = "DemoScene"};
+        SaveGame();
+        //SceneManager.LoadScene(gameData.currentLevelName);
     }
     public void AddObjectToList(ObjectDataSaver new_data_saver)
     {
@@ -86,8 +100,9 @@ public class SaveDataManager : MonoBehaviour
         {
             saveDataStructList.Add(new_save_object);
         }
-        SaveMasterList();
+        //SaveMasterList();
     }
+    /*
     public void SaveMasterList()
     {
         foreach(MasterSaveStruct i in saveDataStructList)
@@ -104,7 +119,7 @@ public class SaveDataManager : MonoBehaviour
 
         }
     }
-
+    */
     public void SaveAllSaveObjects()
     {
         foreach(ObjectDataSaver i in saveDataObjectList)
@@ -131,5 +146,22 @@ public class SaveDataManager : MonoBehaviour
         public string assetPath;
     }
     
+    public void SaveGame()
+    {
+        dataService.SaveData(gameData);
+    }    
+    public void LoadGame(string game_name)
+    {
+        gameData = dataService.LoadAndSetData(game_name);
+        if(string.IsNullOrEmpty(gameData.currentLevelName))
+        {
+            gameData.currentLevelName = "DemoScene";
+        }
+        SceneManager.LoadScene(gameData.currentLevelName);
+    }
+    public void DeleteGame(string game_name)
+    {
+        dataService.DeleteSave(game_name);
+    }
 
 }

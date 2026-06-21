@@ -1,8 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BayatGames.SaveGameFree;
-public interface ISaveable
+using GlobalDataTypes;
+namespace System.Persistence
 {
-    public void SaveData(string identifier);
-    public void LoadAndSetData(string identifier);
+    public interface ISaveable
+    {
+        public void SaveData(GameData data, bool should_overwrite);
+        GameData LoadAndSetData(string identifier);
+
+        public void DeleteSave(string identifier);
+    }
+
 }

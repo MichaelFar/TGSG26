@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Persistence;
 public class ObjectDataSaver : MonoBehaviour
 {
 
@@ -33,7 +34,7 @@ public class ObjectDataSaver : MonoBehaviour
         
         filePathToHeldObjectPrefab = AssetDatabase.GetAssetPath(gameObject);//PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(gameObject);
         print("My asset path is " + filePathToHeldObjectPrefab);
-        SaveGame.Save<List<SavePackage>>(objectID, managedComponents);
+        //SaveGame.Save<List<SavePackage>>(objectID, managedComponents);
     }
 
     // Update is called once per frame
@@ -70,14 +71,14 @@ public class ObjectDataSaver : MonoBehaviour
     {
         foreach(SavePackage i in managedComponents)
         {
-            i.saveableComponent?.SaveData(i.identifier);
+            //i.saveableComponent?.SaveData(i.identifier);
         }
     }
     public void RunLoad()
     {
         foreach (SavePackage i in managedComponents)
         {
-            i.saveableComponent?.LoadAndSetData(i.identifier);
+            //i.saveableComponent?.LoadAndSetData(i.identifier);
         }
     }
     

@@ -10,8 +10,8 @@ using GlobalDataTypes;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
-public class ItemPickup : MonoBehaviour, IInteractable,ISaveable
+using System.Persistence;
+public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;

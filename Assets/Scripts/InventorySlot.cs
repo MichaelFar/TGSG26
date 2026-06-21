@@ -9,7 +9,7 @@ using UnityEngine;
 
 using BayatGames.SaveGameFree;
 using UnityEditor;
-public class InventorySlot : MonoBehaviour,ISaveable
+public class InventorySlot : MonoBehaviour//,ISaveable
 {
     public bool isOccupied = false;
     public InventoryItemData itemData;
