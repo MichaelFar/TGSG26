@@ -33,6 +33,7 @@ public class TimeManager : MonoBehaviour
 
     private float tempSecond;
     public UnityEvent ev_NightTime;
+    public UnityEvent ev_dayOneEvent;
     public UnityEvent ev_dayTwoEvent;
     public UnityEvent ev_dayThreeEvent;
     public UnityEvent ev_dayFourEvent;
