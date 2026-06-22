@@ -4,12 +4,14 @@ Brief Description: Item component that attaches to an item that can be picked up
 Date: 6/2/2026
 */
 
+using BayatGames.SaveGameFree;
 using DG.Tweening;
 using GlobalDataTypes;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
-public class ItemPickup : MonoBehaviour, IInteractable
+using System.Persistence;
+public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
@@ -22,15 +24,23 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     public bool isHeld = false;
     public UnityEvent ev_Activated;
-    void Start()
+    [HideInInspector]
+    public bool isInitialized = false;
+    private void Awake()
     {
         myCollider = GetComponent<Collider>();
         myRigidBody = GetComponent<Rigidbody>();
+        
+    }
+    void Start()
+    {
+        
         if(itemData)
         {
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
-        
+        isInitialized = true;
+        //SaveData(name);
     }
 
     // Update is called once per frame
@@ -47,9 +57,9 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public void DropItemBehavior()
     {
         objectToFollow = null;
-        myCollider.enabled = true;
+        SetColliderEnabled(true);
         isHeld = false;
-        myRigidBody.useGravity = true;
+        SetUseGravity(true);
     }
     void InterpolateToObject()
     {
@@ -83,9 +93,26 @@ public class ItemPickup : MonoBehaviour, IInteractable
         {
             print("Picking up item");
             inventory_obj.DetermineItemPickup(this);
-            myCollider.enabled = false;
-            myRigidBody.useGravity = false;
+            
         }
     }
-    
+    public void SetUseGravity(bool new_value)
+    {
+        myRigidBody.useGravity = new_value;
+    }
+    public void SetColliderEnabled(bool new_value)
+    {
+        myCollider.enabled = new_value;
+    }
+
+    public void LoadAndSetData(string identifier)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(string identifier)
+    {
+        SaveGame.Save<ItemPickup>(identifier, this);
+        
+    }
 }

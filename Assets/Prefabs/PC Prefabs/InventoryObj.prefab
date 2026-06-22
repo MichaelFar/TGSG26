@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2156272747692565473}
   - component: {fileID: 4585925219017708575}
   - component: {fileID: 3972857664764930216}
-  m_Layer: 0
+  - component: {fileID: 2481949765155657157}
+  m_Layer: 7
   m_Name: TwoHandMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +106,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   isOccupied: 0
   itemData: {fileID: 0}
+--- !u!114 &2481949765155657157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77894322801743903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
 --- !u!1 &1023356343243583378
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +130,8 @@ GameObject:
   - component: {fileID: 7370172281343278656}
   - component: {fileID: 2993975251296900645}
   - component: {fileID: 7396766381247980873}
-  m_Layer: 0
+  - component: {fileID: 338669521557718814}
+  m_Layer: 7
   m_Name: LeftHandMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,6 +224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   isOccupied: 0
   itemData: {fileID: 0}
+--- !u!114 &338669521557718814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023356343243583378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
 --- !u!1 &7550244656743312734
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +248,8 @@ GameObject:
   - component: {fileID: 7641514987537305191}
   - component: {fileID: 3987932135782679387}
   - component: {fileID: 3765969748757478342}
-  m_Layer: 0
+  - component: {fileID: 5424760622437624459}
+  m_Layer: 7
   m_Name: RightHandMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,6 +342,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   isOccupied: 0
   itemData: {fileID: 0}
+--- !u!114 &5424760622437624459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550244656743312734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
 --- !u!1 &8880309991270426646
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2839466833517554408}
   - component: {fileID: 7631812786196575864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InventoryObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
