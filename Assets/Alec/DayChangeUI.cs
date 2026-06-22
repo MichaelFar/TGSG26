@@ -17,7 +17,7 @@ public class DayChangeUI : MonoBehaviour
     {
         
         
-        if (isOpen = true)
+        if (isOpen == true)
         {
             dayChangeUIGroup.alpha = 1;
         }
