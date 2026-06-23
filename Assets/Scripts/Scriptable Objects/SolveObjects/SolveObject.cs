@@ -26,6 +26,8 @@ public class SolveObject : ScriptableObject
     [HideInInspector]
     //This is used to determine if the requirements met to solve this object are true and will be checked by puzzle interaction point
     public bool requirementsMetToSolve = false;
+
+    protected bool originalTriggerOnce = false;
     public virtual bool OnSolve()
     {
         
@@ -56,7 +58,7 @@ public class SolveObject : ScriptableObject
         slotToAffect = affected_slot;
     }
 
-    public void ResetDataToDefault()
+    public virtual void ResetDataToDefault()
     {
         slotToAffect = null;
         canBeTriggered = true;

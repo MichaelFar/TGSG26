@@ -1,8 +1,9 @@
+using UnityEngine;
+using UnityEngine.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
+using TMPro;
 
 public class TimeManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Gradient gradientSunsetToNight;
     [SerializeField] private Light globalLight;
 
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI nightText;
+    [SerializeField] private TextMeshProUGUI dayChangeText;
+
     private int minutes;
     public int Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
 
@@ -24,9 +29,20 @@ public class TimeManager : MonoBehaviour
     public int Hours { get { return hours; } set { hours = value; OnHoursChange(value); } }
 
     private int days;
-    public int Days { get { return days; } set { days = value; } }
+    public int Days { get { return days; } set { days = value; OnDayChange(value);} }
 
     private float tempSecond;
+    public UnityEvent ev_NightTime;
+    public UnityEvent ev_dayOneEvent;
+    public UnityEvent ev_dayTwoEvent;
+    public UnityEvent ev_dayThreeEvent;
+    public UnityEvent ev_dayFourEvent;
+    public UnityEvent ev_dayFiveEvent;
+
+    public void Start()
+    {
+        dayChangeText.text = "Day " + days.ToString();
+    }
 
     public void Update()
     {
@@ -37,11 +53,17 @@ public class TimeManager : MonoBehaviour
             tempSecond = 0;
             Minutes++;
         }
+
+        if (timeText != null)
+        {
+            timeText.text = days.ToString("00") + ":" + hours.ToString("00") + ":" + minutes.ToString("00");
+        }
         
     }
 
     private void OnMinutesChange(int value)
     {
+//Change values to be able to be changed by the designer easily
         globalLight.transform.Rotate(Vector3.up, (1f/1440f)*360f, Space.World);
         if(value>= 5)
         {
@@ -52,30 +74,69 @@ public class TimeManager : MonoBehaviour
         {
             Hours = 0;
             Days++;
+            
         }
     }
 
     private void OnHoursChange(int value)
     {
+        bool isNight = value >= 8 || value < 2;
+
+        if (isNight == true)
+        {
+            nightText.text = "Night";
+            ev_NightTime.Invoke();
+        }
+        else
+        {
+            nightText.text = "Day";
+        }
+//Change Value into percentage of Hours
         if (value == 2)
         {
-            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
-            StartCoroutine(LerpLight(gradientNightToSunrise, 10f));
+            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
+            StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
         }
-        else if (value == 5)
+        else if (value == 4)
         {
-            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 10f));
-            StartCoroutine(LerpLight(gradientSunriseToDay, 10f));
+            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
+            StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
+        }
+        else if (value == 6)
+        {
+            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
+            StartCoroutine(LerpLight(gradientDayToSunset, 1f));
         }
         else if (value == 8)
         {
-            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
-            StartCoroutine(LerpLight(gradientDayToSunset, 10f));
+            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
+            StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
+            
         }
-        else if (value == 10)
+    }
+
+    private void OnDayChange(int value)
+    {
+        dayChangeText.text = "Day " + value.ToString();
+        if (value == 1)
         {
-            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
-            StartCoroutine(LerpLight(gradientSunsetToNight, 10f));
+            ev_dayOneEvent.Invoke();
+        }
+        else if (value == 2)
+        {
+            ev_dayTwoEvent.Invoke();
+        }
+        else if (value == 3)
+        {
+            ev_dayThreeEvent.Invoke();
+        }
+        else if (value == 4)
+        {
+            ev_dayFourEvent.Invoke();
+        }
+        else if (value == 5)
+        {
+            ev_dayFiveEvent.Invoke();
         }
     }
 
