@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SolveObjectReplaceItemMilk
   m_EditorClassIdentifier: Assembly-CSharp::SolveObjectReplaceObjectInHand
   requiredData: {fileID: 11400000, guid: 67ce22d790e5b0a4f9fa4a53b04ae175, type: 2}
-  triggerOnce: 0
+  triggerOnce: 1
   ev_OnSolve:
     m_PersistentCalls:
       m_Calls: []
-  hasBeenTriggered: 1
-  requirementsMetToSolve: 1
+  hasBeenTriggered: 0
+  requirementsMetToSolve: 0
   itemToReplace: {fileID: 4364898736719544289, guid: d2054412e22fbe84fa57eac26349c29b, type: 3}
   timeDelayBeforeFollow: 2

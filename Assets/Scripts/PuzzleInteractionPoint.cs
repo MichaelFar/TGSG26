@@ -20,10 +20,23 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     public List<SolveObject> currentlyRequiredItemList;
     public List<SolveObject> radiantTaskList;
     
+    private List<SolveObject> nonPersistentCurrentlyRequiredItemList = new List<SolveObject>();
+    private List<SolveObject> nonPersistentRadiantTaskList = new List<SolveObject>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //PopulateRequirements();
+        foreach (SolveObject i in currentlyRequiredItemList)
+        {
+            nonPersistentCurrentlyRequiredItemList.Add(Instantiate(i));
+        }
+        foreach (SolveObject i in radiantTaskList)
+        {
+
+            nonPersistentRadiantTaskList.Add(Instantiate(i));
+            
+        }
         foreach (SolveObject i in currentlyRequiredItemList)
         {
             i.ResetDataToDefault();
@@ -32,6 +45,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         {
             i.ResetDataToDefault();
         }
+        
     }
 
     // Update is called once per frame
@@ -63,7 +77,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     {
         bool all_requirements_met = true;
         //Check for required to solve items
-        foreach (SolveObject i in currentlyRequiredItemList)
+        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
             if (slot_to_check.isOccupied)
             {
@@ -85,7 +99,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             ev_SolvedPuzzle.Invoke();
         }
         //Check for the radiant tasks requirements
-        foreach (SolveObject i in radiantTaskList)
+        foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
             if (slot_to_check.isOccupied)
             {
