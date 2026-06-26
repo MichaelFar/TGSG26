@@ -936,6 +936,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6013889959193391017, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
+      propertyPath: 'choreWeekList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bd51118dfdc4904bb73ad8034477ea2, type: 2}
     - target: {fileID: 6626864883090194616, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
       propertyPath: ev_PauseStateChanged.m_PersistentCalls.m_Calls.Array.size
       value: 0

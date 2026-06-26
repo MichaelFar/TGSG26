@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 8089514218390040514}
   - component: {fileID: 4490473151792420836}
   - component: {fileID: 1459601288611457563}
+  - component: {fileID: 6013889959193391017}
   m_Layer: 7
   m_Name: First Person Player
   m_TagString: Untagged
@@ -399,6 +400,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4a8a9695496c14fa66f5bb1935ab75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+--- !u!114 &6013889959193391017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582941962336725469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1da794588935c4ab5fc46d31d9e231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  choreWeekList:
+  - {fileID: 11400000, guid: 4bd51118dfdc4904bb73ad8034477ea2, type: 2}
+  currentChoreDayIndex: 0
+  currentChores: []
 --- !u!1001 &2895297535400609858
 PrefabInstance:
   m_ObjectHideFlags: 0

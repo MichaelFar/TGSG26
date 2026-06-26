@@ -45,7 +45,16 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         {
             i.ResetDataToDefault();
         }
-        
+        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
+        {
+            
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+        }
+        foreach (SolveObject i in nonPersistentRadiantTaskList)
+        {
+            print(i.name);
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+        }
     }
 
     // Update is called once per frame
