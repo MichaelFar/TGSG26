@@ -1,3 +1,9 @@
+/*
+Contributor(s): Michael Farrar
+Brief Description: ChoreManager is a singleton that handles the connection between SolveObjects that are on PuzzleInteractionPoints
+                   How to use: Add a chore
+Date: 6/27/2026
+*/
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,9 +19,8 @@ public class ChoreManager : MonoBehaviour
 
     public ChoreDay[] choreWeekList;
     public int currentChoreDayIndex = 0;
-    [HideInInspector]
-    public ChoreTask[] currentChores;
-    Dictionary<string, UnityEvent> solveObjectEventDict = new Dictionary<string, UnityEvent>();
+    
+    Dictionary<string, ChorePackageStruct> solveObjectEventDict = new Dictionary<string, ChorePackageStruct>();
     
     private void Awake()
     {
@@ -49,7 +54,7 @@ public class ChoreManager : MonoBehaviour
         foreach(ChoreTask task in current_day.choreList)
         {
             list_to_return.Add(task);
-            print("Adding task to task list");
+           // print("Adding task to task list");
         }
         
 
@@ -64,7 +69,7 @@ public class ChoreManager : MonoBehaviour
 
         foreach (ChoreTask i in current_chores)
         {
-            print("GetAllCurrentChoreSolveObjects()");
+            //print("GetAllCurrentChoreSolveObjects()");
             foreach (SolveObject j in i.requiredSolveObjectList)
             {
                 list_to_return.Add(j);
@@ -78,14 +83,18 @@ public class ChoreManager : MonoBehaviour
     {
         List<SolveObject> current_solve_object_list = GetAllCurrentChoreSolveObjects();
 
-        foreach(SolveObject i in current_solve_object_list)
+        List<ChoreTask> current_chores = GetAllCurrentChores();
+
+        foreach (ChoreTask task in current_chores)
         {
-            //print("Test");
-            if(!solveObjectEventDict.ContainsKey(i.name))
+            foreach (SolveObject so in task.requiredSolveObjectList)
             {
-                solveObjectEventDict.Add(i.name, new UnityEvent());
-                solveObjectEventDict[i.name].AddListener(TestInvokePrint);
-                print("Adding key " + i.name);
+                if (!solveObjectEventDict.ContainsKey(so.name))
+                {
+                    solveObjectEventDict.Add(so.name, new ChorePackageStruct(task));
+                    solveObjectEventDict[so.name].ev_ThisEvent.AddListener(task.IncrementNumSolved);
+                    //print("Adding key " + i.name);
+                }
             }
         }
 
@@ -97,14 +106,32 @@ public class ChoreManager : MonoBehaviour
         print("Modified object name is " + object_name);
         if(solveObjectEventDict.ContainsKey(object_name))
         {
-            object_to_connect.ev_OnSolve.AddListener(solveObjectEventDict[object_name].Invoke);
+            object_to_connect.ev_OnSolve.AddListener(solveObjectEventDict[object_name].ev_ThisEvent.Invoke);
             print("Connected " + object_to_connect.name + " to " + solveObjectEventDict[object_name]);
         }
     }
-    private int numTestInvokes = 0;
-    public void TestInvokePrint()
+
+    public void InitializeNextDay()
     {
-        numTestInvokes += 1;
-        print("This function has been invoked " + numTestInvokes + " time(s)");
+        SetDayIndex(TimeManager.Instance.GetDay() - 1);
+        PopulateEventDict();
     }
+
+    public void SetDayIndex(int new_index)
+    {
+        currentChoreDayIndex = Mathf.Clamp(new_index, 0, choreWeekList.Length - 1);
+
+    }
+    
+    struct ChorePackageStruct
+    {
+        public ChorePackageStruct(ChoreTask new_task)
+        {
+            chore = new_task;
+            ev_ThisEvent = new UnityEvent();
+        }
+        public ChoreTask chore;
+        public UnityEvent ev_ThisEvent;
+    }
+
 }
