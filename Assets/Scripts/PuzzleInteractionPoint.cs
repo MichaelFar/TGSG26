@@ -14,7 +14,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
 {
 
     public UnityEvent ev_SolvedPuzzle;
-
+    public UnityEvent ev_CompletedAllRadiantTasks;
     //public List<InventoryItemData> RequiredItemList;
 
     public List<SolveObject> currentlyRequiredItemList;
@@ -85,6 +85,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     public void CheckForRequiredItemsThenSolve(InventorySlot slot_to_check)
     {
         bool all_requirements_met = true;
+        bool all_radiant_tasks_met = true;
         //Check for required to solve items
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
@@ -119,6 +120,14 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
                         
                 }
             }
+            if (!i.requirementsMetToSolve)
+            {
+                all_radiant_tasks_met = false;
+            }
+        }
+        if(all_radiant_tasks_met)
+        {
+            ev_CompletedAllRadiantTasks.Invoke();
         }
             
         
