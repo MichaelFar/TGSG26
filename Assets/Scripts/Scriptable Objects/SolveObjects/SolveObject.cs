@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine;
 
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 [CreateAssetMenu(fileName = "SolveObject", menuName = "Scriptable Objects/SolveObject")]
 
 public class SolveObject : ScriptableObject
@@ -20,6 +21,9 @@ public class SolveObject : ScriptableObject
 
     private bool canBeTriggered = true;
     public UnityEvent ev_OnSolve;
+
+    private bool _has_been_triggered = false;
+
 
     [HideInInspector]
     public bool hasBeenTriggered = false;

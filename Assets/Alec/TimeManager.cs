@@ -1,9 +1,16 @@
-using UnityEngine;
-using UnityEngine.Events;
+/*
+Contributor(s): Alec Nguyen, Michael Farrar
+Brief Description: Time manager singleton that controls the flow of time in the game, has events that can be listened to
+Date: 6/23/2026
+*/
+using GlobalDataTypes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Persistence;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class TimeManager : MonoBehaviour
 {
@@ -31,6 +38,8 @@ public class TimeManager : MonoBehaviour
     private int days;
     public int Days { get { return days; } set { days = value; OnDayChange(value);} }
 
+    public int maxDays = 5;
+
     private float tempSecond;
     public UnityEvent ev_NightTime;
     public UnityEvent ev_dayOneEvent;
@@ -39,9 +48,28 @@ public class TimeManager : MonoBehaviour
     public UnityEvent ev_dayFourEvent;
     public UnityEvent ev_dayFiveEvent;
 
+    private UnityEvent[] dayEventArray;
+
+    public static TimeManager Instance { get { return _instance; } }
+    private static TimeManager _instance;
+    private void Awake()
+    {
+        dayEventArray = InitializeArray<UnityEvent>(maxDays);
+        if(_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+    
     public void Start()
     {
+        
         dayChangeText.text = "Day " + days.ToString();
+        //Days = 1;
     }
 
     public void Update()
@@ -138,6 +166,15 @@ public class TimeManager : MonoBehaviour
         {
             ev_dayFiveEvent.Invoke();
         }
+        if(value <= dayEventArray.Length)
+        {
+            dayEventArray[value].Invoke();
+        }
+        else
+        {
+            print("Game ends here probably");
+        }
+        
     }
 
     private IEnumerator LerpSkybox(Texture2D a, Texture2D b, float time)
@@ -162,4 +199,37 @@ public class TimeManager : MonoBehaviour
             yield return null;
         }
     }
+    public int GetDay()
+    {
+        return Days;
+    }
+
+    public int GetMaxDays()
+    {
+        return maxDays;
+    }
+    //Connects a given function to a given day
+    //eg: ConnectToDayEvent(2, MyMethod);
+    public void ConnectToDayEvent(int day_to_connect, UnityAction action_to_connect)
+    {
+        if(day_to_connect < GetMaxDays())
+        {
+            dayEventArray[day_to_connect].AddListener(action_to_connect);
+        }
+        
+
+    }
+    //Returns a new array of type T with given length
+    T[] InitializeArray<T>(int length) where T : new()
+    {
+        T[] array = new T[length];
+        for (int i = 0; i < length; ++i)
+        {
+            array[i] = new T();
+        }
+
+        return array;
+    }
+
+
 }

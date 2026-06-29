@@ -13,6 +13,8 @@ namespace System.Persistence
         string dataPath;
         string fileExtension;
 
+        public SerializableGuid Id { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+
         public FileDataService(ISerializer new_serializer)
         {
             this.dataPath = Application.persistentDataPath;

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Persistence;
+using System;
 public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,6 +41,7 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
         isInitialized = true;
+        
         //SaveData(name);
     }
 
@@ -116,3 +118,11 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
         
     }
 }
+/*
+[Serializable]
+public class ItemSaveData : //ISaveable
+{
+    [field: SerializeField] public SerializableGuid Id { get; set; }
+    
+}
+*/
