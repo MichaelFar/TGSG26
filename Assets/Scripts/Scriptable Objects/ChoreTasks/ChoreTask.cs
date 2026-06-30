@@ -27,6 +27,8 @@ public class ChoreTask : ScriptableObject
 
     public UnityEvent ev_ChoreCompleted;
 
+    public UnityEvent ev_ChoreStepCompleted;
+
     public UnityEvent ev_ChoreFailed;
     protected string CalculateTaskRatio()
     {
@@ -42,6 +44,7 @@ public class ChoreTask : ScriptableObject
             CompleteChore();
         }
         MonoBehaviour.print(GetDescription());
+        ev_ChoreStepCompleted.Invoke();
     }
     public string GetDescription()
     {
@@ -64,6 +67,14 @@ public class ChoreTask : ScriptableObject
     {
         ev_ChoreFailed.Invoke();
     }
+    public bool GetIsComplete()
+    {
+        return isComplete;
+    }
+    public bool GetIsDemon()
+    {
+        return isDemon;
+    }
 
-    
+
 }

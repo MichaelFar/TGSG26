@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
 {
 
@@ -23,6 +24,8 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     private List<SolveObject> nonPersistentCurrentlyRequiredItemList = new List<SolveObject>();
     private List<SolveObject> nonPersistentRadiantTaskList = new List<SolveObject>();
 
+    
+    //public string mainLevelName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,16 +48,27 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         {
             i.ResetDataToDefault();
         }
+        //ChoreManager.Instance.PopulateEventDict();
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
-            
+            print(i.name);
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
         }
         foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
             print(i.name);
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+
         }
+        
+        /*
+        foreach(ChoreTask i in ChoreManager.Instance.GetAllCurrentChores())
+        {
+            i.ev_ChoreStepCompleted.AddListener(SomeFuncYouWrote);
+        }
+        */
+        //SceneManager.LoadScene(0);
+
     }
 
     // Update is called once per frame

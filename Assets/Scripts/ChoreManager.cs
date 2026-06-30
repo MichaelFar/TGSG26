@@ -33,11 +33,15 @@ public class ChoreManager : MonoBehaviour
         {
             _instance = this;
         }
+        PopulateEventDict();
+
+        foreach (ChoreTask i in GetAllCurrentChores())
+        {
+            i.ResetData();
+        }
     }
     void Start()
     {
-        PopulateEventDict();
-        
         
     }
 
@@ -92,12 +96,18 @@ public class ChoreManager : MonoBehaviour
                 if (!solveObjectEventDict.ContainsKey(so.name))
                 {
                     solveObjectEventDict.Add(so.name, new ChorePackageStruct(task));
+                    
                     solveObjectEventDict[so.name].ev_ThisEvent.AddListener(task.IncrementNumSolved);
-                    //print("Adding key " + i.name);
+                    print("Adding key " + so.name);
                 }
             }
         }
+        //print("Dictionary after adding keys is " + solveObjectEventDict.Keys);
 
+        foreach(string i in solveObjectEventDict.Keys)
+        {
+            print("Key " + i + " found");
+        }
     }
 
     public void ConnectSolveObjectToEventDict(SolveObject object_to_connect)
@@ -107,8 +117,13 @@ public class ChoreManager : MonoBehaviour
         if(solveObjectEventDict.ContainsKey(object_name))
         {
             object_to_connect.ev_OnSolve.AddListener(solveObjectEventDict[object_name].ev_ThisEvent.Invoke);
-            print("Connected " + object_to_connect.name + " to " + solveObjectEventDict[object_name]);
+            
+            print("Connected " + object_to_connect.name + " to " + object_name);
+
         }
+        
+        //int num_connected_listeners = object_to_connect.ev_OnSolve;//.;
+
     }
 
     public void InitializeNextDay()
@@ -134,4 +149,16 @@ public class ChoreManager : MonoBehaviour
         public UnityEvent ev_ThisEvent;
     }
 
+    public List<string> GetAllChoreDescriptions()
+    {
+        List<string> list_to_return = new List<string>();
+
+        foreach(ChoreTask i in GetAllCurrentChores())
+        {
+            list_to_return.Add(i.GetDescription());
+        }
+        return list_to_return;
+
+       
+    }
 }

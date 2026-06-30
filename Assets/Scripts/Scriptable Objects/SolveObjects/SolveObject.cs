@@ -19,6 +19,8 @@ public class SolveObject : ScriptableObject
 
     public bool triggerOnce = true;
 
+    
+
     private bool canBeTriggered = true;
     public UnityEvent ev_OnSolve;
 
