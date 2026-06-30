@@ -765,7 +765,7 @@ MonoBehaviour:
       m_Calls: []
   currentlyRequiredItemList: []
   radiantTaskList:
-  - {fileID: 11400000, guid: 4c191c6ee221ce74cb269ba2a45dfbfd, type: 2}
+  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
 --- !u!1001 &1558902693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1206,7 +1206,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6013889959193391017, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
       propertyPath: choreWeekList.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6013889959193391017, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
       propertyPath: 'choreWeekList.Array.data[0]'
