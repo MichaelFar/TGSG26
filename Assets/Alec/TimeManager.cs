@@ -38,7 +38,29 @@ public class TimeManager : MonoBehaviour
     private int days;
     public int Days { get { return days; } set { days = value; OnDayChange(value);} }
 
+    public int minutesPerHour = 5;
+    public int hoursPerDay = 10;
     public int maxDays = 5;
+    
+    private float sunriseHour
+    {
+        get { return hoursPerDay * 1/4; }
+    }
+
+    private float dayHour
+    {
+        get { return hoursPerDay * 2/5; }
+    }
+
+    private float sunsetHour
+    {
+        get { return hoursPerDay * 3/4; }
+    }
+
+    private float nightHour
+    {
+        get { return hoursPerDay * 4/5; }
+    }
 
     private float tempSecond;
     public UnityEvent ev_NightTime;
@@ -54,6 +76,7 @@ public class TimeManager : MonoBehaviour
     private static TimeManager _instance;
     private void Awake()
     {
+
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
         if(_instance != null && _instance != this)
         {
@@ -67,7 +90,6 @@ public class TimeManager : MonoBehaviour
     
     public void Start()
     {
-        
         dayChangeText.text = "Day " + days.ToString();
         //Days = 1;
     }
@@ -93,12 +115,12 @@ public class TimeManager : MonoBehaviour
     {
 //Change values to be able to be changed by the designer easily
         globalLight.transform.Rotate(Vector3.up, (1f/1440f)*360f, Space.World);
-        if(value>= 5)
+        if(value>= minutesPerHour)
         {
             Minutes = 0;
             Hours++;
         }
-        if (Hours >= 10)
+        if (Hours >= hoursPerDay)
         {
             Hours = 0;
             Days++;
@@ -108,7 +130,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnHoursChange(int value)
     {
-        bool isNight = value >= 8 || value < 2;
+        bool isNight = value >= nightHour || value < sunriseHour;
 
         if (isNight == true)
         {
@@ -120,22 +142,22 @@ public class TimeManager : MonoBehaviour
             nightText.text = "Day";
         }
 //Change Value into percentage of Hours
-        if (value == 2)
+        if (value == sunriseHour)
         {
             StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
             StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
         }
-        else if (value == 4)
+        else if (value == dayHour)
         {
             StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
             StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
         }
-        else if (value == 6)
+        else if (value == sunsetHour)
         {
             StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
             StartCoroutine(LerpLight(gradientDayToSunset, 1f));
         }
-        else if (value == 8)
+        else if (value == nightHour)
         {
             StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
             StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
