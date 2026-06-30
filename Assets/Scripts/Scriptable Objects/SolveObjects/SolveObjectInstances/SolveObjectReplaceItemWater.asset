@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a680bb9a066e114a88b983e12219aaf, type: 3}
-  m_Name: SolveObjectReplaceItemBucket
+  m_Name: SolveObjectReplaceItemWater
   m_EditorClassIdentifier: Assembly-CSharp::SolveObjectReplaceObjectInHand
   requiredData: {fileID: 11400000, guid: 6cc600329009ffa49aef053e9379653c, type: 2}
   triggerOnce: 0
