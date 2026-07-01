@@ -56,8 +56,9 @@ public class InventoryComponent : MonoBehaviour
 
         is_two_sized = this_item.itemData.numSlotsUsed == 2;
 
+        print("Item size is " + this_item.itemData.numSlotsUsed);
 
-        if (is_two_sized)
+        if (is_two_sized && activeSlot != twoHandedSlot)
         {
             foreach (InventorySlot this_slot in inventorySlotList)
             {

@@ -32,6 +32,14 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         //PopulateRequirements();
         foreach (SolveObject i in currentlyRequiredItemList)
         {
+            i.ResetDataToDefault();
+        }
+        foreach (SolveObject i in radiantTaskList)
+        {
+            i.ResetDataToDefault();
+        }
+        foreach (SolveObject i in currentlyRequiredItemList)
+        {
             nonPersistentCurrentlyRequiredItemList.Add(Instantiate(i));
         }
         foreach (SolveObject i in radiantTaskList)
@@ -40,25 +48,19 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             nonPersistentRadiantTaskList.Add(Instantiate(i));
             
         }
-        foreach (SolveObject i in currentlyRequiredItemList)
-        {
-            i.ResetDataToDefault();
-        }
-        foreach (SolveObject i in radiantTaskList)
-        {
-            i.ResetDataToDefault();
-        }
+        
         //ChoreManager.Instance.PopulateEventDict();
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
             print(i.name);
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+            i.ResetDataToDefault();
         }
         foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
             print(i.name);
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
-
+            i.ResetDataToDefault();
         }
         
         /*
