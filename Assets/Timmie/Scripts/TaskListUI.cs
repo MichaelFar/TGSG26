@@ -7,7 +7,7 @@ Contributor(s): Timmie Xiong
 Brief Description: Handles input for opening/closing the Task UI
 Date: 6/1/26
 */
-public class TaskListUI : MonoBehaviour
+public class TaskListUI : BaseUI
 {
     private CanvasGroup taskListUIGroup;
     private bool isOpen = false;
@@ -36,6 +36,14 @@ public class TaskListUI : MonoBehaviour
 
     private void SetVisible(bool visible)
     {
-        taskListUIGroup.alpha = visible ? 1 : 0;
+        if (visible)
+        {
+            UIHandler.Instance.ShowUI(this);
+            PauseMenu.Instance.SetGamePaused(false);
+        }
+        else
+        {
+            UIHandler.Instance.CloseUI();
+        }
     }
 }

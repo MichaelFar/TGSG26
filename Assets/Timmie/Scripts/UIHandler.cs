@@ -30,6 +30,20 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseScreen.GameIsPaused && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            //true = resume game
+            OnPauseMenuToggled?.Invoke(true);
+        }
+        else if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            //false = pause game
+            OnPauseMenuToggled?.Invoke(false);
+        }
+        else if (PauseScreen.GameIsPaused)
+        {
+            return;
+        }
         if (Keyboard.current.eKey.wasPressedThisFrame && currentOpenUI != null)
         {
             CloseUI();
@@ -43,14 +57,6 @@ public class UIHandler : MonoBehaviour
         {
             OnTaskListToggled?.Invoke(false);
         }
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            OnPauseMenuToggled?.Invoke(true);
-        }
-        if (Keyboard.current.escapeKey.wasReleasedThisFrame)
-        {
-            OnPauseMenuToggled?.Invoke(false);
-        }
 
     }
 
@@ -62,7 +68,6 @@ public class UIHandler : MonoBehaviour
         }
         currentOpenUI = uiPanel;
         uiPanel.Show();
-        PauseMenuFunctionObject.SetGamePaused(true);
     }
 
     public void CloseUI()

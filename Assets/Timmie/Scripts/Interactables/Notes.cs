@@ -15,5 +15,6 @@ public class Notes : MonoBehaviour, IInteractable
     public void ShowNote()
     {
         UIHandler.Instance.ShowUI(noteUI);
+        PauseMenu.Instance.SetGamePaused(true);
     }
 }
