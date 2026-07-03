@@ -71,7 +71,7 @@ public class TimeManager : MonoBehaviour
     {
         
         dayChangeText.text = "Day " + days.ToString();
-        //Days = 1;
+        Days = 1;
     }
 
     public void Update()

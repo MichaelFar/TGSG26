@@ -36,7 +36,8 @@ public class SolveObject : ScriptableObject
     public bool requirementsMetToSolve = false;
 
     protected bool originalTriggerOnce = false;
-    
+
+    public bool activateOnEmptyHand = false;
     public virtual bool OnSolve()
     {
         

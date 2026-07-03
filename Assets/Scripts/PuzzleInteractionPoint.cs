@@ -133,7 +133,6 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
                 {
                     i.SetSlotToAffect(slot_to_check);
                     i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-                        
                 }
             }
             if (!i.requirementsMetToSolve)
