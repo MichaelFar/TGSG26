@@ -16,5 +16,6 @@ public class InventoryItemData : ScriptableObject
     public int numSlotsUsed = 1;
 
     public UnityEvent ev_DroppedItem;
-    
+
+    public string itemName = "";
 }

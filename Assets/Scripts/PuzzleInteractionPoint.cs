@@ -10,11 +10,12 @@ using UnityEngine.Events;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
 {
 
     public UnityEvent ev_SolvedPuzzle;
-
+    public UnityEvent ev_CompletedAllRadiantTasks;
     //public List<InventoryItemData> RequiredItemList;
 
     public List<SolveObject> currentlyRequiredItemList;
@@ -23,6 +24,8 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     private List<SolveObject> nonPersistentCurrentlyRequiredItemList = new List<SolveObject>();
     private List<SolveObject> nonPersistentRadiantTaskList = new List<SolveObject>();
 
+    
+    //public string mainLevelName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,16 +48,27 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         {
             i.ResetDataToDefault();
         }
+        //ChoreManager.Instance.PopulateEventDict();
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
-            
+            print(i.name);
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
         }
         foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
             print(i.name);
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+
         }
+        
+        /*
+        foreach(ChoreTask i in ChoreManager.Instance.GetAllCurrentChores())
+        {
+            i.ev_ChoreStepCompleted.AddListener(SomeFuncYouWrote);
+        }
+        */
+        //SceneManager.LoadScene(0);
+
     }
 
     // Update is called once per frame
@@ -85,6 +99,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     public void CheckForRequiredItemsThenSolve(InventorySlot slot_to_check)
     {
         bool all_requirements_met = true;
+        bool all_radiant_tasks_met = true;
         //Check for required to solve items
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
@@ -119,6 +134,14 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
                         
                 }
             }
+            if (!i.requirementsMetToSolve)
+            {
+                all_radiant_tasks_met = false;
+            }
+        }
+        if(all_radiant_tasks_met)
+        {
+            ev_CompletedAllRadiantTasks.Invoke();
         }
             
         
