@@ -234,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 1124086702}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: ev_dayOneEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: ev_dayOneEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -822,6 +822,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PuzzleInteractionPoint
   ev_SolvedPuzzle:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_CompletedAllRadiantTasks:
     m_PersistentCalls:
       m_Calls: []
   currentlyRequiredItemList: []
@@ -2596,6 +2599,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ev_CompletedAllRadiantTasks:
+    m_PersistentCalls:
+      m_Calls: []
   currentlyRequiredItemList:
   - {fileID: 11400000, guid: e19a74264559d254abace5196a61a76c, type: 2}
   radiantTaskList: []

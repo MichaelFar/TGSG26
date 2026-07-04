@@ -21,6 +21,7 @@ public class Plant : MonoBehaviour
         print("Watered the plant");
         IsWatered = true;
         CheckSoil(IsWatered);
+        TimeManager.Instance.ConnectToDayEvent(TimeManager.Instance.GetDay() + 1, Grow);
     }
     public void Grow()
     {
