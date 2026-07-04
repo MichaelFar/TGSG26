@@ -9,7 +9,10 @@ public class SettingsScript : MonoBehaviour
     //calling mouse look script for mouse sensitivity variable
     public MoveCamera cameraSpeed;
     public Slider sensitivitySlider;
-
+    /*
+    private float _Sensitivity;
+    public float Sensitivity { get { return _Sensitivity; } set { _Sensitivity = value; } }
+    */
     //stuff for audio
     [SerializeField]
     private AudioMixer Mixer;
@@ -36,20 +39,25 @@ public class SettingsScript : MonoBehaviour
     //mouse speed settings
     public void Start()
     {
-        cameraSpeed.mouseSensitivity = PlayerPrefs.GetFloat("currentSensitivity", 100);
+        
+        cameraSpeed.mouseSensitivity = PlayerPrefs.GetFloat("currentSensitivity");
         sensitivitySlider.value = cameraSpeed.mouseSensitivity / 10;
+        print("options applied");
     }
 
 
-    public void Update()
-    {
-        PlayerPrefs.SetFloat("currentSensitivity", cameraSpeed.mouseSensitivity);
-    }
+    
 
     
    public void AdjustSpeed(float newSpeed)
      {
+        PlayerPrefs.SetFloat("currentSensitivity", cameraSpeed.mouseSensitivity);
+        PlayerPrefs.Save();
         cameraSpeed.mouseSensitivity = newSpeed * 10;
+        if (PlayerPrefs.HasKey("currentSensitivity"))
+        {
+            print(cameraSpeed.mouseSensitivity);
+        }
      }
 
 
@@ -64,5 +72,6 @@ public class SettingsScript : MonoBehaviour
         audioMixer.SetFloat("volume", volume);
     }
 
-    Mathf.Log10(volume)*20*/
+    Mathf.Log10(volume)*20
+    */
 }
