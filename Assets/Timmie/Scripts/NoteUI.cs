@@ -10,6 +10,7 @@ public class NoteUI : BaseUI
     {
         base.Show();
         LoadContent();
+
     }
 
     private void LoadContent()
