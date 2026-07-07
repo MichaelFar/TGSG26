@@ -29,18 +29,20 @@ Date: 6/3/2026
         }
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Start()
     {
-        JohnCanvasGroup = this.GetComponentInParent<CanvasGroup>();
+       ToggleHudVisibility(); 
+    }
+
+    void Awake()
+    {
+        JohnCanvasGroup = GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-           ToggleHudVisibility();
-        }
+        
     }
 }
