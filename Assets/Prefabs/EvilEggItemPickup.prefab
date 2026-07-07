@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6570634971474858652}
   - component: {fileID: 7597123945296843481}
   m_Layer: 0
-  m_Name: FeedModel
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.23, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 184896761142682514}
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5d1564c2bc121554189142c8ed720dcb, type: 2}
+  - {fileID: 2100000, guid: 4f1ef37ae953c484bbc5d5e4049147e5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 386438661337127504}
   - component: {fileID: 3048214232206645915}
   m_Layer: 7
-  m_Name: FeedItemPickup
+  m_Name: EvilEggItemPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1378d9c813d8d9429fb4e57db8c6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  itemData: {fileID: 11400000, guid: 57598f2ec266c4b44af7a3d7b7b91690, type: 2}
+  itemData: {fileID: 11400000, guid: 067a80c7816de054680fa13d184c01d8, type: 2}
   myCollider: {fileID: 6187455729128900774}
   isHeld: 0
   ev_Activated:

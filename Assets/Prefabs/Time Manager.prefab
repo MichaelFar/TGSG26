@@ -169,3 +169,28 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   globalLight: {fileID: 0}
+  timeText: {fileID: 0}
+  nightText: {fileID: 0}
+  dayChangeText: {fileID: 0}
+  maxDays: 5
+  ev_NightTime:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_dayOneEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_dayTwoEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_dayThreeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_dayFourEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_dayFiveEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_dayHasChanged:
+    m_PersistentCalls:
+      m_Calls: []

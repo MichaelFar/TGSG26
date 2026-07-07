@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: newday
   m_EditorClassIdentifier: Assembly-CSharp::ChoreDay
   choreList:
-  - {fileID: 11400000, guid: e6dc45c15f979df4ca6a295c1852ec26, type: 2}
+  - {fileID: 11400000, guid: f83dbf75293fe234e9dec41e5c40d8e2, type: 2}
+  - {fileID: 11400000, guid: e4e5230f786a5fe45a14619d97f303e9, type: 2}
