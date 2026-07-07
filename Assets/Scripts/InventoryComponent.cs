@@ -56,8 +56,9 @@ public class InventoryComponent : MonoBehaviour
 
         is_two_sized = this_item.itemData.numSlotsUsed == 2;
 
+        print("Item size is " + this_item.itemData.numSlotsUsed);
 
-        if (is_two_sized)
+        if (is_two_sized && activeSlot != twoHandedSlot)
         {
             foreach (InventorySlot this_slot in inventorySlotList)
             {
@@ -110,7 +111,9 @@ public class InventoryComponent : MonoBehaviour
         item_to_pickup.transform.forward = transform.forward;
         slot_to_attach_to.AddItemToSlot(item_to_pickup);
         item_to_pickup.SetObjectToFollow(slot_to_attach_to.gameObject);
-        
+        item_to_pickup.SetUseGravity(false);
+        item_to_pickup.SetColliderEnabled(false);
+
     }
 
     void DropItem()
@@ -183,4 +186,5 @@ public class InventoryComponent : MonoBehaviour
         return twoHandedSlot;
     }
     
+
 }

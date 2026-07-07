@@ -7,12 +7,14 @@ notice all the static keywords are gone now, along with the if statement to dest
 
 public class PauseMenu : MonoBehaviour
 {
-   
+
+    public static PauseMenu Instance { get; private set; }
     private GameInput input;
     private bool gamePaused;
 
     private void Awake()
     {
+        Instance = this;
         input = new GameInput();
         input.Enable();
     }
@@ -22,7 +24,7 @@ public class PauseMenu : MonoBehaviour
         input.Disable();
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (input.Menus.PauseGame.triggered)
         {
@@ -30,7 +32,7 @@ public class PauseMenu : MonoBehaviour
 
         }
     }
-
+    */
     public void SetGamePaused(bool paused)
     {
         gamePaused = paused;
