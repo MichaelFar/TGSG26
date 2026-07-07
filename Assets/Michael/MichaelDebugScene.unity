@@ -667,7 +667,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1230487893}
         m_TargetAssemblyTypeName: ChickenNest, Assembly-CSharp
-        m_MethodName: DailyEggSpawnNormal
+        m_MethodName: HookNormalEggSpawnIntoDailyEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
