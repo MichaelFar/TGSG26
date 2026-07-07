@@ -7,7 +7,7 @@ Contributor(s): Timmie Xiong
 Brief Description: Handles input for opening/closing the Task UI
 Date: 6/1/26
 */
-public class TaskListUI : MonoBehaviour
+public class TaskListUI : BaseUI
 {
     private CanvasGroup taskListUIGroup;
     private bool isOpen = false;
@@ -16,16 +16,34 @@ public class TaskListUI : MonoBehaviour
     {
         taskListUIGroup = GetComponent<CanvasGroup>();
         taskListUIGroup.alpha = 0;
+
+        UIHandler.Instance.OnTaskListToggled += SetVisible;
+    }
+
+    void OnDestroy()
+    {
+        if (UIHandler.Instance != null)
+        {
+            UIHandler.Instance.OnTaskListToggled -= SetVisible;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool isHeld = Keyboard.current.tabKey.IsPressed();
-        if (isHeld != isOpen)
+
+    }
+
+    private void SetVisible(bool visible)
+    {
+        if (visible)
         {
-            isOpen = isHeld;
-            taskListUIGroup.alpha = isHeld ? 1 : 0;
+            UIHandler.Instance.ShowUI(this);
+            PauseMenu.Instance.SetGamePaused(false);
+        }
+        else
+        {
+            UIHandler.Instance.CloseUI();
         }
     }
 }

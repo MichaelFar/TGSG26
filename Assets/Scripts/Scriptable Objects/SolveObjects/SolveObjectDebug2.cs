@@ -6,7 +6,7 @@ Date: 6/5/2026
 using UnityEngine;
 
 using UnityEngine.Events;
-[CreateAssetMenu(fileName = "SolveObjectDebug2", menuName = "Scriptable Objects/SolveObjectDebug2")]
+[CreateAssetMenu(fileName = "SolveObjectDebug2", menuName = "Scriptable Objects/SolveObjectDropItem")]
 public class SolveObjectDebug2 : SolveObject
 {
 

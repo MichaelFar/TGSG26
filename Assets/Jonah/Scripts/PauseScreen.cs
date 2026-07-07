@@ -1,30 +1,40 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PauseScreen : MonoBehaviour
+public class PauseScreen : BaseUI
 {
     public static bool GameIsPaused = false;
 
-    public GameObject PauseMenuUi;
+    public CanvasGroup PauseMenuUi;
 
     public PauseMenu PauseMenuFunctionObject;
 
-
-    void Update()
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        UIHandler.Instance.OnPauseMenuToggled += SetVisible;
+    }
+
+    void OnDestroy()
+    {
+        if (UIHandler.Instance != null)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            UIHandler.Instance.OnPauseMenuToggled -= SetVisible;
+        }
+    }
+    private void SetVisible(bool isVisible)
+    {
+        PauseMenuUi.alpha = isVisible ? 1 : 0;
+        if (isVisible)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
         }
     }
 
-    public void Resume()
+    private void Resume()
     {
 
         PauseMenuFunctionObject.SetGamePaused(false);
@@ -35,13 +45,17 @@ public class PauseScreen : MonoBehaviour
         
         Time.timeScale = 1f;
         */
-        PauseMenuUi.SetActive(false);
+        PauseMenuUi.alpha = 0;
+        PauseMenuUi.interactable = false;
+        PauseMenuUi.blocksRaycasts = false;
         GameIsPaused = false;
     }
 
-    void Pause()
+    private void Pause()
     {
-        PauseMenuUi.SetActive(true);
+        PauseMenuUi.alpha = 1;
+        PauseMenuUi.interactable = true;
+        PauseMenuUi.blocksRaycasts = true;
 
         PauseMenuFunctionObject.SetGamePaused(true);
         GameIsPaused = true;
@@ -57,6 +71,7 @@ public class PauseScreen : MonoBehaviour
     public void LoadMainMenu()
     {
         Debug.Log("Loading Main Menu...");
+        SceneManager.LoadScene(0);
     }
 
     public void LoadOptions()
@@ -70,5 +85,5 @@ public class PauseScreen : MonoBehaviour
         Application.Quit();
 
     }
-    
+
 }

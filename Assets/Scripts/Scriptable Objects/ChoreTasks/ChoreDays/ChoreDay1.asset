@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChoreDay
   choreList:
   - {fileID: 11400000, guid: 5c24a4cd2ee2cbf46af4fb44eb01ea88, type: 2}
+  - {fileID: 11400000, guid: f83dbf75293fe234e9dec41e5c40d8e2, type: 2}

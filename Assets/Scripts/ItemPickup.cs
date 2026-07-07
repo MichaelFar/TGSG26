@@ -41,6 +41,7 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
         isInitialized = true;
+        //DropItemBehavior();
         
         //SaveData(name);
     }
