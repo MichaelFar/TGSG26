@@ -50,6 +50,8 @@ public class TimeManager : MonoBehaviour
 
     private UnityEvent[] dayEventArray;
 
+    public UnityEvent ev_dayHasChanged;
+
     public static TimeManager Instance { get { return _instance; } }
     private static TimeManager _instance;
     private void Awake()
@@ -69,7 +71,7 @@ public class TimeManager : MonoBehaviour
     {
         
         dayChangeText.text = "Day " + days.ToString();
-        //Days = 1;
+        Days = 1;
     }
 
     public void Update()
@@ -145,6 +147,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnDayChange(int value)
     {
+        ev_dayHasChanged.Invoke();
         dayChangeText.text = "Day " + value.ToString();
         if (value == 1)
         {

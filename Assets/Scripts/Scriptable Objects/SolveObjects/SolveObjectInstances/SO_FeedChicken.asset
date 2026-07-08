@@ -17,5 +17,6 @@ MonoBehaviour:
   ev_OnSolve:
     m_PersistentCalls:
       m_Calls: []
+  triggerOncePerDay: 1
   hasBeenTriggered: 0
   requirementsMetToSolve: 0

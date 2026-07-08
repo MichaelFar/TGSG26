@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseScreen : BaseUI
 {
@@ -72,6 +73,7 @@ public class PauseScreen : BaseUI
     public void LoadMainMenu()
     {
         Debug.Log("Loading Main Menu...");
+        SceneManager.LoadScene(0);
     }
 
     public void LoadOptions()
