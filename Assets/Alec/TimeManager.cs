@@ -21,6 +21,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Texture2D skyboxSunset;
     [SerializeField]
     private Texture2D[] skyboxArray;
+    private int currentSkyboxIndex = 0;
 
     [SerializeField] private Gradient gradientNightToSunrise;
     [SerializeField] private Gradient gradientSunriseToDay;
@@ -68,6 +69,10 @@ public class TimeManager : MonoBehaviour
     private static TimeManager _instance;
 
     private bool hasInvokedNight = false;
+    private float total_seconds_in_day;
+    private float startingSecondsThreshold;
+    private float secondsThresholdCoefficient = 0.2f;
+    private float secondsUntilTextureChange = 0.0f;
     private void Awake()
     {
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
@@ -79,6 +84,9 @@ public class TimeManager : MonoBehaviour
         {
             _instance = this;
         }
+        total_seconds_in_day = hoursThreshold *  minutesThreshold;
+        startingSecondsThreshold = total_seconds_in_day * 0.2f;
+
     }
     
     public void Start()
@@ -86,40 +94,70 @@ public class TimeManager : MonoBehaviour
         
         dayChangeText.text = "Day " + days.ToString();
         Days = 1;
+        SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[currentSkyboxIndex + 1]);
+        currentSkyboxIndex = 1;
     }
 
     public void Update()
     {
         tempSecond += Time.deltaTime;
         secondsCountToday += Time.deltaTime;
+        secondsUntilTextureChange += Time.deltaTime;
         if (tempSecond >= 1)
         {
             tempSecond = 0;
             Minutes++;
         }
 
+
+
+
+        SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day * secondsThresholdCoefficient));
+        if (secondsUntilTextureChange >= total_seconds_in_day * secondsThresholdCoefficient)
+        {
+            //currentSkyboxIndex += 1;
+            
+
+            
+            if(currentSkyboxIndex == skyboxArray.Length - 1)
+            {
+                SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[0]);
+                currentSkyboxIndex = 0;
+            }
+            else
+            {
+                
+                SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[currentSkyboxIndex + 1]);
+                currentSkyboxIndex += 1;
+            }
+                print("Index of skybox is " + currentSkyboxIndex + " and array length is " + skyboxArray.Length);
+                
+            secondsUntilTextureChange = 0.0f;
+            //secondsThresholdCoefficient = 0.2f * currentSkyboxIndex + 1;
+        }
+        /*
         if (value <= hoursThreshold * .2)
         {
-            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
+            SetSkyboxTexture(skyboxNight, skyboxSunrise);
             StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
         }
         else if (value <= hoursThreshold * .4)
         {
-            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
+            SetSkyboxTexture(skyboxSunrise, skyboxDay);
             StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
         }
         else if (value <= hoursThreshold * .6)
         {
-            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
+            SetSkyboxTexture(skyboxDay, skyboxSunset);
             StartCoroutine(LerpLight(gradientDayToSunset, 1f));
         }
         else if (value <= hoursThreshold * .8)
         {
-            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
+            SetSkyboxTexture(skyboxSunset, skyboxNight);
             StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
 
         }
-
+        */
         if (timeText != null)
         {
             timeText.text = days.ToString("00") + ":" + hours.ToString("00") + ":" + minutes.ToString("00");
@@ -160,27 +198,29 @@ public class TimeManager : MonoBehaviour
             nightText.text = "Day";
         }
 //Change Value into percentage of Hours
+/*
         if (value <= hoursThreshold * .2)
         {
-            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
+            SetSkyboxTexture(skyboxNight, skyboxSunrise);
             StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
         }
         else if (value <= hoursThreshold * .4)
         {
-            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
+            SetSkyboxTexture(skyboxSunrise, skyboxDay);
             StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
         }
         else if (value <= hoursThreshold * .6)
         {
-            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
+            SetSkyboxTexture(skyboxDay, skyboxSunset);
             StartCoroutine(LerpLight(gradientDayToSunset, 1f));
         }
         else if (value <= hoursThreshold * .8)
         {
-            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
+            SetSkyboxTexture(skyboxSunset, skyboxNight);
             StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
             
         }
+*/
     }
 
     private void OnDayChange(int value)
@@ -219,17 +259,23 @@ public class TimeManager : MonoBehaviour
         
     }
 
-    private IEnumerator LerpSkybox(Texture2D a, Texture2D b, float time)
+    private void SetSkyboxTexture(Texture2D a, Texture2D b)
     {
         RenderSettings.skybox.SetTexture("_Texture1", a);
         RenderSettings.skybox.SetTexture("_Texture2", b);
-        RenderSettings.skybox.SetFloat("_Blend", 0);
+        //RenderSettings.skybox.SetFloat("_Blend", 0);
+        /*
         for (float i = 0; i < time; i += Time.deltaTime)
         {
             RenderSettings.skybox.SetFloat("_Blend", i / time);
-            yield return null;
+            
         }
-        RenderSettings.skybox.SetTexture("_Texture1", b);
+        */
+        //RenderSettings.skybox.SetTexture("_Texture1", b);
+    }
+    private void SetSkyboxBlend(float blend)
+    {
+        RenderSettings.skybox.SetFloat("_Blend", blend);
     }
 
     private IEnumerator LerpLight(Gradient lightGradient, float time)
