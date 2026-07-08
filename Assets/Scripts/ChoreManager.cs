@@ -19,7 +19,9 @@ public class ChoreManager : MonoBehaviour
 
     public ChoreDay[] choreWeekList;
     public int currentChoreDayIndex = 0;
-    
+
+    public UnityEvent ev_ChoreUpdated;
+
     Dictionary<string, ChorePackageStruct> solveObjectEventDict = new Dictionary<string, ChorePackageStruct>();
     
     private void Awake()
@@ -58,10 +60,8 @@ public class ChoreManager : MonoBehaviour
         foreach(ChoreTask task in current_day.choreList)
         {
             list_to_return.Add(task);
-           // print("Adding task to task list");
         }
         
-
         return list_to_return;
     }
 
@@ -89,8 +89,11 @@ public class ChoreManager : MonoBehaviour
 
         List<ChoreTask> current_chores = GetAllCurrentChores();
 
+        solveObjectEventDict.Clear();
+
         foreach (ChoreTask task in current_chores)
         {
+            task.ev_ChoreStepCompleted.AddListener(InvokeChoreUpdated);
             foreach (SolveObject so in task.requiredSolveObjectList)
             {
                 if (!solveObjectEventDict.ContainsKey(so.name))
@@ -156,6 +159,10 @@ public class ChoreManager : MonoBehaviour
         }
         return list_to_return;
 
-       
+    }
+
+    public void InvokeChoreUpdated()
+    {
+        ev_ChoreUpdated.Invoke();
     }
 }
