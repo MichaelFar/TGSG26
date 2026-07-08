@@ -115,6 +115,15 @@ public class TimeManager : MonoBehaviour
 
         SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day));
         SetLightBlend(secondsUntilTextureChange / (total_seconds_in_day));
+        bool isNight = secondsCountToday >= (hoursThreshold * minutesThreshold) * .75; //|| value < 2;
+
+        if (isNight == true && !hasInvokedNight)
+        {
+            nightText.text = "Night";
+            ev_NightTime.Invoke();
+            hasInvokedNight = true;
+        }
+        
         if (secondsUntilTextureChange >= total_seconds_in_day )
         {
             //currentSkyboxIndex += 1;
@@ -178,36 +187,16 @@ public class TimeManager : MonoBehaviour
             hasInvokedNight = false;
             nightText.text = "Day";
         }
-//Change Value into percentage of Hours
-/*
-        if (value <= hoursThreshold * .2)
-        {
-            SetSkyboxTexture(skyboxNight, skyboxSunrise);
-            StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
-        }
-        else if (value <= hoursThreshold * .4)
-        {
-            SetSkyboxTexture(skyboxSunrise, skyboxDay);
-            StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
-        }
-        else if (value <= hoursThreshold * .6)
-        {
-            SetSkyboxTexture(skyboxDay, skyboxSunset);
-            StartCoroutine(LerpLight(gradientDayToSunset, 1f));
-        }
-        else if (value <= hoursThreshold * .8)
-        {
-            SetSkyboxTexture(skyboxSunset, skyboxNight);
-            StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
-            
-        }
-*/
+
+
     }
 
     private void OnDayChange(int value)
     {
         secondsCountToday = 0;
+        hasInvokedNight = false;
         ev_dayHasChanged.Invoke();
+        nightText.text = "Day";
         dayChangeText.text = "Day " + value.ToString();
         if (value == 1)
         {
