@@ -84,7 +84,7 @@ public class TimeManager : MonoBehaviour
         {
             _instance = this;
         }
-        total_seconds_in_day = hoursThreshold *  minutesThreshold;
+        
         startingSecondsThreshold = total_seconds_in_day * 0.2f;
 
     }
@@ -94,8 +94,11 @@ public class TimeManager : MonoBehaviour
         
         dayChangeText.text = "Day " + days.ToString();
         Days = 1;
-        SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[currentSkyboxIndex + 1]);
+        
+        SetSkyboxTexture(skyboxArray[currentSkyboxIndex + 1], skyboxArray[currentSkyboxIndex + 1]);
         currentSkyboxIndex = 1;
+        //RenderSettings.skybox.set
+
     }
 
     public void Update()
@@ -103,17 +106,16 @@ public class TimeManager : MonoBehaviour
         tempSecond += Time.deltaTime;
         secondsCountToday += Time.deltaTime;
         secondsUntilTextureChange += Time.deltaTime;
+        total_seconds_in_day = (hoursThreshold * minutesThreshold) * 0.25f;
         if (tempSecond >= 1)
         {
             tempSecond = 0;
             Minutes++;
         }
 
-
-
-
-        SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day * secondsThresholdCoefficient));
-        if (secondsUntilTextureChange >= total_seconds_in_day * secondsThresholdCoefficient)
+        SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day));
+        SetLightBlend(secondsUntilTextureChange / (total_seconds_in_day));
+        if (secondsUntilTextureChange >= total_seconds_in_day )
         {
             //currentSkyboxIndex += 1;
             
@@ -122,6 +124,7 @@ public class TimeManager : MonoBehaviour
             if(currentSkyboxIndex == skyboxArray.Length - 1)
             {
                 SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[0]);
+                
                 currentSkyboxIndex = 0;
             }
             else
@@ -135,29 +138,7 @@ public class TimeManager : MonoBehaviour
             secondsUntilTextureChange = 0.0f;
             //secondsThresholdCoefficient = 0.2f * currentSkyboxIndex + 1;
         }
-        /*
-        if (value <= hoursThreshold * .2)
-        {
-            SetSkyboxTexture(skyboxNight, skyboxSunrise);
-            StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
-        }
-        else if (value <= hoursThreshold * .4)
-        {
-            SetSkyboxTexture(skyboxSunrise, skyboxDay);
-            StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
-        }
-        else if (value <= hoursThreshold * .6)
-        {
-            SetSkyboxTexture(skyboxDay, skyboxSunset);
-            StartCoroutine(LerpLight(gradientDayToSunset, 1f));
-        }
-        else if (value <= hoursThreshold * .8)
-        {
-            SetSkyboxTexture(skyboxSunset, skyboxNight);
-            StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
-
-        }
-        */
+        
         if (timeText != null)
         {
             timeText.text = days.ToString("00") + ":" + hours.ToString("00") + ":" + minutes.ToString("00");
@@ -248,7 +229,7 @@ public class TimeManager : MonoBehaviour
         {
             ev_dayFiveEvent.Invoke();
         }
-        if(value <= dayEventArray.Length)
+        if(value <= dayEventArray.Length - 1)
         {
             dayEventArray[value].Invoke();
         }
@@ -278,6 +259,10 @@ public class TimeManager : MonoBehaviour
         RenderSettings.skybox.SetFloat("_Blend", blend);
     }
 
+    private void SetLightBlend(float blend)
+    {
+        globalLight.color = gradientArray[currentSkyboxIndex].Evaluate(blend);
+    }
     private IEnumerator LerpLight(Gradient lightGradient, float time)
     {
         for (float i = 0; i < time; i += Time.deltaTime)
