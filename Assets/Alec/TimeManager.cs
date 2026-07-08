@@ -11,6 +11,7 @@ using System.Persistence;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 public class TimeManager : MonoBehaviour
 {
@@ -18,22 +19,30 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private Texture2D skyboxSunrise;
     [SerializeField] private Texture2D skyboxDay;
     [SerializeField] private Texture2D skyboxSunset;
+    [SerializeField]
+    private Texture2D[] skyboxArray;
 
     [SerializeField] private Gradient gradientNightToSunrise;
     [SerializeField] private Gradient gradientSunriseToDay;
     [SerializeField] private Gradient gradientDayToSunset;
     [SerializeField] private Gradient gradientSunsetToNight;
     [SerializeField] private Light globalLight;
+    [SerializeField]
+    private Gradient[] gradientArray;
 
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI nightText;
     [SerializeField] private TextMeshProUGUI dayChangeText;
 
-    private int minutes;
-    public int Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
+    private float minutes;
+    public float Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
 
-    private int hours;
-    public int Hours { get { return hours; } set { hours = value; OnHoursChange(value); } }
+    public float minutesThreshold = 5;
+
+    private float hours;
+    public float Hours { get { return hours; } set { hours = value; OnHoursChange(value); } }
+
+    public float hoursThreshold = 10;
 
     private int days;
     public int Days { get { return days; } set { days = value; OnDayChange(value);} }
@@ -41,6 +50,9 @@ public class TimeManager : MonoBehaviour
     public int maxDays = 5;
 
     private float tempSecond;
+
+    private float secondsCountToday;
+
     public UnityEvent ev_NightTime;
     public UnityEvent ev_dayOneEvent;
     public UnityEvent ev_dayTwoEvent;
@@ -54,6 +66,8 @@ public class TimeManager : MonoBehaviour
 
     public static TimeManager Instance { get { return _instance; } }
     private static TimeManager _instance;
+
+    private bool hasInvokedNight = false;
     private void Awake()
     {
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
@@ -77,11 +91,33 @@ public class TimeManager : MonoBehaviour
     public void Update()
     {
         tempSecond += Time.deltaTime;
-
+        secondsCountToday += Time.deltaTime;
         if (tempSecond >= 1)
         {
             tempSecond = 0;
             Minutes++;
+        }
+
+        if (value <= hoursThreshold * .2)
+        {
+            StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
+            StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
+        }
+        else if (value <= hoursThreshold * .4)
+        {
+            StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
+            StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
+        }
+        else if (value <= hoursThreshold * .6)
+        {
+            StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
+            StartCoroutine(LerpLight(gradientDayToSunset, 1f));
+        }
+        else if (value <= hoursThreshold * .8)
+        {
+            StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
+            StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
+
         }
 
         if (timeText != null)
@@ -91,16 +127,16 @@ public class TimeManager : MonoBehaviour
         
     }
 
-    private void OnMinutesChange(int value)
+    private void OnMinutesChange(float value)
     {
 //Change values to be able to be changed by the designer easily
         globalLight.transform.Rotate(Vector3.up, (1f/1440f)*360f, Space.World);
-        if(value>= 5)
+        if(value>= minutesThreshold)
         {
             Minutes = 0;
             Hours++;
         }
-        if (Hours >= 10)
+        if (Hours >= hoursThreshold)
         {
             Hours = 0;
             Days++;
@@ -108,36 +144,38 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void OnHoursChange(int value)
+    private void OnHoursChange(float value)
     {
-        bool isNight = value >= 8 || value < 2;
+        bool isNight = value >= hoursThreshold * .75; //|| value < 2;
 
-        if (isNight == true)
+        if (isNight == true && !hasInvokedNight)
         {
             nightText.text = "Night";
             ev_NightTime.Invoke();
+            hasInvokedNight = true;
         }
         else
         {
+            hasInvokedNight = false;
             nightText.text = "Day";
         }
 //Change Value into percentage of Hours
-        if (value == 2)
+        if (value <= hoursThreshold * .2)
         {
             StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 1f));
             StartCoroutine(LerpLight(gradientNightToSunrise, 1f));
         }
-        else if (value == 4)
+        else if (value <= hoursThreshold * .4)
         {
             StartCoroutine(LerpSkybox(skyboxSunrise, skyboxDay, 1f));
             StartCoroutine(LerpLight(gradientSunriseToDay, 1f));
         }
-        else if (value == 6)
+        else if (value <= hoursThreshold * .6)
         {
             StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 1f));
             StartCoroutine(LerpLight(gradientDayToSunset, 1f));
         }
-        else if (value == 8)
+        else if (value <= hoursThreshold * .8)
         {
             StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 1f));
             StartCoroutine(LerpLight(gradientSunsetToNight, 1f));
@@ -147,6 +185,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnDayChange(int value)
     {
+        secondsCountToday = 0;
         ev_dayHasChanged.Invoke();
         dayChangeText.text = "Day " + value.ToString();
         if (value == 1)
