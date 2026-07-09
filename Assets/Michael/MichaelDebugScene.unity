@@ -584,7 +584,6 @@ MonoBehaviour:
       m_Calls: []
   currentlyRequiredItemList: []
   radiantTaskList:
-  - {fileID: 11400000, guid: 0e9855fc7844a4245b7f7c4763acba00, type: 2}
   - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
 --- !u!1001 &309374763
 PrefabInstance:
