@@ -12,7 +12,7 @@ Date: 6/3/2026
     private CanvasGroup JohnCanvasGroup;
 
 
-    bool IsVisible = true;
+    bool IsVisible = false;
 
 
     public void ToggleHudVisibility()

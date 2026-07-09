@@ -26,6 +26,6 @@ public class SubtitleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+      
     }
 }
