@@ -14,6 +14,8 @@ public class UIHandler : MonoBehaviour
     public event Action<bool> OnTaskListToggled, OnPauseMenuToggled;
     private BaseUI currentOpenUI;
 
+    public bool canPause = true;
+
     public PauseMenu PauseMenuFunctionObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -30,34 +32,40 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseScreen.GameIsPaused && Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (canPause)
         {
-            //true = resume game
-            OnPauseMenuToggled?.Invoke(true);
-        }
-        else if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            //false = pause game
-            OnPauseMenuToggled?.Invoke(false);
-        }
-        else if (PauseScreen.GameIsPaused)
-        {
-            return;
-        }
-        if (Keyboard.current.eKey.wasPressedThisFrame && currentOpenUI != null)
-        {
-            CloseUI();
-        }
-        //If tab is held evoke all functions associated with OnTaskListToggled (look at TaskListUI.cs) 
-        if (Keyboard.current.tabKey.IsPressed())
-        {
-            OnTaskListToggled?.Invoke(true);
-        }
-        if (Keyboard.current.tabKey.wasReleasedThisFrame)
-        {
-            OnTaskListToggled?.Invoke(false);
-        }
+            
 
+            if (PauseScreen.GameIsPaused && Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                //true = resume game
+                OnPauseMenuToggled?.Invoke(true);
+            }
+            else if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                //false = pause game
+
+                OnPauseMenuToggled?.Invoke(false);
+
+            }
+            else if (PauseScreen.GameIsPaused)
+            {
+                return;
+            }
+            if (Keyboard.current.eKey.wasPressedThisFrame && currentOpenUI != null)
+            {
+                CloseUI();
+            }
+            //If tab is held evoke all functions associated with OnTaskListToggled (look at TaskListUI.cs) 
+            if (Keyboard.current.tabKey.IsPressed())
+            {
+                OnTaskListToggled?.Invoke(true);
+            }
+            if (Keyboard.current.tabKey.wasReleasedThisFrame)
+            {
+                OnTaskListToggled?.Invoke(false);
+            }
+        }
     }
 
     public void ShowUI(BaseUI uiPanel)

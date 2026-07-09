@@ -7,6 +7,8 @@ public class TransitionLoader : MonoBehaviour
     
     public ChangeText TransitionText;
 
+    
+
     public void SetTransitionText(string text)
     {
         TransitionText.SetText(text);
@@ -16,15 +18,23 @@ public class TransitionLoader : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            StartTransition();
+            StartTransition("This thing here");
         }
+
+        //Transition.GetCurrentAnimatorStateInfo(0).
+
+       
+        
     }
 
-    public void StartTransition()
+    public void StartTransition(string text)
     {
+        UIHandler.Instance.canPause = false;
         Transition.SetTrigger("FadeTrigger");
 
-        SetTransitionText("Is this right?");
-    }
 
+
+        SetTransitionText(text);
+    }
+    
 }
