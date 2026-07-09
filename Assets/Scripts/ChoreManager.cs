@@ -20,7 +20,11 @@ public class ChoreManager : MonoBehaviour
     public ChoreDay[] choreWeekList;
     public int currentChoreDayIndex = 0;
 
+    public TaskListUI listUI;
+
     public UnityEvent ev_ChoreUpdated;
+
+    public UnityEvent ev_NewDayDataInitialized;
 
     Dictionary<string, ChorePackageStruct> solveObjectEventDict = new Dictionary<string, ChorePackageStruct>();
     
@@ -44,7 +48,7 @@ public class ChoreManager : MonoBehaviour
     }
     void Start()
     {
-        
+        TimeManager.Instance.ev_dayHasChanged.AddListener(InitializeNextDay);
     }
 
     // Update is called once per frame
@@ -57,6 +61,7 @@ public class ChoreManager : MonoBehaviour
         List<ChoreTask> list_to_return = new List<ChoreTask>();
 
         ChoreDay current_day = choreWeekList[currentChoreDayIndex];
+        print("Current day is " + current_day.name);
         foreach(ChoreTask task in current_day.choreList)
         {
             list_to_return.Add(task);
@@ -94,6 +99,7 @@ public class ChoreManager : MonoBehaviour
         foreach (ChoreTask task in current_chores)
         {
             task.ev_ChoreStepCompleted.AddListener(InvokeChoreUpdated);
+            print("Connecting task " + task.name + " to Invoke Chore Updated on day" + choreWeekList[currentChoreDayIndex]);
             foreach (SolveObject so in task.requiredSolveObjectList)
             {
                 if (!solveObjectEventDict.ContainsKey(so.name))
@@ -101,13 +107,21 @@ public class ChoreManager : MonoBehaviour
                     solveObjectEventDict.Add(so.name, new ChorePackageStruct(task));
                     
                     solveObjectEventDict[so.name].ev_ThisEvent.AddListener(task.IncrementNumSolved);
-                    //print("Adding key " + so.name);
+                    print("Adding key " + so.name + " from " + choreWeekList[currentChoreDayIndex].name);
+                    
                 }
             }
+            
+            
+
+        }
+        foreach (string i in solveObjectEventDict.Keys)
+        {
+            print("Dict has " + i + " after populating");
         }
         //print("Dictionary after adding keys is " + solveObjectEventDict.Keys);
 
-        
+
     }
 
     public void ConnectSolveObjectToEventDict(SolveObject object_to_connect)
@@ -128,8 +142,13 @@ public class ChoreManager : MonoBehaviour
 
     public void InitializeNextDay()
     {
+        print("Initializing new day");
         SetDayIndex(TimeManager.Instance.GetDay() - 1);
+        print("Current chore day index is now " + currentChoreDayIndex);
         PopulateEventDict();
+        listUI.PopulateTextLabelList();
+        listUI.UpdateTextLabel();
+        ev_NewDayDataInitialized.Invoke();
     }
 
     public void SetDayIndex(int new_index)

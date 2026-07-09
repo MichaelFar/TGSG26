@@ -35,6 +35,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nightText;
     [SerializeField] private TextMeshProUGUI dayChangeText;
 
+    [Range(0.0f, 100.0f)]
+    public float percentThresholdToGiveWarning = 75;
+
     private float minutes;
     public float Minutes { get { return minutes; } set { minutes = value; OnMinutesChange(value); } }
 
@@ -65,6 +68,7 @@ public class TimeManager : MonoBehaviour
 
     public UnityEvent ev_dayHasChanged;
 
+    private bool timeIsPaused = false;
     public static TimeManager Instance { get { return _instance; } }
     private static TimeManager _instance;
 
@@ -94,25 +98,40 @@ public class TimeManager : MonoBehaviour
         
         dayChangeText.text = "Day " + days.ToString();
         Days = 1;
-        
+        //This line visually syncs the skybox with the typical experience the player encounters per subsequent day
         SetSkyboxTexture(skyboxArray[currentSkyboxIndex + 1], skyboxArray[currentSkyboxIndex + 1]);
         currentSkyboxIndex = 1;
-        //RenderSettings.skybox.set
+        
 
     }
 
     public void Update()
     {
-        tempSecond += Time.deltaTime;
-        secondsCountToday += Time.deltaTime;
-        secondsUntilTextureChange += Time.deltaTime;
-        total_seconds_in_day = (hoursThreshold * minutesThreshold) * 0.25f;
+        if(!timeIsPaused)
+        {
+            tempSecond += Time.deltaTime;
+            secondsCountToday += Time.deltaTime;
+            secondsUntilTextureChange += Time.deltaTime;
+        }
+        
+        
         if (tempSecond >= 1)
         {
             tempSecond = 0;
             Minutes++;
         }
+        ProcessSkyBoxTransition();
+        
+    }
+    //Note does not pause the game, just stops the time manager tick
+    public void SetPauseTime(bool new_value)
+    {
+        timeIsPaused = new_value;
+    }
 
+    private void ProcessSkyBoxTransition()
+    {
+        total_seconds_in_day = (hoursThreshold * minutesThreshold) * 0.25f;
         SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day));
         SetLightBlend(secondsUntilTextureChange / (total_seconds_in_day));
         bool isNight = secondsCountToday >= (hoursThreshold * minutesThreshold) * .75; //|| value < 2;
@@ -123,36 +142,33 @@ public class TimeManager : MonoBehaviour
             ev_NightTime.Invoke();
             hasInvokedNight = true;
         }
-        
-        if (secondsUntilTextureChange >= total_seconds_in_day )
+
+        if (secondsUntilTextureChange >= total_seconds_in_day)
         {
-            //currentSkyboxIndex += 1;
             
 
-            
-            if(currentSkyboxIndex == skyboxArray.Length - 1)
+            if (currentSkyboxIndex == skyboxArray.Length - 1)
             {
                 SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[0]);
-                
+
                 currentSkyboxIndex = 0;
             }
             else
             {
-                
+
                 SetSkyboxTexture(skyboxArray[currentSkyboxIndex], skyboxArray[currentSkyboxIndex + 1]);
                 currentSkyboxIndex += 1;
             }
-                print("Index of skybox is " + currentSkyboxIndex + " and array length is " + skyboxArray.Length);
-                
+            print("Index of skybox is " + currentSkyboxIndex + " and array length is " + skyboxArray.Length);
+
             secondsUntilTextureChange = 0.0f;
-            //secondsThresholdCoefficient = 0.2f * currentSkyboxIndex + 1;
+            
         }
-        
+
         if (timeText != null)
         {
             timeText.text = days.ToString("00") + ":" + hours.ToString("00") + ":" + minutes.ToString("00");
         }
-        
     }
 
     private void OnMinutesChange(float value)
@@ -233,15 +249,7 @@ public class TimeManager : MonoBehaviour
     {
         RenderSettings.skybox.SetTexture("_Texture1", a);
         RenderSettings.skybox.SetTexture("_Texture2", b);
-        //RenderSettings.skybox.SetFloat("_Blend", 0);
-        /*
-        for (float i = 0; i < time; i += Time.deltaTime)
-        {
-            RenderSettings.skybox.SetFloat("_Blend", i / time);
-            
-        }
-        */
-        //RenderSettings.skybox.SetTexture("_Texture1", b);
+        
     }
     private void SetSkyboxBlend(float blend)
     {
@@ -252,15 +260,7 @@ public class TimeManager : MonoBehaviour
     {
         globalLight.color = gradientArray[currentSkyboxIndex].Evaluate(blend);
     }
-    private IEnumerator LerpLight(Gradient lightGradient, float time)
-    {
-        for (float i = 0; i < time; i += Time.deltaTime)
-        {
-            globalLight.color = lightGradient.Evaluate(i / time);
-            RenderSettings.fogColor = globalLight.color;
-            yield return null;
-        }
-    }
+    
     public int GetDay()
     {
         return Days;

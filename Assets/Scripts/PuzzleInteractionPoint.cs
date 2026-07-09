@@ -48,20 +48,10 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             nonPersistentRadiantTaskList.Add(Instantiate(i));
             
         }
-        
+        ChoreManager.Instance.ev_NewDayDataInitialized.AddListener(ConnectSolveObjectsToChoreCalls);
+        ConnectSolveObjectsToChoreCalls();
         //ChoreManager.Instance.PopulateEventDict();
-        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
-        {
-            print(i.name);
-            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
-            i.ResetDataToDefault();
-        }
-        foreach (SolveObject i in nonPersistentRadiantTaskList)
-        {
-            print(i.name);
-            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
-            i.ResetDataToDefault();
-        }
+        
         
         /*
         foreach(ChoreTask i in ChoreManager.Instance.GetAllCurrentChores())
@@ -152,4 +142,20 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         print("Solved puzzle");
     }
     
+    public void ConnectSolveObjectsToChoreCalls()
+    {
+        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
+        {
+            print(i.name);
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+            i.ResetDataToDefault();
+        }
+        foreach (SolveObject i in nonPersistentRadiantTaskList)
+        {
+            print(i.name);
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+            i.ResetDataToDefault();
+        }
+    }
+
 }

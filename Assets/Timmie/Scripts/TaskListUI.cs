@@ -30,6 +30,8 @@ public class TaskListUI : BaseUI
 
         UIHandler.Instance.OnTaskListToggled += SetVisible;
         ChoreManager.Instance.ev_ChoreUpdated.AddListener(UpdateTextLabel);
+        //TimeManager.Instance.ev_dayHasChanged.AddListener(PopulateTextLabelList);
+       // TimeManager.Instance.ev_dayHasChanged.AddListener(UpdateTextLabel);
         PopulateTextLabelList();
         UpdateTextLabel();
     }
@@ -68,6 +70,8 @@ public class TaskListUI : BaseUI
         List<string> description_list = ChoreManager.Instance.GetAllChoreDescriptions();
 
         List<ChoreTask> chore_list = ChoreManager.Instance.GetAllCurrentChores();
+
+        taskLabelList.Clear();
 
         foreach (ChoreTask i in chore_list)
         {

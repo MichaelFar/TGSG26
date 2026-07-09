@@ -38,6 +38,7 @@ public class ChoreTask : ScriptableObject
 
     public void IncrementNumSolved()
     {
+        MonoBehaviour.print("Incrementing task " + this.name);
         numSolved = Mathf.Clamp(numSolved + 1, 0, requiredSolveObjectList.Length);
         if(numSolved >= requiredSolveObjectList.Length)
         {
