@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4fdc7d4d64c5504ba798ea09f96fa21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIHandler
+  canPause: 1
   PauseMenuFunctionObject: {fileID: 0}
