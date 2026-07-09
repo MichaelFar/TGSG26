@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 261264345495702169}
   - component: {fileID: 2156272747692565473}
   - component: {fileID: 4585925219017708575}
-  - component: {fileID: 535581988746158812}
   - component: {fileID: 3972857664764930216}
-  m_Layer: 0
+  - component: {fileID: 2481949765155657157}
+  m_Layer: 7
   m_Name: TwoHandMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,27 +92,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &535581988746158812
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77894322801743903}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3972857664764930216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +106,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   isOccupied: 0
   itemData: {fileID: 0}
+--- !u!114 &2481949765155657157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77894322801743903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
 --- !u!1 &1023356343243583378
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,9 +129,9 @@ GameObject:
   - component: {fileID: 776628662888921573}
   - component: {fileID: 7370172281343278656}
   - component: {fileID: 2993975251296900645}
-  - component: {fileID: 8167099007717419602}
   - component: {fileID: 7396766381247980873}
-  m_Layer: 0
+  - component: {fileID: 338669521557718814}
+  m_Layer: 7
   m_Name: LeftHandMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,27 +210,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8167099007717419602
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023356343243583378}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7396766381247980873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +224,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   isOccupied: 0
   itemData: {fileID: 0}
+--- !u!114 &338669521557718814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023356343243583378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
 --- !u!1 &7550244656743312734
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,9 +247,9 @@ GameObject:
   - component: {fileID: 5935068243386548925}
   - component: {fileID: 7641514987537305191}
   - component: {fileID: 3987932135782679387}
-  - component: {fileID: 1143019016847784215}
   - component: {fileID: 3765969748757478342}
-  m_Layer: 0
+  - component: {fileID: 5424760622437624459}
+  m_Layer: 7
   m_Name: RightHandMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,27 +328,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1143019016847784215
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7550244656743312734}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3765969748757478342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +342,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InventorySlot
   isOccupied: 0
   itemData: {fileID: 0}
+--- !u!114 &5424760622437624459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7550244656743312734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
 --- !u!1 &8880309991270426646
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,8 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2839466833517554408}
   - component: {fileID: 7631812786196575864}
-  - component: {fileID: 7206857148607304493}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InventoryObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,19 +397,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8880309991270426646}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &7206857148607304493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8880309991270426646}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd01b39d61743246a49c6572d2c0ed6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  inventorySlotList:
-  - {fileID: 7396766381247980873}
-  - {fileID: 3765969748757478342}
-  twoHandedSlot: {fileID: 3972857664764930216}
