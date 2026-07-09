@@ -15,6 +15,7 @@ public class UIHandler : MonoBehaviour
     private BaseUI currentOpenUI;
 
     public PauseMenu PauseMenuFunctionObject;
+    [SerializeField] private NoteUI noteUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
@@ -56,16 +57,16 @@ public class UIHandler : MonoBehaviour
             CloseUI();
         }
 
+        if (Keyboard.current.tabKey.wasReleasedThisFrame)
+        {
+            OnTaskListToggled?.Invoke(false);
+        }
         if (currentOpenUI != null) return;
 
         //If tab is held evoke all functions associated with OnTaskListToggled (look at TaskListUI.cs) 
         if (Keyboard.current.tabKey.IsPressed())
         {
             OnTaskListToggled?.Invoke(true);
-        }
-        if (Keyboard.current.tabKey.wasReleasedThisFrame)
-        {
-            OnTaskListToggled?.Invoke(false);
         }
 
     }
@@ -93,5 +94,11 @@ public class UIHandler : MonoBehaviour
             PauseMenuFunctionObject.SetGamePaused(false);
             PauseScreen.GameIsPaused = false;
         }
+    }
+
+    public void ShowNoteUI(NoteData note)
+    {
+        noteUI.LoadContent(note);
+        ShowUI(noteUI);
     }
 }
