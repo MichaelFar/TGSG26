@@ -73,7 +73,7 @@ public class TimeManager : MonoBehaviour
     private static TimeManager _instance;
 
     private bool hasInvokedNight = false;
-    private float total_seconds_in_day;
+    private float total_seconds_before_text_change;
     private float startingSecondsThreshold;
     private float secondsThresholdCoefficient = 0.2f;
     private float secondsUntilTextureChange = 0.0f;
@@ -93,7 +93,7 @@ public class TimeManager : MonoBehaviour
             _instance = this;
         }
         
-        startingSecondsThreshold = total_seconds_in_day * 0.2f;
+        //startingSecondsThreshold = total_seconds_in_day * 0.2f;
 
     }
     
@@ -126,6 +126,12 @@ public class TimeManager : MonoBehaviour
         }
         ProcessSkyBoxTransition();
         
+        if(Input.GetButtonUp("DebugTimeStop"))
+        {
+            //SetPauseTime(true);
+            ResetDayToBeginning();
+        }
+
     }
     //Note does not pause the game, just stops the time manager tick
     public void SetPauseTime(bool new_value)
@@ -135,11 +141,12 @@ public class TimeManager : MonoBehaviour
 
     private void ProcessSkyBoxTransition()
     {
-        total_seconds_in_day = (hoursThreshold * minutesThreshold) * 0.25f;
-        SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day));
-        SetLightBlend(secondsUntilTextureChange / (total_seconds_in_day));
+        total_seconds_before_text_change = (hoursThreshold * minutesThreshold) * 0.25f;
+        SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_before_text_change));
+        SetLightBlend(secondsUntilTextureChange / (total_seconds_before_text_change));
         isNight = secondsCountToday >= (hoursThreshold * minutesThreshold) * .75f; //|| value < 2;
-
+        //globalLight.transform.rotation.SetEulerRotation((secondsCountToday / total_seconds_in_day) * 360.0f, 0.0f, 0.0f);//(1f / 1440f) * 360f, Space.World);
+        globalLight.transform.rotation = Quaternion.Euler((secondsCountToday / total_seconds_before_text_change) * 90.0f, 0.0f, 0.0f);
         if (isNight == true && !hasInvokedNight)
         {
             nightText.text = "Night";
@@ -148,9 +155,9 @@ public class TimeManager : MonoBehaviour
             subtitleController.DisplaySubtitlesWithTimer("It's getting late. I should head to bed", (hoursThreshold * minutesThreshold) * .25f);
         }
 
-        if (secondsUntilTextureChange >= total_seconds_in_day)
+        if (secondsUntilTextureChange >= total_seconds_before_text_change)
         {
-            
+            print(total_seconds_before_text_change * 4.0f + " is total time today");
 
             if (currentSkyboxIndex == skyboxArray.Length - 1)
             {
@@ -176,10 +183,26 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    public void ResetDayToBeginning()
+    {
+        tempSecond = 0;
+        secondsCountToday = 0;
+        secondsUntilTextureChange = 0;
+        
+        SetSkyboxTexture(skyboxArray[0], skyboxArray[1]);
+        currentSkyboxIndex = 1;
+        minutes = 0;
+        hours = 0;
+        if (timeText != null)
+        {
+            timeText.text = days.ToString("00") + ":" + hours.ToString("00") + ":" + minutes.ToString("00");
+        }
+    }
+
     private void OnMinutesChange(float value)
     {
 //Change values to be able to be changed by the designer easily
-        globalLight.transform.Rotate(Vector3.up, (1f/1440f)*360f, Space.World);
+        //globalLight.transform.Rotate(Vector3.right, (1f/1440f)*360f, Space.World);
         if(value>= minutesThreshold)
         {
             Minutes = 0;
@@ -214,6 +237,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnDayChange(int value)
     {
+        print("Delta ticks elapsed today " + secondsCountToday);
         secondsCountToday = 0;
         hasInvokedNight = false;
         ev_dayHasChanged.Invoke();
