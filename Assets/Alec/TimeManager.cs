@@ -77,6 +77,10 @@ public class TimeManager : MonoBehaviour
     private float startingSecondsThreshold;
     private float secondsThresholdCoefficient = 0.2f;
     private float secondsUntilTextureChange = 0.0f;
+
+    public SubtitleController subtitleController;
+    [HideInInspector]
+    public bool isNight = false;
     private void Awake()
     {
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
@@ -134,13 +138,14 @@ public class TimeManager : MonoBehaviour
         total_seconds_in_day = (hoursThreshold * minutesThreshold) * 0.25f;
         SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_in_day));
         SetLightBlend(secondsUntilTextureChange / (total_seconds_in_day));
-        bool isNight = secondsCountToday >= (hoursThreshold * minutesThreshold) * .75; //|| value < 2;
+        isNight = secondsCountToday >= (hoursThreshold * minutesThreshold) * .75f; //|| value < 2;
 
         if (isNight == true && !hasInvokedNight)
         {
             nightText.text = "Night";
             ev_NightTime.Invoke();
             hasInvokedNight = true;
+            subtitleController.DisplaySubtitlesWithTimer("It's getting late. I should head to bed", (hoursThreshold * minutesThreshold) * .25f);
         }
 
         if (secondsUntilTextureChange >= total_seconds_in_day)
