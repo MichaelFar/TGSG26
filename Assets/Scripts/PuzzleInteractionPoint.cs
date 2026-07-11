@@ -102,27 +102,25 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         bool all_requirements_met = true;
         bool all_radiant_tasks_met = true;
         //Check for required to solve items
-        if (!requiredListEmitted)
+        
+
+        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
-
-
-            foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
+            if (slot_to_check.isOccupied)
             {
-                if (slot_to_check.isOccupied)
+                if (i)
                 {
-                    if (i)
-                    {
-                        i.SetSlotToAffect(slot_to_check);
-                        i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
+                    i.SetSlotToAffect(slot_to_check);
+                    i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
 
-                    }
-                }
-                if (!i.requirementsMetToSolve)
-                {
-                    all_requirements_met = false;
                 }
             }
+            if (!i.requirementsMetToSolve)
+            {
+                all_requirements_met = false;
+            }
         }
+        
         //Solve puzzle if all requirements met
         if(all_requirements_met && !requiredListEmitted)
         {
@@ -130,26 +128,24 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             requiredListEmitted = true;
         }
         //Check for the radiant tasks requirements
-        if (!radiantListEmitted)
+        
+
+        foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
-
-
-            foreach (SolveObject i in nonPersistentRadiantTaskList)
+            if (slot_to_check.isOccupied)
             {
-                if (slot_to_check.isOccupied)
+                if (i)
                 {
-                    if (i)
-                    {
-                        i.SetSlotToAffect(slot_to_check);
-                        i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-                    }
-                }
-                if (!i.requirementsMetToSolve)
-                {
-                    all_radiant_tasks_met = false;
+                    i.SetSlotToAffect(slot_to_check);
+                    i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
                 }
             }
+            if (!i.requirementsMetToSolve)
+            {
+                all_radiant_tasks_met = false;
+            }
         }
+        
 
         if(all_radiant_tasks_met && !radiantListEmitted)
         {

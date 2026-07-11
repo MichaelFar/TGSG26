@@ -282,7 +282,6 @@ public class TimeManager : MonoBehaviour
         print("Delta ticks elapsed today " + secondsCountToday);
         secondsCountToday = 0;
         hasInvokedNight = false;
-        ev_dayHasChanged.Invoke();
         nightText.text = "Day";
         dayChangeText.text = "Day " + value.ToString();
         if (value == 1)
@@ -313,7 +312,7 @@ public class TimeManager : MonoBehaviour
         {
             print("Game ends here probably");
         }
-        
+        ev_dayHasChanged.Invoke();
     }
 
     private void SetSkyboxTexture(Texture2D a, Texture2D b)
