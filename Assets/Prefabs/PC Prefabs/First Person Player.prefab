@@ -334,7 +334,7 @@ Transform:
   m_GameObject: {fileID: 6191599424046969869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.565, z: 0}
+  m_LocalPosition: {x: 0, y: 1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -642,7 +642,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7986258868992004752}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -827,6 +827,13 @@ MonoBehaviour:
   choreWeekList:
   - {fileID: 11400000, guid: e8c845f54fcf3a64584395229dd95e83, type: 2}
   currentChoreDayIndex: 0
+  listUI: {fileID: 0}
+  ev_ChoreUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_NewDayDataInitialized:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2895297535400609858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -960,7 +967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2839466833517554408, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.74
+      value: 1.565
       objectReference: {fileID: 0}
     - target: {fileID: 2839466833517554408, guid: b6eb375810bbfb2419565dc5163d8ff4, type: 3}
       propertyPath: m_LocalPosition.z

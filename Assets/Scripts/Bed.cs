@@ -50,7 +50,9 @@ public class Bed : MonoBehaviour, IInteractable
 
         if(shouldTeleportAtEOD)
         {
-            player.gameObject.transform.position = spawnPoint.transform.position;
+            print("Teleporting player");
+            Physics.SyncTransforms();
+            player.transform.position = spawnPoint.transform.position;
             DisplayTeleportNewDayTransition();
         }
             
