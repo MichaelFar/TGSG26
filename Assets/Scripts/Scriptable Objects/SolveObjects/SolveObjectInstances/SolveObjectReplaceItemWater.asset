@@ -17,7 +17,9 @@ MonoBehaviour:
   ev_OnSolve:
     m_PersistentCalls:
       m_Calls: []
+  triggerOncePerDay: 0
   hasBeenTriggered: 0
   requirementsMetToSolve: 0
+  activateOnEmptyHand: 0
   itemToReplace: {fileID: 4364898736719544289, guid: e21b3b352e12a584ca2e862c613b8fc3, type: 3}
   timeDelayBeforeFollow: 2

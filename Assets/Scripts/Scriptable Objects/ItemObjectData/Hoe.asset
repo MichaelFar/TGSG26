@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d873128c6569fb24a92427b3d860c330, type: 3}
-  m_Name: NoteData
-  m_EditorClassIdentifier: Assembly-CSharp::NoteData
-  body: Yo whats up dawg
-  noteSprite: {fileID: 21300000, guid: 3c9f29f1fc22b974ba67481de8e7bb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: c681aeb2e4292cb45805855831752127, type: 3}
+  m_Name: Hoe
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
+  numSlotsUsed: 2
+  ev_DroppedItem:
+    m_PersistentCalls:
+      m_Calls: []
+  itemName: 
