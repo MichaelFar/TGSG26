@@ -272,3 +272,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89318ffaa75b1594aaf7b39ad192ade7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TaskListUI
+  textLabel: {fileID: 8130458029062110720}

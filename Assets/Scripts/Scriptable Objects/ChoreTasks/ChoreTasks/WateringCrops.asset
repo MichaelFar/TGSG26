@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68cd09a6789f73f46b86525631bb00d5, type: 3}
-  m_Name: CollectEggs
+  m_Name: WateringCrops
   m_EditorClassIdentifier: Assembly-CSharp::ChoreTask
-  baseDescription: Collect eggs
+  baseDescription: Water plants
   requiredSolveObjectList:
-  - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
-  - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
-  - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
+  - {fileID: 11400000, guid: e19a74264559d254abace5196a61a76c, type: 2}
+  - {fileID: 11400000, guid: e19a74264559d254abace5196a61a76c, type: 2}
+  - {fileID: 11400000, guid: e19a74264559d254abace5196a61a76c, type: 2}
   ev_ChoreCompleted:
     m_PersistentCalls:
       m_Calls: []
