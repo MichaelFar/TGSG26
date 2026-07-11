@@ -415,6 +415,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3757042802882523567, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757042802882523567, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757042802882523567, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4407450774362552813, guid: fb61b7c161873974f94d40e63f59bb76, type: 3}
       propertyPath: m_Name
       value: TaskListUI
@@ -2376,7 +2388,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766201510}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2929,6 +2941,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6609871876025127520, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6609871876025127520, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
+      propertyPath: m_Interactable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6609871876025127520, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
