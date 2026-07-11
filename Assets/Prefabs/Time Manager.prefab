@@ -294,7 +294,8 @@ MonoBehaviour:
   timeText: {fileID: 0}
   nightText: {fileID: 0}
   dayChangeText: {fileID: 0}
-  minutesThreshold: 5
+  percentThresholdToGiveWarning: 75
+  minutesThreshold: 1
   hoursThreshold: 10
   maxDays: 5
   ev_NightTime:
@@ -318,3 +319,5 @@ MonoBehaviour:
   ev_dayHasChanged:
     m_PersistentCalls:
       m_Calls: []
+  subtitleController: {fileID: 0}
+  isNight: 0

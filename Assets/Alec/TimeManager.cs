@@ -55,6 +55,8 @@ public class TimeManager : MonoBehaviour
 
     private float tempSecond;
 
+    public float minuteLength = 1;
+
     private float secondsCountToday;
 
     public UnityEvent ev_NightTime;
@@ -74,9 +76,14 @@ public class TimeManager : MonoBehaviour
 
     private bool hasInvokedNight = false;
     private float total_seconds_before_text_change;
-    private float startingSecondsThreshold;
-    private float secondsThresholdCoefficient = 0.2f;
+    
     private float secondsUntilTextureChange = 0.0f;
+
+    private float totalTimeElapsed = 0.0f;
+
+    private float pauseTimeTimerGoal = 0.0f;
+
+    private bool timerRunning = false;
 
     public SubtitleController subtitleController;
     [HideInInspector]
@@ -95,6 +102,15 @@ public class TimeManager : MonoBehaviour
         
         //startingSecondsThreshold = total_seconds_in_day * 0.2f;
 
+        if(minutesThreshold <= 0)
+        {
+            minutesThreshold = 1;
+        }
+
+        if(hoursThreshold <= 0)
+        {
+            hoursThreshold = 1;
+        }
     }
     
     public void Start()
@@ -111,6 +127,7 @@ public class TimeManager : MonoBehaviour
 
     public void Update()
     {
+        totalTimeElapsed += Time.deltaTime;
         if(!timeIsPaused)
         {
             tempSecond += Time.deltaTime;
@@ -118,8 +135,16 @@ public class TimeManager : MonoBehaviour
             secondsUntilTextureChange += Time.deltaTime;
         }
         
+        if(timerRunning)
+        {
+            if(totalTimeElapsed >= pauseTimeTimerGoal)
+            {
+                timerRunning = false;
+                SetPauseTime(false);
+            }
+        }
         
-        if (tempSecond >= 1)
+        if (tempSecond >= minuteLength)
         {
             tempSecond = 0;
             Minutes++;
@@ -139,12 +164,23 @@ public class TimeManager : MonoBehaviour
         timeIsPaused = new_value;
     }
 
+    public void PauseTimeForDuration(float duration)
+    {
+        if(timerRunning)
+        {
+            return;
+        }
+        timerRunning = true;
+        SetPauseTime(true);
+        pauseTimeTimerGoal = totalTimeElapsed + duration;
+    }
+
     private void ProcessSkyBoxTransition()
     {
-        total_seconds_before_text_change = (hoursThreshold * minutesThreshold) * 0.25f;
+        total_seconds_before_text_change = (hoursThreshold * minutesThreshold * minuteLength) * 0.25f;
         SetSkyboxBlend(secondsUntilTextureChange / (total_seconds_before_text_change));
         SetLightBlend(secondsUntilTextureChange / (total_seconds_before_text_change));
-        isNight = secondsCountToday >= (hoursThreshold * minutesThreshold) * .75f; //|| value < 2;
+        isNight = secondsCountToday >= (hoursThreshold * minutesThreshold * minuteLength) * .75f; //|| value < 2;
         //globalLight.transform.rotation.SetEulerRotation((secondsCountToday / total_seconds_in_day) * 360.0f, 0.0f, 0.0f);//(1f / 1440f) * 360f, Space.World);
         globalLight.transform.rotation = Quaternion.Euler((secondsCountToday / total_seconds_before_text_change) * 90.0f, 0.0f, 0.0f);
         if (isNight == true && !hasInvokedNight)
@@ -152,7 +188,7 @@ public class TimeManager : MonoBehaviour
             nightText.text = "Night";
             ev_NightTime.Invoke();
             hasInvokedNight = true;
-            subtitleController.DisplaySubtitlesWithTimer("It's getting late. I should head to bed", (hoursThreshold * minutesThreshold) * .25f);
+            subtitleController.DisplaySubtitlesWithTimer("It's getting late. I should head to bed", (hoursThreshold * minutesThreshold * minuteLength) * .25f);
         }
 
         if (secondsUntilTextureChange >= total_seconds_before_text_change)
@@ -199,6 +235,12 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+
+    public void SkipToNextDay()
+    {
+        ResetDayToBeginning();
+        Days += 1;
+    }
     private void OnMinutesChange(float value)
     {
 //Change values to be able to be changed by the designer easily

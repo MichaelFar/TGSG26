@@ -233,6 +233,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  resetRequiredDaily: 0
+  resetRadiantDaily: 1
   currentlyRequiredItemList: []
   radiantTaskList:
   - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
@@ -246,7 +248,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 184896761142682514, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.79
+      value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 184896761142682514, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -293,6 +295,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
+--- !u!114 &223241842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8089514218390040514, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
+  m_PrefabInstance: {fileID: 3641292433908364731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eacc93cd6d128d40a173c6dc1a65e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
 --- !u!1 &231145301
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +595,8 @@ MonoBehaviour:
   ev_CompletedAllRadiantTasks:
     m_PersistentCalls:
       m_Calls: []
+  resetRequiredDaily: 0
+  resetRadiantDaily: 1
   currentlyRequiredItemList: []
   radiantTaskList:
   - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
@@ -688,6 +703,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  resetRequiredDaily: 0
+  resetRadiantDaily: 1
   currentlyRequiredItemList: []
   radiantTaskList:
   - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
@@ -701,7 +718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 184896761142682514, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.75
+      value: 8.34
       objectReference: {fileID: 0}
     - target: {fileID: 184896761142682514, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -938,6 +955,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a99add5987f12a4eba1fc92a524f174, type: 3}
+--- !u!114 &410695796 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1194745813718038138, guid: 515e5d413b9bfa2468770acf30853ca7, type: 3}
+  m_PrefabInstance: {fileID: 485247793}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9303498528d1edd428d0dcc2185bef26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransitionLoader
 --- !u!1001 &485247793
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1156,16 +1184,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1323968314}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
+      propertyPath: minuteLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: dayChangeText
       value: 
       objectReference: {fileID: 1055939033}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: hoursThreshold
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: minutesThreshold
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: subtitleController
@@ -1405,7 +1437,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2035311078467538392, guid: 70d51ef346da17e4f928ac7f8da55187, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.026603
+      value: 6.82
       objectReference: {fileID: 0}
     - target: {fileID: 2035311078467538392, guid: 70d51ef346da17e4f928ac7f8da55187, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1413,7 +1445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2035311078467538392, guid: 70d51ef346da17e4f928ac7f8da55187, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.757542
+      value: -3.06
       objectReference: {fileID: 0}
     - target: {fileID: 2035311078467538392, guid: 70d51ef346da17e4f928ac7f8da55187, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1498,7 +1530,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  currentlyRequiredItemList: []
+  resetRequiredDaily: 0
+  resetRadiantDaily: 1
+  currentlyRequiredItemList:
+  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
   radiantTaskList:
   - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
 --- !u!1 &1323968312
@@ -1706,7 +1741,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 184896761142682514, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.4304967
+      value: 6.6595035
       objectReference: {fileID: 0}
     - target: {fileID: 184896761142682514, guid: 73cad73c0d44d294eaf6c28373b392f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2095,6 +2130,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2221350662652558223, guid: 26aeee8683e5dda4abe7472e2420809b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 223241842}
+    - target: {fileID: 2221350662652558223, guid: 26aeee8683e5dda4abe7472e2420809b, type: 3}
+      propertyPath: transitionObject
+      value: 
+      objectReference: {fileID: 410695796}
     - target: {fileID: 2221350662652558223, guid: 26aeee8683e5dda4abe7472e2420809b, type: 3}
       propertyPath: subtitleController
       value: 
