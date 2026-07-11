@@ -295,9 +295,10 @@ MonoBehaviour:
   nightText: {fileID: 0}
   dayChangeText: {fileID: 0}
   percentThresholdToGiveWarning: 75
-  minutesThreshold: 1
-  hoursThreshold: 10
+  minutesThreshold: 15
+  hoursThreshold: 1
   maxDays: 5
+  minuteLength: 1
   ev_NightTime:
     m_PersistentCalls:
       m_Calls: []

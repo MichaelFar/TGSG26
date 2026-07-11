@@ -1184,20 +1184,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1323968314}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
-      propertyPath: minuteLength
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: dayChangeText
       value: 
       objectReference: {fileID: 1055939033}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: hoursThreshold
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: minutesThreshold
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: subtitleController
