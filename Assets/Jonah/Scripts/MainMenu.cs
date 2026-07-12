@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("Starting New Game...");
+        SceneManager.LoadScene(1);
     }
 
     public void LoadingOptions()

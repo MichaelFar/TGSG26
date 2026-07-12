@@ -15,13 +15,14 @@ public class Bed : MonoBehaviour, IInteractable
 
     public bool shouldTeleportAtEOD = true;
 
-    private bool allChoresCompletedToday = false;
+    private bool allChoresCompletedToday = true;
 
     private float debugTimer = 0.0f;
 
     void Start()
     {
         TimeManager.Instance.ev_dayHasChanged.AddListener(CheckIfHasBeenUsedThenTeleport);
+        
     }
 
     // Update is called once per frame
@@ -80,6 +81,7 @@ public class Bed : MonoBehaviour, IInteractable
         {
             transitionObject.StartTransition("Day " + TimeManager.Instance.GetDay().ToString() + " but you didn't complete all chores yesterday you bozo");
         }
+        ResetChoresCompleted();
             
     }
     public void DisplayTeleportNewDayTransition()
@@ -92,10 +94,16 @@ public class Bed : MonoBehaviour, IInteractable
         {
             transitionObject.StartNewGameTransition("Day " + TimeManager.Instance.GetDay().ToString() + " but you didn't complete all chores yesterday you bozo");
         }
+        ResetChoresCompleted();
     }
 
     public bool CanInteract()
     {
         return true;
+    }
+
+    private void ResetChoresCompleted()
+    {
+        allChoresCompletedToday = false;
     }
 }

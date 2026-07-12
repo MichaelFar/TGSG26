@@ -4382,7 +4382,7 @@ PrefabInstance:
       objectReference: {fileID: 1196680340}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: hoursThreshold
-      value: 24
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: minutesThreshold
