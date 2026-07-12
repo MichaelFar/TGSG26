@@ -59,13 +59,20 @@ public class SolveObject : ScriptableObject
         
     }
 
-    public void CheckIfCanSolve(InventoryItemData data_to_check)
+    public bool CheckIfCanSolve(InventoryItemData data_to_check)
     {
+        
+        if(!slotToAffect.isOccupied && activateOnEmptyHand)
+        {
+            return OnSolve();
+        }
+
         if(requiredData == data_to_check)
         {
-            OnSolve();
-            
+            return OnSolve();
         }
+
+        return false;
     }
     
     public void SetSlotToAffect(InventorySlot affected_slot)

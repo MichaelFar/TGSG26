@@ -37,6 +37,8 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     private List<SolveObject> nonPersistentParallelSOList = new List<SolveObject>();
 
     public UnityEvent ev_AllListsInitialized;
+
+    private bool oneSlotSolved = false;
     //public string mainLevelName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -107,6 +109,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             CheckForRequiredItemsThenSolve(inventory.GetActiveSlot());
             CheckForRequiredItemsThenSolve(inventory.GetOffHandSlot());
             CheckForRequiredItemsThenSolve(inventory.GetTwoHandedSlot());
+            oneSlotSolved = false;
             
         }
     }
@@ -117,98 +120,138 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     /// <param name="slot_to_check"></param>
     public void CheckForRequiredItemsThenSolve(InventorySlot slot_to_check)
     {
-        bool all_requirements_met = true;
-        bool all_radiant_tasks_met = true;
-        //Check for required to solve items
+        if (!oneSlotSolved)
+        {
+
+            bool all_requirements_met = true;
+            bool all_radiant_tasks_met = true;
+
+            bool able_to_emit_solved = false;
+            bool able_to_emit_radiant_solved = false;
+            //Check for required to solve items
+
+            foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
+            {
+                if (slot_to_check.isOccupied || i.activateOnEmptyHand)
+                {
+                    if (i)
+                    {
+
+                        i.SetSlotToAffect(slot_to_check);
+                        if (!i.activateOnEmptyHand)
+                        {
+                            if (i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData))
+                            {
+                                able_to_emit_solved = true;
+                            }
+                        }
+                        else
+                        {
+                            if (i.CheckIfCanSolve(null))
+                            {
+                                able_to_emit_solved = true;
+                            }
+                        }
+
+                    }
+                }
+                if (!i.requirementsMetToSolve)
+                {
+                    all_requirements_met = false;
+                }
+
+
+            }
+
+            //Solve puzzle if all requirements met
+            if (all_requirements_met && able_to_emit_solved)
+            {
+                ev_SolvedPuzzle.Invoke();
+                oneSlotSolved = true;
+
+            }
+            //Check for the radiant tasks requirements
+
+
+            foreach (SolveObject i in nonPersistentRadiantTaskList)
+            {
+                if (slot_to_check.isOccupied || i.activateOnEmptyHand)
+                {
+                    if (i)
+                    {
+
+                        i.SetSlotToAffect(slot_to_check);
+                        if (!i.activateOnEmptyHand)
+                        {
+                            if (i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData))
+                            {
+                                able_to_emit_radiant_solved = true;
+                            }
+                        }
+                        else
+                        {
+                            if (i.CheckIfCanSolve(null))
+                            {
+                                able_to_emit_radiant_solved = true;
+                            }
+                        }
+
+
+                    }
+                }
+                if (!i.requirementsMetToSolve)
+                {
+                    all_radiant_tasks_met = false;
+                }
+
+
+            }
+
+            if (all_radiant_tasks_met && able_to_emit_radiant_solved)
+            {
+                ev_CompletedAllRadiantTasks.Invoke();
+                oneSlotSolved = true;
+            }
+
+            foreach (SolveObject i in nonPersistentParallelSOList)
+            {
+                if (slot_to_check.isOccupied || i.activateOnEmptyHand)
+                {
+                    if (i)
+                    {
+
+                        i.SetSlotToAffect(slot_to_check);
+                        if (!i.activateOnEmptyHand)
+                        {
+                            if (i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData))
+                            {
+                                uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
+                                uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
+                                oneSlotSolved = true;
+                            }
+                        }
+                        else
+                        {
+                            if (i.CheckIfCanSolve(null))
+                            {
+                                uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
+                                uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
+                                oneSlotSolved = true;
+                            }
+                        }
+
+
+                        print("Parallel event is firing");
+                    }
+
+                }
+
+            }
+
+
+        }
         
 
-        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
-        {
-            if (slot_to_check.isOccupied || i.activateOnEmptyHand)
-            {
-                if (i)
-                {
-                    if (!i.CheckCanBeTriggered())
-                    {
-                        all_requirements_met = false;
-                        break;
-                    }
-                    i.SetSlotToAffect(slot_to_check);
-                    i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-                    
-                }
-            }
-            if (!i.requirementsMetToSolve)
-            {
-                all_requirements_met = false;
-            }
-            
-        }
-        
-        //Solve puzzle if all requirements met
-        if(all_requirements_met)
-        {
-            ev_SolvedPuzzle.Invoke();
-            requiredListEmitted = true;
-        }
-        //Check for the radiant tasks requirements
-        
-
-        foreach (SolveObject i in nonPersistentRadiantTaskList)
-        {
-            if (slot_to_check.isOccupied || i.activateOnEmptyHand)
-            {
-                if (i)
-                {
-                    if (!i.CheckCanBeTriggered())
-                    {
-                        all_radiant_tasks_met = false;
-                        break;
-                    }
-                    i.SetSlotToAffect(slot_to_check);
-                    i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-                }
-            }
-            if (!i.requirementsMetToSolve)
-            {
-                all_radiant_tasks_met = false;
-            }
-            
-        }
-        foreach (SolveObject i in nonPersistentParallelSOList)
-        {
-            if (slot_to_check.isOccupied || i.activateOnEmptyHand)
-            {
-                if (i)
-                {
-                    if(!i.CheckCanBeTriggered())
-                    {
-                        break;
-                    }
-                    i.SetSlotToAffect(slot_to_check);
-                    i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-                    uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
-                    print("Parallel event is firing");
-                }
-                /*
-                if(i.requirementsMetToSolve && i.CheckCanBeTriggered())
-                {
-                    print("Parallel event is firing");
-                    uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
-                    //i.SetCanBeTriggered(true);
-                }
-                */
-            }
-            
-        }
-
-        if (all_radiant_tasks_met && !radiantListEmitted)
-        {
-            ev_CompletedAllRadiantTasks.Invoke();
-            radiantListEmitted = true;
-        }
-            
-        
     }
     public void DebugPrintSuccess()
     {
@@ -277,4 +320,8 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         return index_of_so;
     }
 
+    public bool CanInteract()
+    {
+        return true;
+    }
 }

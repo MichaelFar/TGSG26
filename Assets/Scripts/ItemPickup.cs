@@ -119,6 +119,11 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
         SaveGame.Save<ItemPickup>(identifier, this);
         
     }
+
+    public bool CanInteract()
+    {
+        return !isHeld;
+    }
 }
 /*
 [Serializable]

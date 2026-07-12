@@ -8,6 +8,11 @@ public class Notes : MonoBehaviour, IInteractable
     [SerializeField] private NoteUI noteUI;
     [SerializeField] private NoteData noteData;
 
+    public bool CanInteract()
+    {
+        return true;
+    }
+
     public void OnInteract(GameObject object_interacting = null)
     {
         itemPickUp.Invoke();

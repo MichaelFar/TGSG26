@@ -32,9 +32,21 @@ public class PlayerInteraction : MonoBehaviour
                 //checks if interacted item is not null
                 if (gameObject)
                 {
-
+                    if(interactable != null)
+                    {
+                        if(!interactable.CanInteract())
+                        {
+                            
+                            continue;
+                        }
+                        else
+                        {
+                            print("Interactable is able to interact");
+                        }
+                    }
 
                     interactable?.OnInteract(gameObject);
+                    
                 }
             }
 

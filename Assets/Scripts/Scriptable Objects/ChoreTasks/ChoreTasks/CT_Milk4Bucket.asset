@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68cd09a6789f73f46b86525631bb00d5, type: 3}
-  m_Name: MilkCowsChore
+  m_Name: CT_Milk4Bucket
   m_EditorClassIdentifier: Assembly-CSharp::ChoreTask
-  baseDescription: Milk Cows
+  baseDescription: Exchange milk for bucket
   requiredSolveObjectList:
-  - {fileID: 11400000, guid: a0af109eb6a5f4b419edb852244f77c2, type: 2}
-  - {fileID: 11400000, guid: a0af109eb6a5f4b419edb852244f77c2, type: 2}
-  - {fileID: 11400000, guid: a0af109eb6a5f4b419edb852244f77c2, type: 2}
+  - {fileID: 11400000, guid: 81d037a77879b7946adf1ad6f5b7b1d8, type: 2}
+  - {fileID: 11400000, guid: 81d037a77879b7946adf1ad6f5b7b1d8, type: 2}
+  - {fileID: 11400000, guid: 81d037a77879b7946adf1ad6f5b7b1d8, type: 2}
   ev_ChoreCompleted:
     m_PersistentCalls:
       m_Calls: []

@@ -68,4 +68,8 @@ public class Bed : MonoBehaviour, IInteractable
         transitionObject.StartNewGameTransition("Day " + TimeManager.Instance.GetDay().ToString());
     }
 
+    public bool CanInteract()
+    {
+        return true;
+    }
 }
