@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
   m_Name: Default Local Group_ContentUpdateGroupSchema
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.GroupSchemas.ContentUpdateGroupSchema
-  m_Group: {fileID: 11400000, guid: 4a79eb4a0a7ad9b41942575c29e9a187, type: 2}
+  m_Group: {fileID: 11400000, guid: 81a03451bddfa144aaf6277754ede5b1, type: 2}
   m_StaticContent: 0

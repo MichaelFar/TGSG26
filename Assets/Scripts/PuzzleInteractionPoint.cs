@@ -16,6 +16,13 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
 
     public UnityEvent ev_SolvedPuzzle;
     public UnityEvent ev_CompletedAllRadiantTasks;
+
+    private bool requiredListEmitted = false;
+    private bool radiantListEmitted = false;
+
+    public bool resetRequiredDaily = false;
+
+    public bool resetRadiantDaily = true;
     //public List<InventoryItemData> RequiredItemList;
 
     public List<SolveObject> currentlyRequiredItemList;
@@ -48,21 +55,13 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             nonPersistentRadiantTaskList.Add(Instantiate(i));
             
         }
-        
+        ChoreManager.Instance.ev_NewDayDataInitialized.AddListener(ConnectSolveObjectsToChoreCalls);
+        ConnectSolveObjectsToChoreCalls();
+        TimeManager.Instance.ev_dayHasChanged.AddListener(DailyReset);
         //ChoreManager.Instance.PopulateEventDict();
-        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
-        {
-            print(i.name);
-            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
-            i.ResetDataToDefault();
-        }
-        foreach (SolveObject i in nonPersistentRadiantTaskList)
-        {
-            print(i.name);
-            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
-            i.ResetDataToDefault();
-        }
-        
+
+        ev_SolvedPuzzle.AddListener(DebugRequiredSuccess);
+        ev_CompletedAllRadiantTasks.AddListener(DebugRadiantSuccess);
         /*
         foreach(ChoreTask i in ChoreManager.Instance.GetAllCurrentChores())
         {
@@ -103,6 +102,8 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         bool all_requirements_met = true;
         bool all_radiant_tasks_met = true;
         //Check for required to solve items
+        
+
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
             if (slot_to_check.isOccupied)
@@ -111,7 +112,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
                 {
                     i.SetSlotToAffect(slot_to_check);
                     i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-                    
+
                 }
             }
             if (!i.requirementsMetToSolve)
@@ -119,12 +120,16 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
                 all_requirements_met = false;
             }
         }
+        
         //Solve puzzle if all requirements met
-        if(all_requirements_met)
+        if(all_requirements_met && !requiredListEmitted)
         {
             ev_SolvedPuzzle.Invoke();
+            requiredListEmitted = true;
         }
         //Check for the radiant tasks requirements
+        
+
         foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
             if (slot_to_check.isOccupied)
@@ -140,9 +145,12 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
                 all_radiant_tasks_met = false;
             }
         }
-        if(all_radiant_tasks_met)
+        
+
+        if(all_radiant_tasks_met && !radiantListEmitted)
         {
             ev_CompletedAllRadiantTasks.Invoke();
+            radiantListEmitted = true;
         }
             
         
@@ -151,5 +159,37 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     {
         print("Solved puzzle");
     }
-    
+
+    public void DebugRadiantSuccess()
+    {
+        print("Completed all radiant tasks");
+    }
+
+    public void DebugRequiredSuccess()
+    {
+        print("Completed all required tasks");
+    }
+
+    public void ConnectSolveObjectsToChoreCalls()
+    {
+        foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
+        {
+            print(i.name);
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+            i.ResetDataToDefault();
+        }
+        foreach (SolveObject i in nonPersistentRadiantTaskList)
+        {
+            print(i.name);
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+            i.ResetDataToDefault();
+        }
+    }
+
+    public void DailyReset()
+    {
+        requiredListEmitted = !resetRequiredDaily;
+        radiantListEmitted = !resetRadiantDaily;
+    }
+
 }

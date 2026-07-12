@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: CollectEggs
   m_EditorClassIdentifier: Assembly-CSharp::ChoreTask
   baseDescription: Collect eggs
-  requiredSolveObjectList: []
+  requiredSolveObjectList:
+  - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
+  - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
+  - {fileID: 11400000, guid: 668ea9e77abda0c44bc075401c16e8b5, type: 2}
   ev_ChoreCompleted:
     m_PersistentCalls:
       m_Calls: []
