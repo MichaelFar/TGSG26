@@ -7,7 +7,6 @@ public class Fishing : MonoBehaviour
     public Canvas FishingQTE;
     public ItemPickup FishingRod;
     public bool isHoldingFishingRod { get { return FishingRod.isHeld; } }
-    public bool 
 
     void Start()
     {
