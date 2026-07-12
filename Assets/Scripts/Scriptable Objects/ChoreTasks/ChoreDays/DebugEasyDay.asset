@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c43ef1777bd061e4b8d5b9823bb962ab, type: 3}
-  m_Name: newday
+  m_Name: DebugEasyDay
   m_EditorClassIdentifier: Assembly-CSharp::ChoreDay
   choreList:
-  - {fileID: 11400000, guid: f83dbf75293fe234e9dec41e5c40d8e2, type: 2}
-  - {fileID: 11400000, guid: e4e5230f786a5fe45a14619d97f303e9, type: 2}
+  - {fileID: 11400000, guid: d007850163e52024d88ccbaade5f5201, type: 2}
+  allChoresCompletedToday: 0

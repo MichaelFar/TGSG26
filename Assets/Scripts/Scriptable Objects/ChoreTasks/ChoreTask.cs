@@ -21,7 +21,7 @@ public class ChoreTask : ScriptableObject
 
     protected bool isComplete = false;
 
-    protected bool isDemon = false;
+    public bool isDemon = false;
 
     protected int numSolved = 0;
 
@@ -60,6 +60,7 @@ public class ChoreTask : ScriptableObject
 
     public void CompleteChore()
     {
+
         ev_ChoreCompleted.Invoke();
         isComplete = true;
     }

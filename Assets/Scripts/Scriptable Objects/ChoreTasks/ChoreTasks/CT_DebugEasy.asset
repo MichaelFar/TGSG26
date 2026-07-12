@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68cd09a6789f73f46b86525631bb00d5, type: 3}
-  m_Name: HarvestPlants
+  m_Name: CT_DebugEasy
   m_EditorClassIdentifier: Assembly-CSharp::ChoreTask
-  baseDescription: Harvest Plants
+  baseDescription: Tasks Solved
   requiredSolveObjectList:
-  - {fileID: 11400000, guid: 6ebffee3ac2c3564f8beab1253ce03df, type: 2}
-  - {fileID: 11400000, guid: 6ebffee3ac2c3564f8beab1253ce03df, type: 2}
-  - {fileID: 11400000, guid: 6ebffee3ac2c3564f8beab1253ce03df, type: 2}
+  - {fileID: 11400000, guid: 6bcd08d310f87964d9a74f09e644c9b6, type: 2}
+  isDemon: 0
   ev_ChoreCompleted:
     m_PersistentCalls:
       m_Calls: []

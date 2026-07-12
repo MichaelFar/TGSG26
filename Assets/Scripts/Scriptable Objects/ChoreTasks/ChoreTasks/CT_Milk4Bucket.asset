@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68cd09a6789f73f46b86525631bb00d5, type: 3}
   m_Name: CT_Milk4Bucket
   m_EditorClassIdentifier: Assembly-CSharp::ChoreTask
-  baseDescription: Exchange milk for bucket
+  baseDescription: Store Milk
   requiredSolveObjectList:
   - {fileID: 11400000, guid: 81d037a77879b7946adf1ad6f5b7b1d8, type: 2}
   - {fileID: 11400000, guid: 81d037a77879b7946adf1ad6f5b7b1d8, type: 2}

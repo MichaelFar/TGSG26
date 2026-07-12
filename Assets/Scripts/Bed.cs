@@ -15,6 +15,10 @@ public class Bed : MonoBehaviour, IInteractable
 
     public bool shouldTeleportAtEOD = true;
 
+    private bool allChoresCompletedToday = false;
+
+    private float debugTimer = 0.0f;
+
     void Start()
     {
         TimeManager.Instance.ev_dayHasChanged.AddListener(CheckIfHasBeenUsedThenTeleport);
@@ -23,7 +27,14 @@ public class Bed : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        //Remove this later, this is just for prototype
+        debugTimer += Time.deltaTime;
+        if(debugTimer > 1)
+        {
+            debugTimer = 0.0f;
+            allChoresCompletedToday = ChoreManager.Instance.CheckIfCurrentDayCompleted();
+            
+        }
     }
     public void OnInteract(GameObject object_interacting = null)
     {
@@ -61,7 +72,7 @@ public class Bed : MonoBehaviour, IInteractable
 
     public void DisplayNewDayTransition()
     {
-        if (ChoreManager.Instance.GetChoreDay().allChoresCompletedToday)
+        if (allChoresCompletedToday)
         {
             transitionObject.StartTransition("Day " + TimeManager.Instance.GetDay().ToString());
         }
@@ -73,7 +84,7 @@ public class Bed : MonoBehaviour, IInteractable
     }
     public void DisplayTeleportNewDayTransition()
     {
-        if (ChoreManager.Instance.GetChoreDay().allChoresCompletedToday)
+        if (allChoresCompletedToday)
         {
             transitionObject.StartNewGameTransition("Day " + TimeManager.Instance.GetDay().ToString());
         }

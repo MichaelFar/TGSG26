@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1378d9c813d8d9429fb4e57db8c6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemPickup
-  itemData: {fileID: 11400000, guid: 176c9acd8bde450459e69c34c0ed0b24, type: 2}
+  itemData: {fileID: 11400000, guid: 6594ca67e18c5174c80c6238cf70398e, type: 2}
   myCollider: {fileID: 6215594669236160057}
   isHeld: 0
   ev_Activated:

@@ -222,4 +222,45 @@ public class ChoreManager : MonoBehaviour
     {
         return choreWeekList[currentChoreDayIndex];
     }
+    
+    public bool CheckIfPreviousDayCompleted()
+    {
+        bool all_days_completed = true;
+
+        if (!(currentChoreDayIndex - 1 < 0))
+        {
+
+            ChoreDay day = choreWeekList[currentChoreDayIndex - 1];
+            foreach (ChoreTask task in day.choreList)
+            {
+                print(task.name + " get completed is " + task.GetIsComplete());
+                if (!task.GetIsComplete())
+                {
+                    all_days_completed = false;
+                    break;
+                }
+            }
+        }
+        
+        print("Completed all chores today is " + all_days_completed);
+        return all_days_completed;
+    }
+    public bool CheckIfCurrentDayCompleted()
+    {
+        bool all_days_completed = true;
+
+        ChoreDay day = choreWeekList[currentChoreDayIndex];
+        foreach (ChoreTask task in day.choreList)
+        {
+            print(task.name + " get completed is " + task.GetIsComplete());
+            if (!task.GetIsComplete())
+            {
+                all_days_completed = false;
+                break;
+            }
+        }
+        
+        print("Completed all chores today is " + all_days_completed);
+        return all_days_completed;
+    }
 }
