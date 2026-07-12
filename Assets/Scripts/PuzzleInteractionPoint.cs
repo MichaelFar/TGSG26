@@ -20,9 +20,9 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     private bool requiredListEmitted = false;
     private bool radiantListEmitted = false;
 
-    public bool resetRequiredDaily = false;
+    //public bool resetRequiredDaily = false;
 
-    public bool resetRadiantDaily = true;
+    //public bool resetRadiantDaily = true;
     //public List<InventoryItemData> RequiredItemList;
 
     public List<SolveObject> currentlyRequiredItemList;
@@ -31,9 +31,19 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     private List<SolveObject> nonPersistentCurrentlyRequiredItemList = new List<SolveObject>();
     private List<SolveObject> nonPersistentRadiantTaskList = new List<SolveObject>();
 
-    
+    private UnityEvent[] uniqueSOEventArray;
+
+    public List<SolveObject> parallelSOList;// = new List<SolveObject>();
+    private List<SolveObject> nonPersistentParallelSOList = new List<SolveObject>();
+
+    public UnityEvent ev_AllListsInitialized;
     //public string mainLevelName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        uniqueSOEventArray = HelperFunctions.InitializeArray<UnityEvent>(parallelSOList.Count);
+        
+    }
     void Start()
     {
         //PopulateRequirements();
@@ -45,6 +55,14 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         {
             i.ResetDataToDefault();
         }
+        foreach (SolveObject i in parallelSOList)
+        {
+            i.ResetDataToDefault();
+        }
+        foreach (SolveObject i in parallelSOList)
+        {
+            nonPersistentParallelSOList.Add(Instantiate(i));
+        }
         foreach (SolveObject i in currentlyRequiredItemList)
         {
             nonPersistentCurrentlyRequiredItemList.Add(Instantiate(i));
@@ -53,7 +71,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         {
 
             nonPersistentRadiantTaskList.Add(Instantiate(i));
-            
+
         }
         ChoreManager.Instance.ev_NewDayDataInitialized.AddListener(ConnectSolveObjectsToChoreCalls);
         ConnectSolveObjectsToChoreCalls();
@@ -69,7 +87,7 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
         }
         */
         //SceneManager.LoadScene(0);
-
+        ev_AllListsInitialized.Invoke();
     }
 
     // Update is called once per frame
@@ -106,23 +124,29 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
 
         foreach (SolveObject i in nonPersistentCurrentlyRequiredItemList)
         {
-            if (slot_to_check.isOccupied)
+            if (slot_to_check.isOccupied || i.activateOnEmptyHand)
             {
                 if (i)
                 {
+                    if (!i.CheckCanBeTriggered())
+                    {
+                        all_requirements_met = false;
+                        break;
+                    }
                     i.SetSlotToAffect(slot_to_check);
                     i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
-
+                    
                 }
             }
             if (!i.requirementsMetToSolve)
             {
                 all_requirements_met = false;
             }
+            
         }
         
         //Solve puzzle if all requirements met
-        if(all_requirements_met && !requiredListEmitted)
+        if(all_requirements_met)
         {
             ev_SolvedPuzzle.Invoke();
             requiredListEmitted = true;
@@ -132,10 +156,15 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
 
         foreach (SolveObject i in nonPersistentRadiantTaskList)
         {
-            if (slot_to_check.isOccupied)
+            if (slot_to_check.isOccupied || i.activateOnEmptyHand)
             {
                 if (i)
                 {
+                    if (!i.CheckCanBeTriggered())
+                    {
+                        all_radiant_tasks_met = false;
+                        break;
+                    }
                     i.SetSlotToAffect(slot_to_check);
                     i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
                 }
@@ -144,10 +173,36 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             {
                 all_radiant_tasks_met = false;
             }
+            
         }
-        
+        foreach (SolveObject i in nonPersistentParallelSOList)
+        {
+            if (slot_to_check.isOccupied || i.activateOnEmptyHand)
+            {
+                if (i)
+                {
+                    if(!i.CheckCanBeTriggered())
+                    {
+                        break;
+                    }
+                    i.SetSlotToAffect(slot_to_check);
+                    i.CheckIfCanSolve(slot_to_check.GetHeldItem().itemData);
+                    uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
+                    print("Parallel event is firing");
+                }
+                /*
+                if(i.requirementsMetToSolve && i.CheckCanBeTriggered())
+                {
+                    print("Parallel event is firing");
+                    uniqueSOEventArray[GetIndexOfParallelEvent(i)].Invoke();
+                    //i.SetCanBeTriggered(true);
+                }
+                */
+            }
+            
+        }
 
-        if(all_radiant_tasks_met && !radiantListEmitted)
+        if (all_radiant_tasks_met && !radiantListEmitted)
         {
             ev_CompletedAllRadiantTasks.Invoke();
             radiantListEmitted = true;
@@ -184,12 +239,42 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
             ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
             i.ResetDataToDefault();
         }
+        foreach (SolveObject i in nonPersistentParallelSOList)
+        {
+            print(i.name);
+            ChoreManager.Instance.ConnectSolveObjectToEventDict(i);
+            i.ResetDataToDefault();
+        }
     }
 
+    //Handled via solve objects instead to be more in line with programatic design
     public void DailyReset()
     {
-        requiredListEmitted = !resetRequiredDaily;
-        radiantListEmitted = !resetRadiantDaily;
+        //requiredListEmitted = !resetRequiredDaily;
+        //radiantListEmitted = !resetRadiantDaily;
+    }
+
+    public void ConnectToSOParallelEvent(SolveObject object_to_check, UnityAction action_to_connect)
+    {
+        int index_of_so = GetIndexOfParallelEvent(object_to_check);
+        if (index_of_so >= 0)
+        {
+            print("Checking if SO object is in list");
+            
+            print("Index of SO object in list" + index_of_so);
+            
+            uniqueSOEventArray[index_of_so].AddListener(action_to_connect);
+            
+                
+            //taskLabelList.FindIndex(p => p.text == i.text);
+        }
+    }
+    private int GetIndexOfParallelEvent(SolveObject object_to_check)
+    {
+        print("Solve object to connect name is " + object_to_check.name);
+        string object_name = object_to_check.name.Replace("(Clone)", "");
+        int index_of_so = parallelSOList.FindIndex(p => p.name == object_name);
+        return index_of_so;
     }
 
 }

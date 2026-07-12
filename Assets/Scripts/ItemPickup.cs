@@ -23,6 +23,7 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
 
     private GameObject objectToFollow;
 
+    [HideInInspector]
     public bool isHeld = false;
     public UnityEvent ev_Activated;
     [HideInInspector]

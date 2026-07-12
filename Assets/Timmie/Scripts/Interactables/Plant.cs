@@ -13,6 +13,7 @@ public class Plant : MonoBehaviour
 {
     [SerializeField] private Material DrySoil, WetSoil, DeadGrass;
     [SerializeField] private GameObject[] GrowthStagePrefabs;
+    [SerializeField] private GameObject[] spookyGrowthStagePrefabs;
     [SerializeField] private Transform PlantGroup;
     private int CurrentGrowthStage = 0;
     private GameObject CurrentStagePrefab;
@@ -21,11 +22,50 @@ public class Plant : MonoBehaviour
     private bool IsDead;
     private bool IsReadyToHarvest;
     private MeshRenderer SoilMeshRenderer;
+
+    public GameObject normalPlantItem;
+
+    public GameObject spookyPlantItem;
+
+    public GameObject spawnLocationObject;
+
+    public SolveObject bloodMilkSO;
+
+    private GameObject plantToSpawnOnHarvest;
+
+    private PuzzleInteractionPoint myInteractionPoint;
+
+    private int frameCount = 0;
+    private void Awake()
+    {
+        myInteractionPoint = GetComponent<PuzzleInteractionPoint>();
+        //plantToSpawnOnHarvest = normalPlantItem;
+        //myInteractionPoint.ev_AllListsInitialized.AddListener(InitializeSOEvents);
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         SoilMeshRenderer = GetComponent<MeshRenderer>();
         TimeManager.Instance.ev_dayHasChanged.AddListener(AdvanceNextStage);
+        plantToSpawnOnHarvest = normalPlantItem;
+        
+    }
+
+    void Update()
+    {
+        frameCount += 1;
+        if(frameCount == 1)
+        {
+            InitializeSOEvents();
+        }
+    }
+
+    public void InitializeSOEvents()
+    {
+        
+        myInteractionPoint.ConnectToSOParallelEvent(bloodMilkSO, SwitchPrefabsToSpooky);
+        myInteractionPoint.ConnectToSOParallelEvent(bloodMilkSO, WateredPlant);
+        
     }
 
     public void WateredPlant()
@@ -48,11 +88,15 @@ public class Plant : MonoBehaviour
         if (CurrentStagePrefab != null)
         {
             Destroy(CurrentStagePrefab);
+            
         }
-        CurrentStagePrefab = Instantiate(GrowthStagePrefabs[CurrentGrowthStage], PlantGroup.position, PlantGroup.rotation, PlantGroup);
+        if (GrowthStagePrefabs[CurrentGrowthStage])
+        {
+            CurrentStagePrefab = Instantiate(GrowthStagePrefabs[CurrentGrowthStage], spawnLocationObject.transform.position, PlantGroup.rotation, PlantGroup);
+        }
         IsWatered = false;
         CheckSoil(IsWatered);
-        if (CurrentGrowthStage == 2)
+        if (CurrentGrowthStage == GrowthStagePrefabs.Length - 1)
         {
             IsReadyToHarvest = true;
         }
@@ -61,7 +105,7 @@ public class Plant : MonoBehaviour
 
     private void Wither()
     {
-        if (!IsWatered)
+        if (!IsWatered && CurrentStagePrefab)
         {
             CurrentStagePrefab.GetComponent<MeshRenderer>().material = DeadGrass;
             IsDead = true;
@@ -85,8 +129,15 @@ public class Plant : MonoBehaviour
         if (IsReadyToHarvest)
         {
             Destroy(CurrentStagePrefab);
+            GameObject spawned_plant = Instantiate(plantToSpawnOnHarvest);
+            spawned_plant.transform.position = spawnLocationObject.transform.position;
         }
         print("Harvested Plant");
+    }
+    private void SwitchPrefabsToSpooky()
+    {
+        GrowthStagePrefabs = spookyGrowthStagePrefabs;
+        plantToSpawnOnHarvest = spookyPlantItem;
     }
 
 }

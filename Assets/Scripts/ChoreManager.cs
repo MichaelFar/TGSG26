@@ -137,6 +137,8 @@ public class ChoreManager : MonoBehaviour
         
     }
 
+    
+
     public void InitializeNextDay()
     {
         foreach (ChoreTask i in GetAllCurrentChores())

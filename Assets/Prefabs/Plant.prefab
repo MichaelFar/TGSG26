@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4717318959151451648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1892890660373283769}
+  - component: {fileID: 7471726487544926881}
+  m_Layer: 0
+  m_Name: SpawnMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1892890660373283769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717318959151451648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.164, y: 0.159, z: 0}
+  m_LocalScale: {x: 0.30704, y: 0.30704, z: 0.30704}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4379243856042321826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7471726487544926881
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717318959151451648}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5632349319549872858
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +161,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -135,7 +188,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 6046724829841420357, guid: 06a7b801cb5de764995ad7ea3b9526af, type: 3}
   - {fileID: 3987998920954545502, guid: 7a8bb8d6cc9eea34e9c2f6bb94726cab, type: 3}
+  spookyGrowthStagePrefabs:
+  - {fileID: 0}
+  - {fileID: 6046724829841420357, guid: 42dd718ce372fa642aea6bdf7db01c50, type: 3}
+  - {fileID: 3987998920954545502, guid: 3226f13f2cdfe2c4eab4fe5212e43170, type: 3}
   PlantGroup: {fileID: 4379243856042321826}
+  normalPlantItem: {fileID: 3987998920954545502, guid: f67ab2070afcdfb49acffcebf982f664, type: 3}
+  spookyPlantItem: {fileID: 3987998920954545502, guid: 3867d9d3dca5778418e27dc5515fa959, type: 3}
+  spawnLocationObject: {fileID: 4717318959151451648}
+  bloodMilkSO: {fileID: 11400000, guid: 456d73c7c06cb4147ba5424e4a73cc0c, type: 2}
 --- !u!114 &1539686191929527050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,12 +239,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  resetRequiredDaily: 1
-  resetRadiantDaily: 1
   currentlyRequiredItemList:
   - {fileID: 11400000, guid: e19a74264559d254abace5196a61a76c, type: 2}
   radiantTaskList:
   - {fileID: 11400000, guid: 6ebffee3ac2c3564f8beab1253ce03df, type: 2}
+  parallelSOList:
+  - {fileID: 11400000, guid: 456d73c7c06cb4147ba5424e4a73cc0c, type: 2}
 --- !u!1 &8773545872994933934
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,5 +275,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6340263438613861035}
+  - {fileID: 1892890660373283769}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
