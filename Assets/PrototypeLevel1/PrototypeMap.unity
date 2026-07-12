@@ -4382,7 +4382,7 @@ PrefabInstance:
       objectReference: {fileID: 1196680340}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: hoursThreshold
-      value: 1
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: minutesThreshold
@@ -7128,8 +7128,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  currentlyRequiredItemList:
-  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
+  currentlyRequiredItemList: []
   radiantTaskList:
   - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
   parallelSOList: []
@@ -7317,9 +7316,9 @@ MonoBehaviour:
   ev_CompletedAllRadiantTasks:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1599347003}
+      - m_Target: {fileID: 1599347004}
         m_TargetAssemblyTypeName: ChickenNest, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: HookNormalEggSpawnIntoDailyEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7329,8 +7328,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  currentlyRequiredItemList:
-  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
+  currentlyRequiredItemList: []
   radiantTaskList:
   - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
   parallelSOList: []
@@ -9859,15 +9857,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 523002390317159514, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 523002390317159514, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 523002390317159514, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 602913956640672789, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: PauseMenuFunctionObject
@@ -9875,15 +9873,15 @@ PrefabInstance:
       objectReference: {fileID: 1196680344}
     - target: {fileID: 2403128589989162625, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.47368422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2403128589989162625, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2403128589989162625, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.47368422
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4868433330830743705, guid: 0b0a004376420aa4d853ce08ae2ece5d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -12654,8 +12652,8 @@ Transform:
   - {fileID: 694227943}
   - {fileID: 1122101750}
   - {fileID: 470449621}
-  - {fileID: 1940238852}
   - {fileID: 1185266119}
+  - {fileID: 1940238852}
   - {fileID: 1196680339}
   - {fileID: 1599347002}
   - {fileID: 1445023769}
@@ -14166,11 +14164,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6558987713161301691, guid: fb58aa229a77eff4cb91e160ecf3cca2, type: 3}
   m_PrefabInstance: {fileID: 1599347001}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1599347003 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8192256318868565565, guid: fb58aa229a77eff4cb91e160ecf3cca2, type: 3}
+--- !u!114 &1599347004 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2402711315369060922, guid: fb58aa229a77eff4cb91e160ecf3cca2, type: 3}
   m_PrefabInstance: {fileID: 1599347001}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3b8fff321ed094ba20c8d5d0efe1e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &1613721764
 PrefabInstance:
   m_ObjectHideFlags: 0
