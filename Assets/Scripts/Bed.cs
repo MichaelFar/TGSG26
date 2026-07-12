@@ -61,11 +61,26 @@ public class Bed : MonoBehaviour, IInteractable
 
     public void DisplayNewDayTransition()
     {
-        transitionObject.StartTransition("Day " + TimeManager.Instance.GetDay().ToString());
+        if (ChoreManager.Instance.GetChoreDay().allChoresCompletedToday)
+        {
+            transitionObject.StartTransition("Day " + TimeManager.Instance.GetDay().ToString());
+        }
+        else
+        {
+            transitionObject.StartTransition("Day " + TimeManager.Instance.GetDay().ToString() + " but you didn't complete all chores yesterday you bozo");
+        }
+            
     }
     public void DisplayTeleportNewDayTransition()
     {
-        transitionObject.StartNewGameTransition("Day " + TimeManager.Instance.GetDay().ToString());
+        if (ChoreManager.Instance.GetChoreDay().allChoresCompletedToday)
+        {
+            transitionObject.StartNewGameTransition("Day " + TimeManager.Instance.GetDay().ToString());
+        }
+        else
+        {
+            transitionObject.StartNewGameTransition("Day " + TimeManager.Instance.GetDay().ToString() + " but you didn't complete all chores yesterday you bozo");
+        }
     }
 
     public bool CanInteract()
