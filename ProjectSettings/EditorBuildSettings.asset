@@ -8,8 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Jonah/MainMenu.unity
     guid: 990585a43be04c641a998e69db56efcf
-  - enabled: 1
+  - enabled: 0
     path: Assets/PrototypeLevel1/PrototypeMap.unity
     guid: b55f03eca0d6fbe41bdb27ef4e2632bd
+  - enabled: 1
+    path: Assets/Michael/NewMichaelDebugScene.unity
+    guid: 2aa9628ed42486246aa0471f01c71ea6
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 0f6ba537a8602884cb170b8dbd0bad8b, type: 2}
