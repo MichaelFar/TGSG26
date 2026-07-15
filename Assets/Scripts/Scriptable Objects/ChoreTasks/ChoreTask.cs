@@ -21,7 +21,7 @@ public class ChoreTask : ScriptableObject
 
     protected bool isComplete = false;
 
-    protected bool isDemon = false;
+    public bool isDemon = false;
 
     protected int numSolved = 0;
 
@@ -38,6 +38,7 @@ public class ChoreTask : ScriptableObject
 
     public void IncrementNumSolved()
     {
+        MonoBehaviour.print("Incrementing task " + this.name);
         numSolved = Mathf.Clamp(numSolved + 1, 0, requiredSolveObjectList.Length);
         if(numSolved >= requiredSolveObjectList.Length)
         {
@@ -59,6 +60,7 @@ public class ChoreTask : ScriptableObject
 
     public void CompleteChore()
     {
+
         ev_ChoreCompleted.Invoke();
         isComplete = true;
     }

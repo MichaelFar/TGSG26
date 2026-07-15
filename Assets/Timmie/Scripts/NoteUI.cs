@@ -1,20 +1,16 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class NoteUI : BaseUI
 {
-    [SerializeField] private NoteData noteData;
+
     [SerializeField] private TMP_Text noteText;
-    public override void Show()
+    [SerializeField] private Image noteImage;
+    public void LoadContent(NoteData data)
     {
-        base.Show();
-        LoadContent();
-
-    }
-
-    private void LoadContent()
-    {
-        noteText.text = noteData.body;
+        // noteText.text = noteData.body;
+        noteImage.sprite = data.noteSprite;
     }
 }

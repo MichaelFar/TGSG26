@@ -9,16 +9,13 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "SolveObjectDebug", menuName = "Scriptable Objects/SolveObjectDeleteObjectInHand")]
 public class SolveObjectDeleteObjectInHand : SolveObject
 {
-    //public GameObject milkObjectToSpawn;
-
-    //public UnityEvent ev_OnSolve;
     
     public override bool OnSolve()
     {
         if(base.OnSolve())
         {
             slotToAffect.DeleteItemFromSlot();
-            //Instantiate(milkObjectToSpawn);
+            
         }
         
         return true;

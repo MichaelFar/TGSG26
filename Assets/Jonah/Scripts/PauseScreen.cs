@@ -23,13 +23,15 @@ public class PauseScreen : BaseUI
     }
     private void SetVisible(bool isVisible)
     {
-        PauseMenuUi.alpha = isVisible ? 1 : 0;
+
         if (isVisible)
         {
             Resume();
+            UIHandler.Instance.CloseUI();
         }
         else
         {
+            UIHandler.Instance.ShowUI(this);
             Pause();
         }
     }

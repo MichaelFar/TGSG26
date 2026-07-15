@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using System.Persistence;
 public class ObjectDataSaver : MonoBehaviour
 {
-
+    /*
     private string objectID;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private List<SavePackage> managedComponents;
@@ -103,6 +103,6 @@ public class ObjectDataSaver : MonoBehaviour
         public Component relevantComponent;
         public string identifier;
     }
-
+    */
 
 }

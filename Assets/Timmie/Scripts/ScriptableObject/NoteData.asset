@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: NoteData
   m_EditorClassIdentifier: Assembly-CSharp::NoteData
   body: Yo whats up dawg
+  noteSprite: {fileID: 21300000, guid: 3c9f29f1fc22b974ba67481de8e7bb9a, type: 3}

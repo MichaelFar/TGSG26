@@ -56,4 +56,9 @@ public class Door : MonoBehaviour, IInteractable
             isTriggered = false;
         }
     }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
 }
