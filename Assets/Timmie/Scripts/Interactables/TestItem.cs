@@ -10,6 +10,11 @@ public class TestItem : MonoBehaviour, IInteractable
 {
     public UnityEvent itemPickUp;
 
+    public bool CanInteract()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void OnInteract(GameObject interacting_object)
     {
         print("Picked up item");

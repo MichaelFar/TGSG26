@@ -23,6 +23,7 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
 
     private GameObject objectToFollow;
 
+    [HideInInspector]
     public bool isHeld = false;
     public UnityEvent ev_Activated;
     [HideInInspector]
@@ -117,6 +118,11 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
     {
         SaveGame.Save<ItemPickup>(identifier, this);
         
+    }
+
+    public bool CanInteract()
+    {
+        return !isHeld;
     }
 }
 /*

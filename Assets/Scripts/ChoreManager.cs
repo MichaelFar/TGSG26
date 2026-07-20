@@ -137,13 +137,24 @@ public class ChoreManager : MonoBehaviour
         
     }
 
+    
+
     public void InitializeNextDay()
     {
+        bool all_chores_completed = true;
+        
         foreach (ChoreTask i in GetAllCurrentChores())
         {
+            if (!i.GetIsComplete())
+            {
+                all_chores_completed = false;
+            }
             //Here would also be code to invoke the fail event
             i.ResetData();
         }
+
+        choreWeekList[currentChoreDayIndex].allChoresCompletedToday = all_chores_completed;
+
         print("Initializing new day");
         SetDayIndex(TimeManager.Instance.GetDay() - 1);
         print("Current chore day index is now " + currentChoreDayIndex);
@@ -191,5 +202,65 @@ public class ChoreManager : MonoBehaviour
     public void InvokeChoreUpdated()
     {
         ev_ChoreUpdated.Invoke();
+    }
+
+    public bool CheckIfAllDaysCompletedSuccessfully()
+    {
+        bool all_days_completed = true;
+        foreach(ChoreDay i in choreWeekList)
+        {
+            if(!i.allChoresCompletedToday)
+            {
+                all_days_completed = false;
+                break;
+            }
+        }
+        return all_days_completed;
+    }
+
+    public ChoreDay GetChoreDay()
+    {
+        return choreWeekList[currentChoreDayIndex];
+    }
+    
+    public bool CheckIfPreviousDayCompleted()
+    {
+        bool all_days_completed = true;
+
+        if (!(currentChoreDayIndex - 1 < 0))
+        {
+
+            ChoreDay day = choreWeekList[currentChoreDayIndex - 1];
+            foreach (ChoreTask task in day.choreList)
+            {
+                print(task.name + " get completed is " + task.GetIsComplete());
+                if (!task.GetIsComplete())
+                {
+                    all_days_completed = false;
+                    break;
+                }
+            }
+        }
+        
+        print("Completed all chores today is " + all_days_completed);
+        return all_days_completed;
+    }
+    public bool CheckIfCurrentDayCompleted()
+    {
+        bool all_days_completed = true;
+
+        ChoreDay day = choreWeekList[currentChoreDayIndex];
+        foreach (ChoreTask task in day.choreList)
+        {
+            print(task.name + " get completed is " + task.GetIsComplete());
+            if (!task.GetIsComplete())
+            {
+                all_days_completed = false;
+                break;
+            }
+        }
+        
+        print("Completed all chores today is " + all_days_completed);
+        return all_days_completed;
     }
 }

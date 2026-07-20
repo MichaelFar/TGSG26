@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43ef1777bd061e4b8d5b9823bb962ab, type: 3}
   m_Name: ChoreDay4
   m_EditorClassIdentifier: Assembly-CSharp::ChoreDay
-  choreList: []
+  choreList:
+  - {fileID: 11400000, guid: 0ff2a776745018c468c54a230827caa1, type: 2}
+  - {fileID: 11400000, guid: f83dbf75293fe234e9dec41e5c40d8e2, type: 2}
+  - {fileID: 11400000, guid: e6dc45c15f979df4ca6a295c1852ec26, type: 2}
+  - {fileID: 11400000, guid: 5e7e9d7a63ad844458892a748a0b5ac6, type: 2}
+  allChoresCompletedToday: 0

@@ -9,4 +9,6 @@ using UnityEngine;
 public class ChoreDay : ScriptableObject
 {
     public ChoreTask[] choreList;
+    [HideInInspector]
+    public bool allChoresCompletedToday = false;
 }

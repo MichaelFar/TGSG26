@@ -6,6 +6,12 @@ public class Notes : MonoBehaviour, IInteractable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public UnityEvent itemPickUp;
     [SerializeField] private NoteUI noteUI;
+    [SerializeField] private NoteData noteData;
+
+    public bool CanInteract()
+    {
+        return true;
+    }
 
     public void OnInteract(GameObject object_interacting = null)
     {
@@ -14,7 +20,9 @@ public class Notes : MonoBehaviour, IInteractable
 
     public void ShowNote()
     {
-        UIHandler.Instance.ShowUI(noteUI);
+        UIHandler.Instance.ShowNoteUI(noteData);
         PauseMenu.Instance.SetGamePaused(true);
+        // NoteInventory.Instance.AddNote(noteData);
+        // Destroy(gameObject);
     }
 }
