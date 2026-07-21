@@ -763,7 +763,7 @@ MonoBehaviour:
   maximumThreshold: 275
   finishedMinigameTimer: 0
   finishedMinigame: 0
-  canInputAgain: 0
+  canInputAgain: 1
   onSuccess:
     m_PersistentCalls:
       m_Calls: []
@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fishing
   FishingQTE: {fileID: 1857282954}
   FishingRod: {fileID: 2019629143}
-  RotateIsActive: {fileID: 0}
+  RotateIsActive: {fileID: 1552296958}
   isFishing: 0
   deltaTimer: 0
   timeToHold: 6
