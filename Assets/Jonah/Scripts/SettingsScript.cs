@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class SettingsScript : MonoBehaviour
+public class SettingsScript : BaseUI
 {
     //calling mouse look script for mouse sensitivity variable
     public MoveCamera cameraSpeed;
@@ -39,18 +39,18 @@ public class SettingsScript : MonoBehaviour
     //mouse speed settings
     public void Start()
     {
-        
+
         cameraSpeed.mouseSensitivity = PlayerPrefs.GetFloat("currentSensitivity");
         sensitivitySlider.value = cameraSpeed.mouseSensitivity / 10;
         print("options applied");
     }
 
 
-    
 
-    
-   public void AdjustSpeed(float newSpeed)
-     {
+
+
+    public void AdjustSpeed(float newSpeed)
+    {
         PlayerPrefs.SetFloat("currentSensitivity", cameraSpeed.mouseSensitivity);
         PlayerPrefs.Save();
         cameraSpeed.mouseSensitivity = newSpeed * 10;
@@ -58,9 +58,7 @@ public class SettingsScript : MonoBehaviour
         {
             print(cameraSpeed.mouseSensitivity);
         }
-     }
-
-
+    }
 
 
 

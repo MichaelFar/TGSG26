@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 /*
 Contributor(s): Timmie Xiong
 Brief Description: Holds the notes data in a list and handles adding notes to said list.
@@ -31,5 +32,9 @@ public class NoteInventory : MonoBehaviour
     public void AddNote(NoteData pickedUpNote)
     {
         PickedUpNotes.Add(pickedUpNote);
+    }
+    public List<NoteData> GetNotes()
+    {
+        return PickedUpNotes;
     }
 }
