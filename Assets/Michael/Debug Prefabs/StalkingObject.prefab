@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4626775809668791135}
+  - component: {fileID: 8181757162684152901}
+  - component: {fileID: 3186548518029860652}
   m_Layer: 0
   m_Name: PositionRotationParent
   m_TagString: Untagged
@@ -25,13 +27,64 @@ Transform:
   m_GameObject: {fileID: 2755809794680821936}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.26, y: 0, z: -3.24}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 735952640088923880}
   m_Father: {fileID: 112347365163446885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8181757162684152901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755809794680821936}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 15.22, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3186548518029860652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2755809794680821936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1147c5d1de2919418be181f5f830214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  ev_EnteredVolume:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_ExitedVolume:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8125700728509260490}
+        m_TargetAssemblyTypeName: Stalker, Assembly-CSharp
+        m_MethodName: RandomlyAppear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3336363805408231705
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +192,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -171,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 4792826884300724924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.05, y: 0.8, z: 4.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -202,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 112347365163446885}
   - component: {fileID: 8125700728509260490}
+  - component: {fileID: 6555492107113446824}
   m_Layer: 0
   m_Name: StalkingObject
   m_TagString: Untagged
@@ -238,6 +292,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   transformToCastFrom: {fileID: 0}
+  visualParent: {fileID: 3336363805408231705}
+  triggerVolume: {fileID: 8181757162684152901}
+  isActive: 0
+--- !u!135 &6555492107113446824
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7163362509216400701}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8964117272773481704
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +424,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
