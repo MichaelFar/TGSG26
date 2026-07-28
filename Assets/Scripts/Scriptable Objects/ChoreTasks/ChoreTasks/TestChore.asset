@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cd09a6789f73f46b86525631bb00d5, type: 3}
+  m_Name: TestChore
+  m_EditorClassIdentifier: Assembly-CSharp::ChoreTask
+  baseDescription: Water plants
+  requiredSolveObjectList:
+  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
+  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
+  - {fileID: 11400000, guid: 054181f180eb1b34991baa80a01ea2dc, type: 2}
+  ev_ChoreCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_ChoreStepCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_ChoreFailed:
+    m_PersistentCalls:
+      m_Calls: []

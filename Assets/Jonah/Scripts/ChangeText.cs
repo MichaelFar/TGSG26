@@ -1,5 +1,5 @@
 using UnityEngine.UI;
-using Unity.GraphToolkit.Editor;
+//using Unity.GraphToolkit.Editor;
 using UnityEngine;
 
 public class ChangeText : MonoBehaviour
@@ -20,7 +20,7 @@ Date: 6/3/2026
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         changeText = GetComponent<Text>();
     }
@@ -28,10 +28,6 @@ Date: 6/3/2026
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            //Debug.Log("Variable value is: " + changeText);
-            SetText("bruh.com");
-        } 
+       
     }
 }

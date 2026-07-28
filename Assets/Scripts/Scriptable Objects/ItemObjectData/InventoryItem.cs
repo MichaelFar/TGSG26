@@ -11,10 +11,11 @@ using GlobalDataTypes;
 public class InventoryItemData : ScriptableObject
 {
 
-    public e_ItemTypes thisItemType = e_ItemTypes.DebugType;
+    //public e_ItemTypes thisItemType = e_ItemTypes.DebugType;
 
     public int numSlotsUsed = 1;
 
     public UnityEvent ev_DroppedItem;
-    
+
+    public string itemName = "";
 }

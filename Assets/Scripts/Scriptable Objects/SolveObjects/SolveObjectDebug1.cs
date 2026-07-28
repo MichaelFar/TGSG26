@@ -6,18 +6,16 @@ Date: 6/5/2026
 using UnityEngine;
 
 using UnityEngine.Events;
-[CreateAssetMenu(fileName = "SolveObjectDebug", menuName = "Scriptable Objects/SolveObjectDebug")]
-public class SolveObjectDebug : SolveObject
+[CreateAssetMenu(fileName = "SolveObjectDebug", menuName = "Scriptable Objects/SolveObjectDeleteObjectInHand")]
+public class SolveObjectDeleteObjectInHand : SolveObject
 {
-
-
-    //public UnityEvent ev_OnSolve;
     
     public override bool OnSolve()
     {
         if(base.OnSolve())
         {
             slotToAffect.DeleteItemFromSlot();
+            
         }
         
         return true;

@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 6698066701525972511}
   - component: {fileID: 9060090973754209685}
   - component: {fileID: 386438661337127504}
-  m_Layer: 0
+  - component: {fileID: 3048214232206645915}
+  m_Layer: 7
   m_Name: ItemPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,9 +176,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1378d9c813d8d9429fb4e57db8c6c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  itemData: {fileID: 11400000, guid: 517d534e65775a442a739e34d021c569, type: 2}
+  itemData: {fileID: 11400000, guid: bf0cc9c5fd6f5dc4e9ec4e3a9c5b3364, type: 2}
   myCollider: {fileID: 6187455729128900774}
   isHeld: 0
   ev_Activated:
     m_PersistentCalls:
       m_Calls: []
+  isInitialized: 0
+--- !u!114 &3048214232206645915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364898736719544289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver

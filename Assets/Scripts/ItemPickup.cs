@@ -4,12 +4,15 @@ Brief Description: Item component that attaches to an item that can be picked up
 Date: 6/2/2026
 */
 
+using BayatGames.SaveGameFree;
 using DG.Tweening;
 using GlobalDataTypes;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
-public class ItemPickup : MonoBehaviour, IInteractable
+using System.Persistence;
+using System;
+public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InventoryItemData itemData;
@@ -20,17 +23,28 @@ public class ItemPickup : MonoBehaviour, IInteractable
 
     private GameObject objectToFollow;
 
+    [HideInInspector]
     public bool isHeld = false;
     public UnityEvent ev_Activated;
-    void Start()
+    [HideInInspector]
+    public bool isInitialized = false;
+    private void Awake()
     {
         myCollider = GetComponent<Collider>();
         myRigidBody = GetComponent<Rigidbody>();
+        
+    }
+    void Start()
+    {
+        
         if(itemData)
         {
             itemData.ev_DroppedItem.AddListener(DropItemBehavior);
         }
+        isInitialized = true;
+        //DropItemBehavior();
         
+        //SaveData(name);
     }
 
     // Update is called once per frame
@@ -47,9 +61,9 @@ public class ItemPickup : MonoBehaviour, IInteractable
     public void DropItemBehavior()
     {
         objectToFollow = null;
-        myCollider.enabled = true;
+        SetColliderEnabled(true);
         isHeld = false;
-        myRigidBody.useGravity = true;
+        SetUseGravity(true);
     }
     void InterpolateToObject()
     {
@@ -82,21 +96,40 @@ public class ItemPickup : MonoBehaviour, IInteractable
         if (inventory_obj && !isHeld)
         {
             print("Picking up item");
-            inventory_obj.AddItemToArray(this);
-            myCollider.enabled = false;
-            myRigidBody.useGravity = false;
+            inventory_obj.DetermineItemPickup(this);
+            
         }
+    }
+    public void SetUseGravity(bool new_value)
+    {
+        myRigidBody.useGravity = new_value;
+    }
+    public void SetColliderEnabled(bool new_value)
+    {
+        myCollider.enabled = new_value;
     }
 
-    public e_ItemTypes GetItemType()
+    public void LoadAndSetData(string identifier)
     {
-        if (itemData)
-        {
-            return itemData.thisItemType;
-        }
-        else
-        {
-            return e_ItemTypes.NoType;
-        }
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(string identifier)
+    {
+        SaveGame.Save<ItemPickup>(identifier, this);
+        
+    }
+
+    public bool CanInteract()
+    {
+        return !isHeld;
     }
 }
+/*
+[Serializable]
+public class ItemSaveData : //ISaveable
+{
+    [field: SerializeField] public SerializableGuid Id { get; set; }
+    
+}
+*/

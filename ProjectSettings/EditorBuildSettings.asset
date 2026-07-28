@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Jonah/MainMenu.unity
+    guid: 990585a43be04c641a998e69db56efcf
+  - enabled: 1
+    path: Assets/PrototypeLevel1/PrototypeMap.unity
+    guid: b55f03eca0d6fbe41bdb27ef4e2632bd
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.addressableassets: {fileID: 11400000, guid: 0f6ba537a8602884cb170b8dbd0bad8b, type: 2}

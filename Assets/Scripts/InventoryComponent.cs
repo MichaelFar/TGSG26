@@ -49,15 +49,16 @@ public class InventoryComponent : MonoBehaviour
         }
     }
 
-    public void AddItemToArray(ItemPickup this_item)
+    public void DetermineItemPickup(ItemPickup this_item)
     {
         
         bool is_two_sized = false;
 
         is_two_sized = this_item.itemData.numSlotsUsed == 2;
 
+        print("Item size is " + this_item.itemData.numSlotsUsed);
 
-        if (is_two_sized)
+        if (is_two_sized && activeSlot != twoHandedSlot)
         {
             foreach (InventorySlot this_slot in inventorySlotList)
             {
@@ -84,7 +85,7 @@ public class InventoryComponent : MonoBehaviour
         }
         
     }
-    //Swaps the slot positions
+    //Swaps the slot positions, does not swap anything if the two handed slot is occupied or the hands are empty
     void SwitchHands()
     {
         if (twoHandedSlot.GetSlotIsOccupied() || CheckIfHandsEmpty())
@@ -106,18 +107,20 @@ public class InventoryComponent : MonoBehaviour
     
     void PickupItem(ItemPickup item_to_pickup, InventorySlot slot_to_attach_to)
     {
-       // item_to_pickup.transform.parent = slot_to_attach_to.transform;
+       
         item_to_pickup.transform.forward = transform.forward;
         slot_to_attach_to.AddItemToSlot(item_to_pickup);
         item_to_pickup.SetObjectToFollow(slot_to_attach_to.gameObject);
-        //item_to_pickup.isHeld = true;
+        item_to_pickup.SetUseGravity(false);
+        item_to_pickup.SetColliderEnabled(false);
+
     }
 
     void DropItem()
     {
         if(twoHandedSlot.GetSlotIsOccupied())
         {
-            twoHandedSlot.RemoveItemFromSlot();
+            twoHandedSlot.DropItemFromSlot();
             foreach(InventorySlot i in inventorySlotList)
             {
                 if(GetWhichHand(i) == e_Hands.RightHand)
@@ -127,29 +130,28 @@ public class InventoryComponent : MonoBehaviour
                 }
             }
         }
-        else if(CheckIfHandsEmpty())
-        {
-            SwitchHands();
-        }
         else
         {
+            //Drops from the left hand if it has an item, but if the active hand is the only one that has one it drops one from there
             if (!dropSlot.isOccupied)
             {
-                activeSlot.RemoveItemFromSlot();
+                activeSlot.DropItemFromSlot();
             }
             else
             {
-                dropSlot.RemoveItemFromSlot();
+                dropSlot.DropItemFromSlot();
             }
 
         }
         
     }
+    //This ensures that the right hand is always the active slot
     private void ChangeActiveSlotIndex()
     {
         activeSlotIndex = 1 - activeSlotIndex;
         activeSlot = inventorySlotList[activeSlotIndex];
     }
+    //Returns true if the hands are empty, this does not check for the two handed slot
     private bool CheckIfHandsEmpty()
     {
         foreach (InventorySlot i in inventorySlotList)
@@ -161,7 +163,7 @@ public class InventoryComponent : MonoBehaviour
         }
         return true;
     }
-    
+    //Determines if the given slot is the left or right hand
     private e_Hands GetWhichHand(InventorySlot slot_to_check)
     {
         if(slot_to_check.transform.localPosition == rightSlotPosition)
@@ -183,8 +185,6 @@ public class InventoryComponent : MonoBehaviour
     {
         return twoHandedSlot;
     }
-    public e_ItemTypes GetItemTypeInSlot(InventorySlot this_slot)
-    {
-        return this_slot.GetHeldItem().itemData.thisItemType;
-    }
+    
+
 }

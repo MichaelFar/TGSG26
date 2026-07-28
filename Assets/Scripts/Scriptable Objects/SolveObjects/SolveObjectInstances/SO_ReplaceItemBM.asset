@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a680bb9a066e114a88b983e12219aaf, type: 3}
+  m_Name: SO_ReplaceItemBM
+  m_EditorClassIdentifier: Assembly-CSharp::SolveObjectReplaceObjectInHand
+  requiredData: {fileID: 11400000, guid: 67ce22d790e5b0a4f9fa4a53b04ae175, type: 2}
+  triggerOnce: 0
+  ev_OnSolve:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerOncePerDay: 1
+  hasBeenTriggered: 0
+  requirementsMetToSolve: 0
+  itemToReplace: {fileID: 4364898736719544289, guid: 3cc344b9058d53c48831907525d68250, type: 3}
+  timeDelayBeforeFollow: 2
