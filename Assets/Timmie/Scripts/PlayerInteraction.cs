@@ -21,9 +21,9 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         Vector3 ray_origin = playerCam.ViewportToWorldPoint(new Vector3(.5f, .5f, 0f));
+        RaycastHit[] hits = Physics.RaycastAll(ray_origin, playerCam.transform.forward, interactionRange);
         if (Keyboard.current.fKey.wasPressedThisFrame && !PauseMenu.Instance.GetGamePaused())
         {
-            RaycastHit[] hits = Physics.RaycastAll(ray_origin, playerCam.transform.forward, interactionRange);
 
             Debug.DrawRay(ray_origin, playerCam.transform.forward * 10, Color.red, 2, false);
             foreach (RaycastHit hit in hits)
@@ -32,11 +32,11 @@ public class PlayerInteraction : MonoBehaviour
                 //checks if interacted item is not null
                 if (gameObject)
                 {
-                    if(interactable != null)
+                    if (interactable != null)
                     {
-                        if(!interactable.CanInteract())
+                        if (!interactable.CanInteract())
                         {
-                            
+
                             continue;
                         }
                         else
@@ -46,11 +46,22 @@ public class PlayerInteraction : MonoBehaviour
                     }
 
                     interactable?.OnInteract(gameObject);
-                    
+
                 }
             }
 
 
+        }
+        foreach (RaycastHit hit in hits)
+        {
+            DemonFigure demon = hit.collider.GetComponent<DemonFigure>();
+            if (gameObject)
+            {
+                if (demon != null)
+                {
+                    demon.Vanish();
+                }
+            }
         }
     }
 }
