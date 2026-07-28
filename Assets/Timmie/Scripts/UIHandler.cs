@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,9 +13,9 @@ Date: 6/25/26
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance { get; private set; }
-    public event Action<bool> OnTaskListToggled, OnPauseMenuToggled;
+    public event Action<bool> OnTaskListToggled, OnPauseMenuToggled, OnSettingsToggled;
     private BaseUI currentOpenUI;
-
+    private Stack<BaseUI> UIStack = new Stack<BaseUI>();
     public PauseMenu PauseMenuFunctionObject;
     [SerializeField] private NoteUI noteUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -71,16 +73,33 @@ public class UIHandler : MonoBehaviour
 
     }
 
+    //Puts the most recently opened UI to the top of the stack and displays it
     public void ShowUI(BaseUI uiPanel)
     {
-        if (currentOpenUI != null)
+        if (currentOpenUI != null && UIStack.Count > 0)
         {
-            currentOpenUI.Hide();
+            UIStack.Peek().Hide();
         }
         currentOpenUI = uiPanel;
         uiPanel.Show();
+        UIStack.Push(uiPanel);
     }
 
+    //Goes back one menu in the stack if there had been a menu opened within a menu
+    public void GoBack()
+    {
+        if (UIStack.Count == 0)
+        {
+            return;
+        }
+        UIStack.Pop().Hide();
+        if (UIStack.Count > 0)
+        {
+            UIStack.Peek().Show();
+        }
+    }
+
+    // Closes all UI elements and resets the stack
     public void CloseUI()
     {
         if (currentOpenUI == null)
@@ -89,6 +108,10 @@ public class UIHandler : MonoBehaviour
         }
         currentOpenUI.Hide();
         currentOpenUI = null;
+        while (UIStack.Count > 0)
+        {
+            UIStack.Pop().Hide();
+        }
         if (PauseMenu.Instance.GetGamePaused())
         {
             PauseMenuFunctionObject.SetGamePaused(false);
