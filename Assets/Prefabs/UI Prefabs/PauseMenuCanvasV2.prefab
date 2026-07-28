@@ -734,7 +734,7 @@ MonoBehaviour:
   cameraSpeed: {fileID: 0}
   sensitivitySlider: {fileID: 7990510020683528245}
   Mixer: {fileID: 24100000, guid: ea5abc912e15024478ca2364366c3e7a, type: 2}
-  AudioSource: {fileID: 0}
+  AudioSource: {fileID: 168599784425550422}
   MixMode: 0
 --- !u!225 &767723178296301150
 CanvasGroup:
