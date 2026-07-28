@@ -4,6 +4,8 @@ public class BillBoardUI : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Camera currentCamera;
+
+    public bool lookAtCamera = false;
     void Start()
     {
         if(currentCamera == null)
@@ -21,6 +23,10 @@ public class BillBoardUI : MonoBehaviour
     {
 
         transform.forward = currentCamera.transform.forward;
+        if(lookAtCamera)
+        {
+            transform.LookAt(currentCamera.transform);
+        }
         //transform.rotation = Quaternion.Euler(currentCamera.transform.rotation.x, transform.rotation.y, 0);
         //transform.rotation = Quaternion.Euler(playerTransform.rotation.x, playerTransform.rotation.y, playerTransform.rotation.z);
     }
