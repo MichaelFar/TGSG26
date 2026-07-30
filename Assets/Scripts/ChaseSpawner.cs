@@ -37,9 +37,9 @@ public class ChaseSpawner : MonoBehaviour
     public enum e_TriggerReset
     {
         [InspectorName("Trigger Every Day")]
-        EveryDay,
+        EveryDay = -2,
         [InspectorName("Trigger At Night")]
-        EveryNight,
+        EveryNight = -1,
         [InspectorName("Trigger On Day 1")]
         Day1 = 0,
         [InspectorName("Trigger On Day 2")]
@@ -53,6 +53,7 @@ public class ChaseSpawner : MonoBehaviour
         
     }
     [Header("What days can this be triggered?")]
+    [SerializeField]
     public e_TriggerReset[] triggerTimeList;
 
     [Header("How many times can this trigger? Resets on the specified days. Make -1 for indefinite")]
@@ -165,6 +166,7 @@ public class ChaseSpawner : MonoBehaviour
                 TimeManager.Instance.ConnectToDayEvent((int)i, ResetNumTriggers);
 
                 day_index_array[index] = (int)i;
+                print("Adding day index " + day_index_array[index] + " to day index array");
                 index += 1;
                 if((int)i == 0)
                 {
@@ -179,6 +181,7 @@ public class ChaseSpawner : MonoBehaviour
         {
             if(!day_index_array.Contains(i) && i != 0)
             {
+                print("Setting day index " + i + " to setting trigger to false");
                 TimeManager.Instance.ConnectToDayEvent(i, SetCanTriggerToFalse);
             }
         }
