@@ -176,14 +176,19 @@ public class ChaseSpawner : MonoBehaviour
 
         }
 
-        int[] day_index_list = HelperFunctions.InitializeArray<int>(TimeManager.Instance.GetMaxDays());
+        int[] day_index_list = Enumerable.Range(0, TimeManager.Instance.GetMaxDays()).ToArray();
         foreach(int i in day_index_list)
         {
-            if(!day_index_array.Contains(i) && i != 0)
+            if (!day_index_array.Contains(i) && i != 0)
             {
                 print("Setting day index " + i + " to setting trigger to false");
                 TimeManager.Instance.ConnectToDayEvent(i, SetCanTriggerToFalse);
             }
+            else
+            {
+                print("day index array contains " + i);
+            }
+
         }
 
     }
@@ -232,10 +237,12 @@ public class ChaseSpawner : MonoBehaviour
 
     private void SetCanTriggerToTrue()
     {
+        print("Setting can chase trigger to true");
         canTrigger = true;
     }
     private void SetCanTriggerToFalse()
     {
+        print("Setting can chase trigger to false");
         canTrigger = false;
     }
 

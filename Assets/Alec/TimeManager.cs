@@ -294,9 +294,9 @@ public class TimeManager : MonoBehaviour
         {
             ev_dayFiveEvent.Invoke();
         }
-        if(value <= dayEventArray.Length - 1)
+        if(value <= dayEventArray.Length)
         {
-            dayEventArray[value].Invoke();
+            dayEventArray[value - 1].Invoke();
         }
         else
         {

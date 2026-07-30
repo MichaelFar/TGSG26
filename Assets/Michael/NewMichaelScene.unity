@@ -7304,7 +7304,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 374214687812205580, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: minutesThreshold
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1953523910971389349, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7538,7 +7538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: triggerTimeList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[0]'
@@ -7546,7 +7546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[1]'
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[2]'
