@@ -7302,6 +7302,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1953523910971389349, guid: 8b8541faff560d74fac9990974347f26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -46.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953523910971389349, guid: 8b8541faff560d74fac9990974347f26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -50.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2548939767681665376, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7324,7 +7332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8332700037312241758, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -181.553
+      value: -195.83
       objectReference: {fileID: 0}
     - target: {fileID: 8332700037312241758, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7516,45 +7524,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7445490733558446991, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 7445490733558446991, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7445490733558446991, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535705504987343500, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535705504987343500, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 7535705504987343500, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -11.63
-      objectReference: {fileID: 0}
     - target: {fileID: 8175015479643444023, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: m_Name
       value: ChaseSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: endingVolume
+      propertyPath: timesCanTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: endingTrigger
+      propertyPath: triggerTimeList.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
-      propertyPath: startingTrigger
+      propertyPath: 'triggerTimeList.Array.data[0]'
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
+      propertyPath: 'triggerTimeList.Array.data[1]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
+      propertyPath: 'triggerTimeList.Array.data[2]'
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

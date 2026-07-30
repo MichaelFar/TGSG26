@@ -1,5 +1,8 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using GlobalDataTypes;
 public class ChaseSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,7 +34,30 @@ public class ChaseSpawner : MonoBehaviour
         TriggerVolumeB
     }
 
-    
+    public enum e_TriggerReset
+    {
+        [InspectorName("Trigger Every Day")]
+        EveryDay,
+        [InspectorName("Trigger At Night")]
+        EveryNight,
+        [InspectorName("Trigger On Day 1")]
+        Day1 = 0,
+        [InspectorName("Trigger On Day 2")]
+        Day2 = 1,
+        [InspectorName("Trigger On Day 3")]
+        Day3 = 2,
+        [InspectorName("Trigger On Day 4")]
+        Day4 = 3,
+        [InspectorName("Trigger On Day 5")]
+        Day5 = 4,
+        
+    }
+    [Header("What days can this be triggered?")]
+    public e_TriggerReset[] triggerTimeList;
+
+    [Header("How many times can this trigger? Resets on the specified days. Make -1 for indefinite")]
+    public int timesCanTrigger = -1;
+
     [Header("Which volume starts the chase?")]
     public e_TriggerVolumes startingVolume;
 
@@ -53,6 +79,9 @@ public class ChaseSpawner : MonoBehaviour
     public UnityEvent ev_ChaseStarted;
 
     public UnityEvent ev_ChaseEnded;
+
+    private bool canTrigger = false;
+    private int numTimesTriggered = 0;
     void Start()
     {
         if(!spawnPoint)
@@ -113,6 +142,47 @@ public class ChaseSpawner : MonoBehaviour
             ending_volume.ev_Viewed.AddListener(DespawnChaser);
         }
 
+        e_TriggerReset[] no_duplicate_triggers = triggerTimeList.Distinct().ToArray();
+
+        int[] day_index_array = new int[TimeManager.Instance.GetMaxDays()];
+        int index = 0;
+        foreach (e_TriggerReset i in no_duplicate_triggers)
+        {
+            if(i == e_TriggerReset.EveryDay)
+            {
+                TimeManager.Instance.ev_dayHasChanged.AddListener(SetCanTriggerToTrue);
+                TimeManager.Instance.ev_dayHasChanged.AddListener(ResetNumTriggers);
+                SetCanTriggerToTrue();
+            }
+            else if (i == e_TriggerReset.EveryNight)
+            {
+                TimeManager.Instance.ev_NightTime.AddListener(SetCanTriggerToTrue);
+                TimeManager.Instance.ev_NightTime.AddListener(ResetNumTriggers);
+            }
+            else
+            {
+                TimeManager.Instance.ConnectToDayEvent((int)i, SetCanTriggerToTrue);
+                TimeManager.Instance.ConnectToDayEvent((int)i, ResetNumTriggers);
+
+                day_index_array[index] = (int)i;
+                index += 1;
+                if((int)i == 0)
+                {
+                    SetCanTriggerToTrue();
+                }
+            }
+
+        }
+
+        int[] day_index_list = HelperFunctions.InitializeArray<int>(TimeManager.Instance.GetMaxDays());
+        foreach(int i in day_index_list)
+        {
+            if(!day_index_array.Contains(i) && i != 0)
+            {
+                TimeManager.Instance.ConnectToDayEvent(i, SetCanTriggerToFalse);
+            }
+        }
+
     }
 
     
@@ -132,13 +202,18 @@ public class ChaseSpawner : MonoBehaviour
 
     public void SpawnChaser()
     {
-        if (!chaserInstance)
+        if (!chaserInstance && numTimesTriggered < timesCanTrigger || !chaserInstance && timesCanTrigger < 0)
         {
-            ev_ChaseStarted.Invoke();
-            chaserInstance = Instantiate(chaserPrefab);
+            if(canTrigger)
+            {
+                numTimesTriggered += 1;
+                ev_ChaseStarted.Invoke();
+                chaserInstance = Instantiate(chaserPrefab);
 
-            
-            chaserInstance.transform.position = spawnPoint.transform.position;
+
+                chaserInstance.transform.position = spawnPoint.transform.position;
+            }
+                
                 
         }
     }
@@ -150,5 +225,19 @@ public class ChaseSpawner : MonoBehaviour
             ev_ChaseEnded.Invoke();
             Destroy(chaserInstance);
         }
+    }
+
+    private void SetCanTriggerToTrue()
+    {
+        canTrigger = true;
+    }
+    private void SetCanTriggerToFalse()
+    {
+        canTrigger = false;
+    }
+
+    private void ResetNumTriggers()
+    {
+        numTimesTriggered = 0;
     }
 }

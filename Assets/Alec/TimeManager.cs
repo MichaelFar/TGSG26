@@ -262,17 +262,7 @@ public class TimeManager : MonoBehaviour
     {
         bool isNight = value >= hoursThreshold * .75; //|| value < 2;
 
-        if (isNight == true && !hasInvokedNight)
-        {
-            nightText.text = "Night";
-            ev_NightTime.Invoke();
-            hasInvokedNight = true;
-        }
-        else
-        {
-            hasInvokedNight = false;
-            nightText.text = "Day";
-        }
+        
 
 
     }
