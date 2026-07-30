@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7977874188586117135
+--- !u!1 &1472805730890090562
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 378475211727568688}
-  - component: {fileID: 8177680392329118797}
-  - component: {fileID: 6259126711954317569}
-  - component: {fileID: 1765383731190468168}
-  - component: {fileID: 1609026007667560489}
-  - component: {fileID: 1123756316990814176}
+  - component: {fileID: 7502672728355234007}
+  - component: {fileID: 3226604546176743498}
+  - component: {fileID: 2259080804685759828}
+  - component: {fileID: 822538647330527920}
+  - component: {fileID: 2627606127388056221}
   m_Layer: 0
-  m_Name: ChaseAI
+  m_Name: TriggerVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &378475211727568688
+--- !u!4 &7502672728355234007
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977874188586117135}
+  m_GameObject: {fileID: 1472805730890090562}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -250.66635, y: 102.41, z: -194.73296}
-  m_LocalScale: {x: 1, y: 4.805864, z: 1}
+  m_LocalPosition: {x: 2.81, y: 0, z: 0}
+  m_LocalScale: {x: 4.0318, y: 4.0318, z: 4.0318}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8177680392329118797
+--- !u!33 &3226604546176743498
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977874188586117135}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6259126711954317569
+  m_GameObject: {fileID: 1472805730890090562}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2259080804685759828
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977874188586117135}
+  m_GameObject: {fileID: 1472805730890090562}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -69,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: c0175a7c31b244148afa146c40af4a5b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,13 +92,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1765383731190468168
-BoxCollider:
+--- !u!135 &822538647330527920
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977874188586117135}
+  m_GameObject: {fileID: 1472805730890090562}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -108,43 +107,30 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &1609026007667560489
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977874188586117135}
-  m_Enabled: 1
-  m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1123756316990814176
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2627606127388056221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7977874188586117135}
+  m_GameObject: {fileID: 1472805730890090562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06ec120eedf37e478a446b2504581db, type: 3}
+  m_Script: {fileID: 11500000, guid: e1147c5d1de2919418be181f5f830214, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChaseAI
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerVolume
+  ev_EnteredVolume:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_ExitedVolume:
+    m_PersistentCalls:
+      m_Calls: []
+  ev_Viewed:
+    m_PersistentCalls:
+      m_Calls: []
