@@ -18,8 +18,9 @@ public class PlayerGlobal : MonoBehaviour
             _instance = this;
         }
         playerRootObject = gameObject;
+        
 
     }
-
+    [HideInInspector]
     public GameObject playerRootObject;
 }
