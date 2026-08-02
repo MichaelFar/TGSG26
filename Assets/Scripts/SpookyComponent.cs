@@ -4,17 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Jonathan Aguilar | 7/31/26 |
-/// ScaredSense — attach this directly to the Player GameObject.
-/// It scans for nearby WanderAI objects and logs + activates vignette when the player
-/// enters any of their wander radius.
-///
-/// SETUP:
-///  1. Attach this script to your Player GameObject.
-///  2. Add Image to UI Canvas
-///  3. Set image source to vignette sprite or not, the script should be able to handle its transparency
-///  4. Grab and drop that image from the UI Canvas to the slot avaible in the inspector when you attach this script
-///  5. Set the Image's RectTransform to stretch across the fullscreen( anchor to all corners )
+/// Jonathan Aguilar, Michael Farrar | 7/31/26 |
+/// Description modified by Michael: Add this to any object that should produce the musical sting and the vignette
+/// Uses IViewable to accomplish the trigger and detection, hook events into the SetCanTrigger functions to control retriggering
+/// Otherwise, use the public bool triggerOnce in the inspector to control how often this event can trigger
+/// 
 /// 
 /// </summary>
 
