@@ -7538,7 +7538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: triggerTimeList.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[0]'
