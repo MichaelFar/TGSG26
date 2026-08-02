@@ -1108,6 +1108,7 @@ MonoBehaviour:
   vignetteImage: {fileID: 1634212509}
   maxVignetteAlpha: 0.95
   fadeDuration: 1
+  suspenseClip: {fileID: 8300000, guid: 5faa7b4cf0e1a8c42bb37affe5b06e94, type: 3}
 --- !u!1001 &1686896436
 PrefabInstance:
   m_ObjectHideFlags: 0

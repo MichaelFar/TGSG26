@@ -33,6 +33,10 @@ public class ScaredSense : MonoBehaviour
     [Tooltip("How many seconds it takes to fade the vignette in or out.")]
     public float fadeDuration = 1f;
 
+    [Header("Audio")]
+    [Tooltip("The suspense sound that plays when the player enters a wanderer's radius.")]
+    public AudioClip suspenseClip;
+
 
         // Tracks which WanderAI objects the player is already inside of
         // so we only log on enter/exit rather than every frame
@@ -42,6 +46,7 @@ public class ScaredSense : MonoBehaviour
         // to work with this then we can make some tweaks
 
         private Coroutine fadeCoroutine;
+         private AudioSource audioSource;
 
 
         private void Start()
@@ -49,6 +54,12 @@ public class ScaredSense : MonoBehaviour
             // Make sure vignette starts invisible
             if (vignetteImage != null)
             SetVignetteAlpha(0f);
+
+                // Add an AudioSource to the player automatically so we don't need one manually
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
+            audioSource.clip = suspenseClip;
         }
 
     private void Update()
@@ -68,6 +79,7 @@ public class ScaredSense : MonoBehaviour
                 currentlyInRange.Add(wanderer);
                 Debug.Log($"[ScaredSense] The player feels something is off near | in range {wanderer.gameObject.name}...");
                 FadeVignette(maxVignetteAlpha);
+                PlaySuspenseAudio();
             }
             else if (!isInRange && currentlyInRange.Contains(wanderer))
             {
@@ -75,12 +87,16 @@ public class ScaredSense : MonoBehaviour
                 currentlyInRange.Remove(wanderer);
                 Debug.Log($"[ScaredSense] The feeling fades near | leaving range {wanderer.gameObject.name}.");
                 if (currentlyInRange.Count == 0)
+                {
                     FadeVignette(0f);
+                    StopSuspenseAudio();
+                }
             }
         }
     }
 
     // ---------------------------------------------------------------
+    // you can ignore
     // vignette function stuff below
  
     private void FadeVignette(float targetAlpha)
@@ -115,5 +131,23 @@ public class ScaredSense : MonoBehaviour
         Color c = vignetteImage.color;
         c.a = alpha;
         vignetteImage.color = c;
+    }
+
+    // ---------------------------------------------------------------
+    // audio stuff
+ 
+    private void PlaySuspenseAudio()
+    {
+        if (audioSource == null || suspenseClip == null) return;
+ 
+        // Only play if not already playing so entering two radii at once doesn't restart it
+        if (!audioSource.isPlaying)
+            audioSource.Play();
+    }
+ 
+    private void StopSuspenseAudio()
+    {
+        if (audioSource == null) return;
+        audioSource.Stop();
     }
 }
