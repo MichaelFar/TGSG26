@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80623abed712b754c8270f6dc1e0b2ef, type: 3}
+  m_Name: SO_FeedDispenser
+  m_EditorClassIdentifier: Assembly-CSharp::SolveObject
+  requiredData: {fileID: 0}
+  triggerOnce: 0
+  ev_OnSolve:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerOncePerDay: 0
+  requirementsMetToSolve: 0
+  activateOnEmptyHand: 1

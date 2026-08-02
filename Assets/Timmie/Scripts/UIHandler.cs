@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +13,11 @@ Date: 6/25/26
 public class UIHandler : MonoBehaviour
 {
     public static UIHandler Instance { get; private set; }
-    public event Action<bool> OnTaskListToggled, OnPauseMenuToggled;
+    public event Action<bool> OnTaskListToggled, OnPauseMenuToggled, OnSettingsToggled;
     private BaseUI currentOpenUI;
-
-    public bool canPause = true;
-
+    private Stack<BaseUI> UIStack = new Stack<BaseUI>();
     public PauseMenu PauseMenuFunctionObject;
+    [SerializeField] private NoteUI noteUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
@@ -32,52 +33,73 @@ public class UIHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canPause)
+        if (PauseScreen.GameIsPaused && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            
+            //true = resume game
+            OnPauseMenuToggled?.Invoke(true);
 
-            if (PauseScreen.GameIsPaused && Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-                //true = resume game
-                OnPauseMenuToggled?.Invoke(true);
-            }
-            else if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-                //false = pause game
-
-                OnPauseMenuToggled?.Invoke(false);
-
-            }
-            else if (PauseScreen.GameIsPaused)
-            {
-                return;
-            }
-            if (Keyboard.current.eKey.wasPressedThisFrame && currentOpenUI != null)
-            {
-                CloseUI();
-            }
-            //If tab is held evoke all functions associated with OnTaskListToggled (look at TaskListUI.cs) 
-            if (Keyboard.current.tabKey.IsPressed())
-            {
-                OnTaskListToggled?.Invoke(true);
-            }
-            if (Keyboard.current.tabKey.wasReleasedThisFrame)
-            {
-                OnTaskListToggled?.Invoke(false);
-            }
         }
+        else if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            //false = pause game
+            OnPauseMenuToggled?.Invoke(false);
+            return;
+        }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame && currentOpenUI != null)
+        {
+            CloseUI();
+        }
+        if (PauseScreen.GameIsPaused)
+        {
+            return;
+        }
+        if (currentOpenUI != null && Keyboard.current.tabKey.wasPressedThisFrame)
+        {
+            CloseUI();
+        }
+
+        if (Keyboard.current.tabKey.wasReleasedThisFrame)
+        {
+            OnTaskListToggled?.Invoke(false);
+        }
+        if (currentOpenUI != null) return;
+
+        //If tab is held evoke all functions associated with OnTaskListToggled (look at TaskListUI.cs) 
+        if (Keyboard.current.tabKey.IsPressed())
+        {
+            OnTaskListToggled?.Invoke(true);
+        }
+
     }
 
+    //Puts the most recently opened UI to the top of the stack and displays it
     public void ShowUI(BaseUI uiPanel)
     {
-        if (currentOpenUI != null)
+        if (currentOpenUI != null && UIStack.Count > 0)
         {
-            currentOpenUI.Hide();
+            UIStack.Peek().Hide();
         }
         currentOpenUI = uiPanel;
         uiPanel.Show();
+        UIStack.Push(uiPanel);
     }
 
+    //Goes back one menu in the stack if there had been a menu opened within a menu
+    public void GoBack()
+    {
+        if (UIStack.Count == 0)
+        {
+            return;
+        }
+        UIStack.Pop().Hide();
+        if (UIStack.Count > 0)
+        {
+            UIStack.Peek().Show();
+        }
+    }
+
+    // Closes all UI elements and resets the stack
     public void CloseUI()
     {
         if (currentOpenUI == null)
@@ -86,6 +108,20 @@ public class UIHandler : MonoBehaviour
         }
         currentOpenUI.Hide();
         currentOpenUI = null;
-        PauseMenuFunctionObject.SetGamePaused(false);
+        while (UIStack.Count > 0)
+        {
+            UIStack.Pop().Hide();
+        }
+        if (PauseMenu.Instance.GetGamePaused())
+        {
+            PauseMenuFunctionObject.SetGamePaused(false);
+            PauseScreen.GameIsPaused = false;
+        }
+    }
+
+    public void ShowNoteUI(NoteData note)
+    {
+        noteUI.LoadContent(note);
+        ShowUI(noteUI);
     }
 }

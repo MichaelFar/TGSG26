@@ -50,4 +50,8 @@ public class PauseMenu : MonoBehaviour
 
         Cursor.visible = enabled;
     }
+    public bool GetGamePaused()
+    {
+        return gamePaused;
+    }
 }

@@ -8,10 +8,14 @@ public class PauseScreen : BaseUI
     public CanvasGroup PauseMenuUi;
 
     public PauseMenu PauseMenuFunctionObject;
+    private BaseUI SettingsMenu, NoteInventoryMenu;
 
     void Start()
     {
         UIHandler.Instance.OnPauseMenuToggled += SetVisible;
+        SettingsMenu = transform.parent.Find("OptionsMenu").GetComponent<BaseUI>();
+        NoteInventoryMenu = transform.parent.Find("NotesInventory").GetComponent<BaseUI>();
+        print("Found NoteInventoryMenu BaseUI: " + NoteInventoryMenu);
     }
 
     void OnDestroy()
@@ -23,18 +27,20 @@ public class PauseScreen : BaseUI
     }
     private void SetVisible(bool isVisible)
     {
-        PauseMenuUi.alpha = isVisible ? 1 : 0;
+
         if (isVisible)
         {
             Resume();
+            UIHandler.Instance.CloseUI();
         }
         else
         {
+            UIHandler.Instance.ShowUI(this);
             Pause();
         }
     }
 
-    private void Resume()
+    public void Resume()
     {
 
         PauseMenuFunctionObject.SetGamePaused(false);
@@ -74,9 +80,13 @@ public class PauseScreen : BaseUI
         SceneManager.LoadScene(0);
     }
 
+    public void ViewNotes()
+    {
+        UIHandler.Instance.ShowUI(NoteInventoryMenu);
+    }
     public void LoadOptions()
     {
-        Debug.Log("Loading Options...");
+        UIHandler.Instance.ShowUI(SettingsMenu);
     }
 
     public void QuitGame()

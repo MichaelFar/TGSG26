@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
-
+/*
 [CustomPropertyDrawer(typeof(SerializableGuid))]
 public class SerializableGuidDrawer : PropertyDrawer {
     static readonly string[] GuidParts = { "Part1", "Part2", "Part3", "Part4" };
@@ -88,3 +88,4 @@ public class SerializableGuidDrawer : PropertyDrawer {
             .ToString();
     }
 }
+*/

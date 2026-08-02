@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43ef1777bd061e4b8d5b9823bb962ab, type: 3}
+  m_Name: TimmieTestChoreDay
+  m_EditorClassIdentifier: Assembly-CSharp::ChoreDay
+  choreList:
+  - {fileID: 11400000, guid: d76a288ac9e5a714da6e27409d916666, type: 2}
+  - {fileID: 11400000, guid: 4156c8c303a645f4cbf8b410de8be11e, type: 2}

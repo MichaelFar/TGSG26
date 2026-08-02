@@ -4,4 +4,5 @@ using UnityEngine;
 public class NoteData : ScriptableObject
 {
     [TextArea] public string body;
+    public Sprite noteSprite;
 }

@@ -3,12 +3,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using BayatGames.SaveGameFree;
-using UnityEditor.Overlays;
+//using UnityEditor.Overlays;
 using GlobalDataTypes;
 using System.Persistence;
 using UnityEngine.SceneManagement;
 public class SaveDataManager : MonoBehaviour
 {
+    /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] public GameData gameData;
     FileDataService dataService;
@@ -72,7 +73,7 @@ public class SaveDataManager : MonoBehaviour
         {
             SaveAllSaveObjects();
         }
-        */
+        
     }
     public void NewGame()
     {
@@ -119,7 +120,7 @@ public class SaveDataManager : MonoBehaviour
 
         }
     }
-    */
+    
     public void SaveAllSaveObjects()
     {
         foreach(ObjectDataSaver i in saveDataObjectList)
@@ -163,5 +164,5 @@ public class SaveDataManager : MonoBehaviour
     {
         dataService.DeleteSave(game_name);
     }
-
+*/
 }
