@@ -5,6 +5,8 @@ public class PlayerGlobal : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private static PlayerGlobal _instance;
+
+    
     public static PlayerGlobal Instance { get { return _instance; } }
     private void Awake()
     {
@@ -24,5 +26,5 @@ public class PlayerGlobal : MonoBehaviour
     [HideInInspector]
     public GameObject playerRootObject;
 
-    public Image vignetteImage;
+    public ScaredSense scareStingController;
 }

@@ -244,7 +244,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 4881244780428617048}
   triggerVolumeA: {fileID: 3114884136074183109}
   triggerVolumeB: {fileID: 2665511930797281478}
-  triggerTimeList: feffffff
+  triggerTimeList: 040000000000000002000000
   timesCanTrigger: -1
   startingVolume: 0
   startingTrigger: 1
