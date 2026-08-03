@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Stalker : MonoBehaviour, IViewable
 {
@@ -9,6 +10,9 @@ public class Stalker : MonoBehaviour, IViewable
 
     public Collider triggerVolume;
     public bool isActive = false;
+
+    public UnityEvent ev_appeared;
+    public UnityEvent ev_disappeared;
     void Start()
     {
         SetIsActive(isActive);
@@ -33,6 +37,7 @@ public class Stalker : MonoBehaviour, IViewable
     public void OnView()
     {
         SetIsActive(false);
+        ev_disappeared.Invoke();
     }
 
     public void RandomlyAppear()
@@ -42,6 +47,7 @@ public class Stalker : MonoBehaviour, IViewable
         if (roll <= 5.0f)
         {
             SetIsActive(true);
+            ev_appeared.Invoke();
         }
     }
 }

@@ -78,14 +78,15 @@ public class PlayerInteraction : MonoBehaviour
             Debug.DrawRay(ray_origin, playerCam.transform.forward * passiveInteractionRange, Color.red, 2, false);
             foreach (RaycastHit hit in hits)
             {
-                IViewable viewable = hit.collider.GetComponent<IViewable>();
+                IViewable[] viewables = hit.collider.GetComponents<IViewable>();
                 //checks if interacted item is not null
-                if (gameObject)
-                {
+                foreach(IViewable viewable in viewables)
+                    if (gameObject)
+                    {
 
-                    viewable?.OnView();
+                        viewable?.OnView();
 
-                }
+                    }
             }
         }
 

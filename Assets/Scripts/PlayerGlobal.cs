@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.UI;
 public class PlayerGlobal : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,4 +23,6 @@ public class PlayerGlobal : MonoBehaviour
     }
     [HideInInspector]
     public GameObject playerRootObject;
+
+    public Image vignetteImage;
 }
