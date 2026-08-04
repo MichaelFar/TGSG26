@@ -21,7 +21,7 @@ public class Stalker : MonoBehaviour, IViewable
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetIsActive(bool new_value)
@@ -44,7 +44,7 @@ public class Stalker : MonoBehaviour, IViewable
     {
         float roll = Random.Range(0.0f, 10.0f);
         print("Rolling to reappear");
-        if(roll <= 5.0f)
+        if (roll <= 5.0f)
         {
             SetIsActive(true);
             ev_appeared.Invoke();
