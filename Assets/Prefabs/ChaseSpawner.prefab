@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5741367769263162521}
   - component: {fileID: 3856244994706402736}
   - component: {fileID: 1202282212118542797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 7772256447555411730}
   - component: {fileID: 2236484133985950576}
   - component: {fileID: 9188605056412570736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ChaseSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,6 +269,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TriggerVolumeB
       objectReference: {fileID: 0}
+    - target: {fileID: 1472805730890090562, guid: 381ff9d9f554b074d8fe19daa06b2fae, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2259080804685759828, guid: 381ff9d9f554b074d8fe19daa06b2fae, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -345,6 +349,10 @@ PrefabInstance:
     - target: {fileID: 1472805730890090562, guid: 381ff9d9f554b074d8fe19daa06b2fae, type: 3}
       propertyPath: m_Name
       value: TriggerVolumeA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472805730890090562, guid: 381ff9d9f554b074d8fe19daa06b2fae, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7502672728355234007, guid: 381ff9d9f554b074d8fe19daa06b2fae, type: 3}
       propertyPath: m_LocalPosition.x

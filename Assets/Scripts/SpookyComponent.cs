@@ -83,12 +83,6 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
         }
     }
 
-
-   
-    
-
-    
-
     public void OnView()
     {
         if(canTrigger)
