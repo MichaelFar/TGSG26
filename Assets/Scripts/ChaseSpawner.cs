@@ -52,6 +52,13 @@ public class ChaseSpawner : MonoBehaviour
         Day5 = 4,
         
     }
+
+    public enum e_CatchConsequence
+    {
+        [InspectorName("Spawn Player At The Respawn Point")]
+        RespawnPlayerAtSpawnPoint
+    }
+
     [Header("What days can this be triggered?")]
     [SerializeField]
     public e_TriggerReset[] triggerTimeList;

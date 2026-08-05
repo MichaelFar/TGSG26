@@ -262,9 +262,6 @@ public class TimeManager : MonoBehaviour
     {
         bool isNight = value >= hoursThreshold * .75; //|| value < 2;
 
-        
-
-
     }
 
     private void OnDayChange(int value)
