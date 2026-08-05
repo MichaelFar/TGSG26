@@ -19,9 +19,9 @@ public class Interaction: MonoBehaviour
     [SerializeField]
     private LayerMask interactionLayer;
 
-    
+
     //Jonah added
-    public Text interactionText;
+    /*public Text interactionText;
 
     public GameObject interactionUI;
 
@@ -29,9 +29,12 @@ public class Interaction: MonoBehaviour
     {
         return interactionText.text;
     }
-    
+    */
 
-
+    private void Start()
+    {
+        playerCam = GetComponentInChildren<Camera>();
+    }
     private void Update()
     {
         Vector3 ray_origin = playerCam.ViewportToWorldPoint(new Vector3(.5f, .5f, 0f));
@@ -40,7 +43,7 @@ public class Interaction: MonoBehaviour
         
         
         //Jonah added
-        bool hitSomething = false;
+        //bool hitSomething = false;
 
         Debug.DrawRay(ray_origin, playerCam.transform.forward * interactionRange, Color.red, 2, false);
         foreach (RaycastHit hit in hits)
@@ -70,15 +73,15 @@ public class Interaction: MonoBehaviour
             }
 
             //Jonah Added
-            if (interactables != null)
+            /*if (interactables != null)
             {
                 hitSomething = true;
                 interactionText.text = GetDescription();
             }
-            
+            */
         }
         
-        interactionUI.SetActive(hitSomething);
+        //interactionUI.SetActive(hitSomething);
     }
    
 }

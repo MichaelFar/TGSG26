@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 //Info
 /*Jonathan Aguilar | 6/1/26 | 
 component version of my GameManager pause script, this is component now and GameManager is singleton version of this
@@ -11,7 +11,8 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu Instance { get; private set; }
     private GameInput input;
     private bool gamePaused;
-
+    public UnityEvent ev_GamePaused;
+    public UnityEvent ev_GameUnPaused;
     private void Awake()
     {
         Instance = this;
@@ -37,7 +38,14 @@ public class PauseMenu : MonoBehaviour
     {
         gamePaused = paused;
         Debug.Log("Pause");
-
+        if (paused)
+        {
+            ev_GamePaused.Invoke();
+        }
+        else
+        {
+            ev_GameUnPaused.Invoke();
+        }
         SetCursorState(gamePaused);
         Time.timeScale = gamePaused ? 0 : 1;
     }

@@ -27,4 +27,6 @@ public class PlayerGlobal : MonoBehaviour
     public GameObject playerRootObject;
 
     public ScaredSense scareStingController;
+
+    public PromptController promptController; 
 }
