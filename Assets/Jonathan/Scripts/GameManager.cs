@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{// This is essenatially Input.GetKeyDown(KeyCode.Escape)) but using the new input system
-		if (Input.Menus.PauseGame.triggered)
-		SetGamePaused(!GamePaused);
+		//if (Input.Menus.PauseGame.triggered)
+		//SetGamePaused(!GamePaused);
 		
 	}
 
