@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +10,7 @@ public class ChaseAI : MonoBehaviour
 
     private GameObject playerGameObject;
 
-    [HideInInspector]
+    [SerializeField]
     private float stopDistance = 4.0f;
     private void Awake()
     {

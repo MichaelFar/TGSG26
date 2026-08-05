@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4626775809668791135}
   - component: {fileID: 8181757162684152901}
   - component: {fileID: 3186548518029860652}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PositionRotationParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 100, y: 15.22, z: 100}
+  m_Size: {x: 10, y: 15.22, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3186548518029860652
 MonoBehaviour:
@@ -85,6 +85,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ev_Viewed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3336363805408231705
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +100,7 @@ GameObject:
   - component: {fileID: 8850763055813767313}
   - component: {fileID: 5169733918519916180}
   - component: {fileID: 2302756649790785839}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735952640088923880}
   - component: {fileID: 7494222115067872068}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EyeRotationParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,9 +257,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112347365163446885}
+  - component: {fileID: 3485455918209109060}
   - component: {fileID: 8125700728509260490}
   - component: {fileID: 6555492107113446824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StalkingObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,6 +283,23 @@ Transform:
   - {fileID: 4626775809668791135}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3485455918209109060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7163362509216400701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7ce292a56e62c44b41c6d900bed0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  maxVignetteAlpha: 0.6
+  fadeDuration: 1
+  suspenseClip: {fileID: 8300000, guid: 5faa7b4cf0e1a8c42bb37affe5b06e94, type: 3}
+  effectLength: 5
+  triggerOnce: 1
 --- !u!114 &8125700728509260490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +315,37 @@ MonoBehaviour:
   transformToCastFrom: {fileID: 0}
   visualParent: {fileID: 3336363805408231705}
   triggerVolume: {fileID: 8181757162684152901}
-  isActive: 0
+  isActive: 1
+  ev_appeared:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3485455918209109060}
+        m_TargetAssemblyTypeName: SpookyOnViewComponent, Assembly-CSharp
+        m_MethodName: SetCanTriggerToTrue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ev_disappeared:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3485455918209109060}
+        m_TargetAssemblyTypeName: SpookyOnViewComponent, Assembly-CSharp
+        m_MethodName: SetCanTriggerToFalse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &6555492107113446824
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -305,7 +356,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -314,7 +365,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.94766235
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8964117272773481704
 GameObject:
@@ -328,7 +379,7 @@ GameObject:
   - component: {fileID: 7717299534339473046}
   - component: {fileID: 1329811525204798059}
   - component: {fileID: 8893961860440391941}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pupil
   m_TagString: Untagged
   m_Icon: {fileID: 0}

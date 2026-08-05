@@ -51,9 +51,10 @@ public class ScaredSense : MonoBehaviour
 
         private void Start()
         {
+            PlayerGlobal.Instance.scareStingController = this;
             // Make sure vignette starts invisible
             if (vignetteImage != null)
-            SetVignetteAlpha(0f);
+                SetVignetteAlpha(0f);
 
                 // Add an AudioSource to the player automatically so we don't need one manually
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -65,6 +66,7 @@ public class ScaredSense : MonoBehaviour
     private void Update()
     {   // an array or basically list of wander ai objs | allWanderers is just the name I gave it 
         // the FindObjectsByType<WanderAI2> | is only going to grab every wanderAI2 component in the entire scene then puts them all in that list
+        /*
         WanderAI2[] allWanderers = FindObjectsByType<WanderAI2>(FindObjectsSortMode.None);
 
             // the wanderer is just the NPCs that wanderAI2 script attached to it
@@ -93,13 +95,14 @@ public class ScaredSense : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     // ---------------------------------------------------------------
     // you can ignore
     // vignette function stuff below
  
-    private void FadeVignette(float targetAlpha)
+    public void FadeVignette(float targetAlpha)
     {
         if (vignetteImage == null) return;
  
@@ -126,7 +129,7 @@ public class ScaredSense : MonoBehaviour
         SetVignetteAlpha(targetAlpha);
     }
  
-    private void SetVignetteAlpha(float alpha)
+    public void SetVignetteAlpha(float alpha)
     {
         Color c = vignetteImage.color;
         c.a = alpha;
@@ -136,7 +139,7 @@ public class ScaredSense : MonoBehaviour
     // ---------------------------------------------------------------
     // audio stuff
  
-    private void PlaySuspenseAudio()
+    public void PlaySuspenseAudio()
     {
         if (audioSource == null || suspenseClip == null) return;
  
@@ -145,7 +148,7 @@ public class ScaredSense : MonoBehaviour
             audioSource.Play();
     }
  
-    private void StopSuspenseAudio()
+    public void StopSuspenseAudio()
     {
         if (audioSource == null) return;
         audioSource.Stop();

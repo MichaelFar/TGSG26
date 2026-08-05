@@ -17,7 +17,7 @@ using UnityEngine.UI;
 public class SpookyOnViewComponent : MonoBehaviour, IViewable
 {
     
-    private Image vignetteImage;
+    public Image vignetteImage;
 
     [Tooltip("How dark/opaque the vignette gets at full intensity (0 = invisible, 1 = fully black).")]
     [Range(0f, 1f)]
@@ -26,9 +26,7 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
     [Tooltip("How many seconds it takes to fade the vignette in or out.")]
     public float fadeDuration = 1f;
 
-    [Header("Audio")]
-    [Tooltip("The suspense sound that plays when the player enters a wanderer's radius.")]
-    public AudioClip suspenseClip;
+    
 
 
     // Tracks which WanderAI objects the player is already inside of
@@ -52,7 +50,8 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
     private bool canTrigger = true;
     private void Start()
     {
-        vignetteImage = PlayerGlobal.Instance.vignetteImage;
+        
+        /*
         // Make sure vignette starts invisible
         if (vignetteImage != null)
             SetVignetteAlpha(0f);
@@ -62,77 +61,26 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
         audioSource.playOnAwake = false;
         audioSource.loop = false;
         audioSource.clip = suspenseClip;
-        
+        */
+                
     }
 
 
     private void Update()
     {    
-        if(effectActive && canTrigger)
+        if(effectActive)
         {
             effectTimer += Time.deltaTime;
+            print("Vignette effect timer running");
             if(effectTimer >= effectLength)
             {
                 effectTimer = 0.0f;
                 effectActive = false;
                 StopEffect();
-                
+                print("Stopping effect");
                 canTrigger = !triggerOnce;
             }
         }
-    }
-
-
-    private void FadeVignette(float targetAlpha)
-    {
-        if (vignetteImage == null) return;
-
-        // Cancel any fade already in progress before starting a new one
-        if (fadeCoroutine != null)
-            StopCoroutine(fadeCoroutine);
-
-        fadeCoroutine = StartCoroutine(FadeRoutine(targetAlpha));
-    }
-
-    private IEnumerator FadeRoutine(float targetAlpha)
-    {
-        float startAlpha = vignetteImage.color.a;
-        float elapsed = 0f;
-
-        while (elapsed < fadeDuration)
-        {
-            elapsed += Time.deltaTime;
-            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsed / fadeDuration);
-            SetVignetteAlpha(newAlpha);
-            yield return null;
-        }
-
-        SetVignetteAlpha(targetAlpha);
-    }
-
-    private void SetVignetteAlpha(float alpha)
-    {
-        Color c = vignetteImage.color;
-        c.a = alpha;
-        vignetteImage.color = c;
-    }
-
-    // ---------------------------------------------------------------
-    // audio stuff
-
-    private void PlaySuspenseAudio()
-    {
-        if (audioSource == null || suspenseClip == null) return;
-
-        // Only play if not already playing so entering two radii at once doesn't restart it
-        if (!audioSource.isPlaying)
-            audioSource.Play();
-    }
-
-    private void StopSuspenseAudio()
-    {
-        if (audioSource == null) return;
-        audioSource.Stop();
     }
 
     public void OnView()
@@ -140,8 +88,8 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
         if(canTrigger)
         {
             print("Vignette effect started");
-            FadeVignette(maxVignetteAlpha);
-            PlaySuspenseAudio();
+            PlayerGlobal.Instance.scareStingController.FadeVignette(maxVignetteAlpha);
+            PlayerGlobal.Instance.scareStingController.PlaySuspenseAudio();
             effectActive = true;
         }
             
@@ -149,8 +97,8 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
     public void StopEffect()
     {
         print("Ending vignette effect");
-        FadeVignette(0f);
-        StopSuspenseAudio();
+        PlayerGlobal.Instance.scareStingController.FadeVignette(0f);
+        PlayerGlobal.Instance.scareStingController.StopSuspenseAudio();
     }
     public void SetCanTriggerToTrue()
     {
