@@ -682,7 +682,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 925589164571312973, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -200.91296
+      value: -221.11
       objectReference: {fileID: 0}
     - target: {fileID: 925589164571312973, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: m_LocalPosition.y
@@ -690,7 +690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 925589164571312973, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -138.59628
+      value: -152.92
       objectReference: {fileID: 0}
     - target: {fileID: 925589164571312973, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: m_LocalRotation.w
@@ -754,11 +754,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[1]'
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[2]'
-      value: 4
+      value: -6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

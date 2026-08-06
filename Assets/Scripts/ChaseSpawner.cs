@@ -16,7 +16,8 @@ public class ChaseSpawner : MonoBehaviour
 
     public TriggerVolume triggerVolumeA;
     public TriggerVolume triggerVolumeB;
-    
+
+    public GameObject playerRespawnPoint;
 
     public enum e_TriggerTypes
     {
@@ -37,20 +38,30 @@ public class ChaseSpawner : MonoBehaviour
     public enum e_TriggerReset
     {
         [InspectorName("Trigger Every Day")]
-        EveryDay = -2,
+        EveryDay = -10,
         [InspectorName("Trigger At Night")]
         EveryNight = -1,
         [InspectorName("Trigger On Day 1")]
         Day1 = 0,
+        [InspectorName("Trigger On Night 1")]
+        Night1 = -2,
         [InspectorName("Trigger On Day 2")]
         Day2 = 1,
+        [InspectorName("Trigger On Night 2")]
+        Night2 = -3,
         [InspectorName("Trigger On Day 3")]
         Day3 = 2,
+        [InspectorName("Trigger On Night 3")]
+        Night3 = -4,
         [InspectorName("Trigger On Day 4")]
         Day4 = 3,
+        [InspectorName("Trigger On Night 4")]
+        Night4 = -5,
         [InspectorName("Trigger On Day 5")]
         Day5 = 4,
-        
+        [InspectorName("Trigger On Night 5")]
+        Night5 = -6,
+
     }
 
     public enum e_CatchConsequence
@@ -153,19 +164,32 @@ public class ChaseSpawner : MonoBehaviour
         e_TriggerReset[] no_duplicate_triggers = triggerTimeList.Distinct().ToArray();
 
         int[] day_index_array = new int[TimeManager.Instance.GetMaxDays()];
+        int[] night_index_array = new int[TimeManager.Instance.GetMaxDays()];
+        
         int index = 0;
         foreach (e_TriggerReset i in no_duplicate_triggers)
         {
+            print("Trigger found: " + i);
             if(i == e_TriggerReset.EveryDay)
             {
                 TimeManager.Instance.ev_dayHasChanged.AddListener(SetCanTriggerToTrue);
                 TimeManager.Instance.ev_dayHasChanged.AddListener(ResetNumTriggers);
                 SetCanTriggerToTrue();
+                print("Every Day has been selected in list");
             }
             else if (i == e_TriggerReset.EveryNight)
             {
                 TimeManager.Instance.ev_NightTime.AddListener(SetCanTriggerToTrue);
                 TimeManager.Instance.ev_NightTime.AddListener(ResetNumTriggers);
+            }
+            else if ((int)i < 0)
+            {
+                int night_index = ((int)i * -1) - 2;
+                TimeManager.Instance.ConnectToNightEvent(night_index, SetCanTriggerToTrue);
+                TimeManager.Instance.ConnectToNightEvent(night_index, ResetNumTriggers);
+                night_index_array[night_index] = night_index;
+                print("Adding night index " + night_index + " to night index array");
+                
             }
             else
             {
@@ -175,7 +199,7 @@ public class ChaseSpawner : MonoBehaviour
                 day_index_array[index] = (int)i;
                 print("Adding day index " + day_index_array[index] + " to day index array");
                 index += 1;
-                if((int)i == 0)
+                if ((int)i == 0)
                 {
                     SetCanTriggerToTrue();
                 }
@@ -197,10 +221,23 @@ public class ChaseSpawner : MonoBehaviour
             }
 
         }
+        int[] night_index_list = Enumerable.Range(0, TimeManager.Instance.GetMaxDays()).ToArray();
+        foreach (int i in night_index_list)
+        {
+            if (!night_index_array.Contains(i))
+            {
+                print("Setting night index " + i + " to setting trigger to false");
+                TimeManager.Instance.ConnectToNightEvent(i, SetCanTriggerToFalse);
+            }
+            else
+            {
+                print("night index array contains " + i);
+            }
+
+        }
+
 
     }
-
-    
 
     // Update is called once per frame
     void Update()
@@ -228,8 +265,7 @@ public class ChaseSpawner : MonoBehaviour
 
                 chaserInstance.transform.position = spawnPoint.transform.position;
             }
-                
-                
+            
         }
     }
 
