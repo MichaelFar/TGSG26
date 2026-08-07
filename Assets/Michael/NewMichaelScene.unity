@@ -731,6 +731,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3263408545342354582, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263408545342354582, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11.94
+      objectReference: {fileID: 0}
     - target: {fileID: 7445490733558446991, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.11
@@ -756,12 +764,16 @@ PrefabInstance:
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
+      propertyPath: chosenConsequence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: triggerTimeList.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[0]'
-      value: -2
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: 'triggerTimeList.Array.data[1]'
@@ -794,6 +806,10 @@ PrefabInstance:
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: ev_ChaseStarted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: TimeManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
+      propertyPath: ev_ChaseStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9188605056412570736, guid: af8c4557dbf3be44a80f57d6bc0b9313, type: 3}
       propertyPath: ev_ChaseStarted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -7434,6 +7450,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1803040542729448386, guid: 8b8541faff560d74fac9990974347f26, type: 3}
+      propertyPath: shouldTeleportAtEOD
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2548939767681665376, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

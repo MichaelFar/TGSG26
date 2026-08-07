@@ -28,5 +28,9 @@ public class PlayerGlobal : MonoBehaviour
 
     public ScaredSense scareStingController;
 
-    public PromptController promptController; 
+    public PromptController promptController;
+
+    public TransitionLoader transitionController;
+
+    public Bed bedController;
 }

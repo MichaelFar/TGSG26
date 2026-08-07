@@ -22,7 +22,7 @@ public class Bed : MonoBehaviour, IInteractable
     void Start()
     {
         TimeManager.Instance.ev_dayHasChanged.AddListener(CheckIfHasBeenUsedThenTeleport);
-        
+        PlayerGlobal.Instance.bedController = this;
     }
 
     // Update is called once per frame
@@ -62,13 +62,18 @@ public class Bed : MonoBehaviour, IInteractable
 
         if(shouldTeleportAtEOD)
         {
-            print("Teleporting player");
-            Physics.SyncTransforms();
-            player.transform.position = spawnPoint.transform.position;
-            DisplayTeleportNewDayTransition();
+            StartNewDay();
         }
             
 
+    }
+
+    public void StartNewDay()
+    {
+        print("Teleporting player");
+        Physics.SyncTransforms();
+        player.transform.position = spawnPoint.transform.position;
+        DisplayTeleportNewDayTransition();
     }
 
     public void DisplayNewDayTransition()

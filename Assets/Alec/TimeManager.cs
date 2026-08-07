@@ -173,11 +173,17 @@ public class TimeManager : MonoBehaviour
         {
             return;
         }
+
+        
         timerRunning = true;
         SetPauseTime(true);
         pauseTimeTimerGoal = totalTimeElapsed + duration;
     }
 
+    public void ResumeTime()
+    {
+        pauseTimeTimerGoal = 0;
+    }
     private void ProcessSkyBoxTransition()
     {
         total_seconds_before_text_change = (hoursThreshold * minutesThreshold * minuteLength) * 0.25f;

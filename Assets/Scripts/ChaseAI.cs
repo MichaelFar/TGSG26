@@ -40,6 +40,7 @@ public class ChaseAI : MonoBehaviour
             {
                 hasReachedPlayer = true;
                 ev_ReachedPlayer.Invoke();
+                
             }
             
         }
@@ -54,4 +55,5 @@ public class ChaseAI : MonoBehaviour
         agent.SetDestination(playerGameObject.transform.position);
     }
 
+    
 }

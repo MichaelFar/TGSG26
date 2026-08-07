@@ -67,7 +67,11 @@ public class ChaseSpawner : MonoBehaviour
     public enum e_CatchConsequence
     {
         [InspectorName("Spawn Player At The Respawn Point")]
-        RespawnPlayerAtSpawnPoint
+        RespawnPlayerAtSpawnPoint,
+        [InspectorName("Restart the day")]
+        RestartDay,
+        [InspectorName("End the day")]
+        EndDay
     }
 
     [Header("What days can this be triggered?")]
@@ -89,6 +93,9 @@ public class ChaseSpawner : MonoBehaviour
     [Header("How does it end the chase?")]
     public e_TriggerTypes endingTrigger;
 
+    [Header("What happens when the player is caught?")]
+    public e_CatchConsequence chosenConsequence;
+
     [SerializeField]
     [Header("How long does the chase last if not ended?")]
     private float lifeTime = 15.0f;
@@ -98,6 +105,8 @@ public class ChaseSpawner : MonoBehaviour
     public UnityEvent ev_ChaseStarted;
 
     public UnityEvent ev_ChaseEnded;
+
+    private UnityAction consequenceAction;
 
     private bool canTrigger = false;
     private int numTimesTriggered = 0;
@@ -112,12 +121,14 @@ public class ChaseSpawner : MonoBehaviour
             i.enabled = false;
         }
         InitializeValues();
+
     }
 
     private void InitializeValues()
     {
         TriggerVolume starting_volume;
-        if(startingVolume == e_TriggerVolumes.TriggerVolumeA)
+        
+        if (startingVolume == e_TriggerVolumes.TriggerVolumeA)
         {
             starting_volume = triggerVolumeA;
         }
@@ -160,6 +171,21 @@ public class ChaseSpawner : MonoBehaviour
         {
             ending_volume.ev_Viewed.AddListener(DespawnChaser);
         }
+
+        if(chosenConsequence == e_CatchConsequence.RespawnPlayerAtSpawnPoint)
+        {
+            consequenceAction = TeleportToSpawnPoint;
+            
+        }
+        else if(chosenConsequence == e_CatchConsequence.RestartDay)
+        {
+            consequenceAction = RestartDay;
+        }
+        else
+        {
+            consequenceAction = SkipToNextDay;
+        }
+
 
         e_TriggerReset[] no_duplicate_triggers = triggerTimeList.Distinct().ToArray();
 
@@ -264,6 +290,15 @@ public class ChaseSpawner : MonoBehaviour
 
 
                 chaserInstance.transform.position = spawnPoint.transform.position;
+
+                ChaseAI chase_ai = chaserInstance.GetComponent<ChaseAI>();
+
+                if(chase_ai)
+                {
+                    chase_ai.ev_ReachedPlayer.AddListener(consequenceAction);
+                    chase_ai.ev_ReachedPlayer.AddListener(DespawnChaser);
+                    
+                }
             }
             
         }
@@ -293,4 +328,41 @@ public class ChaseSpawner : MonoBehaviour
     {
         numTimesTriggered = 0;
     }
+
+    private void TeleportAndTransitionPlayer(Vector3 location, string transition_text)
+    {
+        //PlayerGlobal.Instance.GetComponent<CharacterController>().enabled = false;
+        Physics.SyncTransforms();
+        
+        PlayerGlobal.Instance.playerRootObject.transform.position = location;
+
+        PlayerGlobal.Instance.transitionController.StartNewGameTransition(transition_text);
+        //PlayerGlobal.Instance.GetComponent<CharacterController>().enabled = true;
+
+    }
+
+    private void TeleportToSpawnPoint()
+    {
+        TeleportAndTransitionPlayer(playerRespawnPoint.transform.position, "");
+
+    }
+    private void TeleportToBed(string transition_text)
+    {
+        TeleportAndTransitionPlayer(PlayerGlobal.Instance.bedController.spawnPoint.transform.position, transition_text);
+    }
+
+    private void RestartDay()
+    {
+        TeleportToBed("Day " + TimeManager.Instance.GetDay().ToString());
+        TimeManager.Instance.ResetDayToBeginning();
+    }
+    private void SkipToNextDay()
+    {
+        TeleportToBed("Day " + (TimeManager.Instance.GetDay() + 1).ToString());
+        TimeManager.Instance.SkipToNextDay();
+        
+    }
+
+
+        
 }
