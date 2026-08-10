@@ -282,14 +282,17 @@ public class ChaseSpawner : MonoBehaviour
     {
         if (!chaserInstance && numTimesTriggered < timesCanTrigger || !chaserInstance && timesCanTrigger < 0)
         {
+            print("Spawning Chase");
             if(canTrigger)
             {
                 numTimesTriggered += 1;
                 ev_ChaseStarted.Invoke();
-                chaserInstance = Instantiate(chaserPrefab);
+                chaserInstance = Instantiate(chaserPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
 
 
-                chaserInstance.transform.position = spawnPoint.transform.position;
+                //chaserInstance.transform.position = spawnPoint.transform.position;
+
+                print("Chase AI spawned at " + chaserInstance.transform.position + " and spawn point is " + spawnPoint.transform.position);
 
                 ChaseAI chase_ai = chaserInstance.GetComponent<ChaseAI>();
 
