@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class rotateIsActive : MonoBehaviour
 {
     public Fishing FishingActivated;
-    public float spinSpeed = 20;
+    public float spinSpeed = 50;
     public float startLocation = 0;
     public float currentLocation = 0;
     public float minimumThreshold = 235;
@@ -50,7 +50,7 @@ public class rotateIsActive : MonoBehaviour
                 {
                     if (currentLocation > minimumThreshold && currentLocation < maximumThreshold)
                     {
-                        //print("Success");
+                        print("Success");
                         onSuccess.Invoke();
                         transform.rotation = Quaternion.Euler(0, 0, startLocation);
                         finishedMinigame = true;
@@ -58,7 +58,7 @@ public class rotateIsActive : MonoBehaviour
                     }
                     else
                     {
-                        //print("Fail");
+                        print("Fail");
                         onFailure.Invoke();
                         transform.rotation = Quaternion.Euler(0, 0, startLocation);
                         finishedMinigame = true;
