@@ -22,7 +22,8 @@ public class Notes : MonoBehaviour, IInteractable
     {
         UIHandler.Instance.ShowNoteUI(noteData);
         PauseMenu.Instance.SetGamePaused(true);
-        // NoteInventory.Instance.AddNote(noteData);
-        // Destroy(gameObject);
+        NoteInventory.Instance.AddNote(noteData);
+        NoteInvUI.Instance.PopulateGrid();
+        Destroy(gameObject);
     }
 }
