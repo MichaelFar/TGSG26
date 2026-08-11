@@ -68,6 +68,8 @@ public class TimeManager : MonoBehaviour
 
     private UnityEvent[] dayEventArray;
 
+    private UnityEvent[] nightEventArray;
+
     public UnityEvent ev_dayHasChanged;
 
     private bool timeIsPaused = false;
@@ -91,6 +93,7 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
+        nightEventArray = InitializeArray<UnityEvent>(maxDays);
         if(_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -151,11 +154,7 @@ public class TimeManager : MonoBehaviour
         }
         ProcessSkyBoxTransition();
         
-        if(Input.GetButtonUp("DebugTimeStop"))
-        {
-            //SetPauseTime(true);
-            ResetDayToBeginning();
-        }
+        
 
     }
     //Note does not pause the game, just stops the time manager tick
@@ -170,11 +169,17 @@ public class TimeManager : MonoBehaviour
         {
             return;
         }
+
+        
         timerRunning = true;
         SetPauseTime(true);
         pauseTimeTimerGoal = totalTimeElapsed + duration;
     }
 
+    public void ResumeTime()
+    {
+        pauseTimeTimerGoal = 0;
+    }
     private void ProcessSkyBoxTransition()
     {
         total_seconds_before_text_change = (hoursThreshold * minutesThreshold * minuteLength) * 0.25f;
@@ -185,6 +190,7 @@ public class TimeManager : MonoBehaviour
         globalLight.transform.rotation = Quaternion.Euler((secondsCountToday / total_seconds_before_text_change) * 90.0f, 0.0f, 0.0f);
         if (isNight == true && !hasInvokedNight)
         {
+            nightEventArray[GetDay() - 1].Invoke();
             nightText.text = "Night";
             ev_NightTime.Invoke();
             hasInvokedNight = true;
@@ -262,9 +268,6 @@ public class TimeManager : MonoBehaviour
     {
         bool isNight = value >= hoursThreshold * .75; //|| value < 2;
 
-        
-
-
     }
 
     private void OnDayChange(int value)
@@ -339,7 +342,14 @@ public class TimeManager : MonoBehaviour
             dayEventArray[day_to_connect].AddListener(action_to_connect);
         }
         
-
+    }
+    public void ConnectToNightEvent(int night_to_connect, UnityAction action_to_connect)
+    {
+        if (night_to_connect < GetMaxDays())
+        {
+            nightEventArray[night_to_connect].AddListener(action_to_connect);
+            print("Connecting action to night event index " + night_to_connect);
+        }
     }
     //Returns a new array of type T with given length
     T[] InitializeArray<T>(int length) where T : new()
