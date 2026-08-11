@@ -804,7 +804,7 @@ PrefabInstance:
       objectReference: {fileID: 3703924386054526515}
     - target: {fileID: 2221350662652558223, guid: 26aeee8683e5dda4abe7472e2420809b, type: 3}
       propertyPath: shouldTeleportAtEOD
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2303131862991620587, guid: 26aeee8683e5dda4abe7472e2420809b, type: 3}
       propertyPath: m_Layer
@@ -1039,7 +1039,7 @@ PrefabInstance:
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: globalLight
       value: 
-      objectReference: {fileID: 5704660035765509412}
+      objectReference: {fileID: 0}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: skyboxNight
       value: 
@@ -1207,7 +1207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8784167699772035665, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.6
+      value: -14.65
       objectReference: {fileID: 0}
     - target: {fileID: 8784167699772035665, guid: 5baef2c10406a5e4c8520424daf965a6, type: 3}
       propertyPath: m_LocalPosition.y

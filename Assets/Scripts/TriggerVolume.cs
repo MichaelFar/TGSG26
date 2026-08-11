@@ -24,18 +24,20 @@ public class TriggerVolume : MonoBehaviour, IViewable
 
     public void OnView()
     {
-        
+        print("Viewed trigger volume");
         ev_Viewed.Invoke();
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Player entered trigger volume");
         ev_EnteredVolume.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
+        print("Player left trigger volume");
         ev_ExitedVolume.Invoke();
     }
 
