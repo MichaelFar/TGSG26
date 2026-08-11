@@ -148,6 +148,7 @@ public class ChaseSpawner : MonoBehaviour
         else
         {
             starting_volume.ev_Viewed.AddListener(SpawnChaser);
+            starting_volume.SetLayerToViewLayer();
         }
         TriggerVolume ending_volume;
         if (endingVolume == e_TriggerVolumes.TriggerVolumeA)
@@ -170,6 +171,7 @@ public class ChaseSpawner : MonoBehaviour
         else
         {
             ending_volume.ev_Viewed.AddListener(DespawnChaser);
+            ending_volume.SetLayerToViewLayer();
         }
 
         if(chosenConsequence == e_CatchConsequence.RespawnPlayerAtSpawnPoint)

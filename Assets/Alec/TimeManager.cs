@@ -154,11 +154,7 @@ public class TimeManager : MonoBehaviour
         }
         ProcessSkyBoxTransition();
         
-        if(Input.GetButtonUp("DebugTimeStop"))
-        {
-            //SetPauseTime(true);
-            ResetDayToBeginning();
-        }
+        
 
     }
     //Note does not pause the game, just stops the time manager tick
