@@ -18,19 +18,12 @@ public class TransitionLoader : MonoBehaviour
     public void Start()
     {
         StartNewGameTransition("Day 1");
+        PlayerGlobal.Instance.transitionController = this;
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            StartTransition("This thing here");
-        }
-
-        //Transition.GetCurrentAnimatorStateInfo(0).
-
-       
-        
+      
     }
 
 
