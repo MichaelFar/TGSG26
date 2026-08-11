@@ -10,8 +10,6 @@ public class ChaseAI : MonoBehaviour
 
     private GameObject playerGameObject;
 
-    [SerializeField]
-    private float stopDistance = 4.0f;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -20,7 +18,6 @@ public class ChaseAI : MonoBehaviour
     private void Start()
     {
         playerGameObject = PlayerGlobal.Instance.playerRootObject;
-        agent.stoppingDistance = stopDistance;
     }
 
     private void Update()
