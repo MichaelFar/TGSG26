@@ -637,13 +637,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8461588796120555883}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.23, y: -0.5000001, z: -4.93}
+  m_LocalRotation: {x: 0.7287568, y: -0, z: -0, w: 0.6847727}
+  m_LocalPosition: {x: -7.23, y: 21, z: -4.9300003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8332700037312241758}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 93.563995, y: 0, z: 0}
 --- !u!108 &5704660035765509412
 Light:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
-  m_Color: {r: 0.14901961, g: 0.16862746, b: 0.4392157, a: 1}
+  m_Color: {r: 0.4392157, g: 0.20269379, b: 0.14901961, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1039,7 +1039,7 @@ PrefabInstance:
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: globalLight
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5704660035765509412}
     - target: {fileID: 6761198720927446192, guid: fae1fbbd05dfe234e9145c66c93fee6c, type: 3}
       propertyPath: skyboxNight
       value: 
@@ -1718,7 +1718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1065645137971362839, guid: af22c6f3edc3c1c419fd24eba70b144a, type: 3}
       propertyPath: m_Name
-      value: HudCanvas
+      value: SubtitleController
       objectReference: {fileID: 0}
     - target: {fileID: 2602927433117329492, guid: af22c6f3edc3c1c419fd24eba70b144a, type: 3}
       propertyPath: m_Interactable

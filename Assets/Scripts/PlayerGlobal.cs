@@ -33,4 +33,6 @@ public class PlayerGlobal : MonoBehaviour
     public TransitionLoader transitionController;
 
     public Bed bedController;
+
+    public SubtitleController subController;
 }
