@@ -7474,6 +7474,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee8dee214af71a4469d33b9cbd6ccf53, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2083827537}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee8dee214af71a4469d33b9cbd6ccf53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2083827538}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ee8dee214af71a4469d33b9cbd6ccf53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2083827541}
   m_SourcePrefab: {fileID: 100100000, guid: ee8dee214af71a4469d33b9cbd6ccf53, type: 3}
 --- !u!1 &338036254 stripped
 GameObject:
@@ -8405,6 +8411,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9425f56b661c9104faec5e590dc8892d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1947758596}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9425f56b661c9104faec5e590dc8892d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1947758599}
   m_SourcePrefab: {fileID: 100100000, guid: 9425f56b661c9104faec5e590dc8892d, type: 3}
 --- !u!1 &515839763 stripped
 GameObject:
@@ -21465,6 +21474,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5953769, y: 1.8186594}
   m_EdgeRadius: 0
+--- !u!114 &1947758599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515839763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e3a569d25ce9745895887c8a880b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorInteraction
+  openAngle: -140
+  openSpeed: 3
+  isOpen: 1
 --- !u!4 &1954226815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8813192850238103608, guid: 9a94262aabe7b4a4db92bf4ae32c65c3, type: 3}
@@ -23006,6 +23030,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5953769, y: 1.8186594, z: 0.17396729}
   m_Center: {x: 0.29768845, y: 0.9093297, z: -0.038907398}
+--- !u!114 &2083827538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338036254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e3a569d25ce9745895887c8a880b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorInteraction
+  openAngle: 140
+  openSpeed: 3
+  isOpen: 1
+--- !u!114 &2083827541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338036254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d228341ae9ff2fc44bde0161b058f327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
+  description: Open
 --- !u!1001 &2088242593
 PrefabInstance:
   m_ObjectHideFlags: 0
