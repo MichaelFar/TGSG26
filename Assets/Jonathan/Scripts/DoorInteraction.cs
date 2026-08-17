@@ -7,7 +7,7 @@ public class DoorInteraction : MonoBehaviour, IInteractable
 {
     public float openAngle = 90f;
     public float openSpeed = 3f;
-    public bool isOpen = true;
+    public bool isOpen = false;
 
     [SerializeField]
     private bool isLocked = true;
@@ -40,9 +40,14 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     {
         if  (!isLocked)
         {
-            if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
-               _currentCoroutine = StartCoroutine(ToggleDoor());
+
+            if (_currentCoroutine != null) 
+            {
+                StopCoroutine(_currentCoroutine);
+            }
+            _currentCoroutine = StartCoroutine(ToggleDoor());
         }
+        print("DoorToggling");
         
     }
 
@@ -62,6 +67,7 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     {
         Quaternion targetRotation = isOpen ? _closedRotation : _openRotation; 
         isOpen = !isOpen; 
+
 
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
         {
