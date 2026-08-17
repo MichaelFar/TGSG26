@@ -9,6 +9,9 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     public float openSpeed = 3f;
     public bool isOpen = true;
 
+    [SerializeField]
+    private bool isLocked = true;
+
     private Quaternion _closedRotation; 
     private Quaternion _openRotation; 
     private Coroutine _currentCoroutine;
@@ -26,8 +29,8 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
-        _currentCoroutine = StartCoroutine(ToggleDoor());
+        //if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
+        //_currentCoroutine = StartCoroutine(ToggleDoor());
     }
 
 
@@ -35,12 +38,22 @@ public class DoorInteraction : MonoBehaviour, IInteractable
     
     public void OnInteract(GameObject object_interacting = null)
     {
-
+        if  (!isLocked)
+        {
+            if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
+               _currentCoroutine = StartCoroutine(ToggleDoor());
+        }
+        
     }
 
     public bool CanInteract()
     {
         return true;
+    }
+
+    public void LookedAway()
+    {
+        return;
     }
     
     
@@ -58,4 +71,10 @@ public class DoorInteraction : MonoBehaviour, IInteractable
 
         transform.rotation = targetRotation;
     }
+
+    public void UnlockDoor()
+    {
+        isLocked = false;
+    }
+
 }
