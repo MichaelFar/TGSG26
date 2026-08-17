@@ -5,20 +5,27 @@ public class ColliderRendererController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private MeshRenderer thisRenderer;
     private Collider thisCollider;
+    private SkinnedMeshRenderer thisSkinRenderer;
+
 
 
     private MeshRenderer[] childRenderers;
     private Collider[] childColliders;
+    
 
+    private SkinnedMeshRenderer[] childSkinRenderers;
 
     public bool startHidden = false;
     private void Awake()
     {
         thisRenderer = GetComponent<MeshRenderer>();
         thisCollider = GetComponent<Collider>();
+        thisSkinRenderer = GetComponent<SkinnedMeshRenderer>();
+
 
         childRenderers = GetComponentsInChildren<MeshRenderer>();
         childColliders = GetComponentsInChildren<Collider>();
+        childSkinRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
     }
     void Start()
     {
@@ -45,9 +52,16 @@ public class ColliderRendererController : MonoBehaviour
         {
             i.enabled = false;
         }
-
-        thisRenderer.enabled = false;
-        thisCollider.enabled = false;
+        foreach (SkinnedMeshRenderer i in childSkinRenderers)
+        {
+            i.enabled = false;
+        }
+        if(thisSkinRenderer)
+            thisSkinRenderer.enabled = false;
+        if(thisRenderer)
+            thisRenderer.enabled = false;
+        if(thisCollider)
+            thisCollider.enabled = false;
     }
 
     public void EnableCollidersAndHideRenderers()
@@ -60,9 +74,17 @@ public class ColliderRendererController : MonoBehaviour
         {
             i.enabled = true;
         }
+        foreach (SkinnedMeshRenderer i in childSkinRenderers)
+        {
+            i.enabled = true;
+        }
 
-        thisRenderer.enabled = true;
-        thisCollider.enabled = true;
+        if (thisSkinRenderer)
+            thisSkinRenderer.enabled = true;
+        if (thisRenderer)
+            thisRenderer.enabled = true;
+        if (thisCollider)
+            thisCollider.enabled = true;
     }
 
 }

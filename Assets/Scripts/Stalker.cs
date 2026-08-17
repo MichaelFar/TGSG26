@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-
+using System.Collections;
 public class Stalker : MonoBehaviour, IViewable
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,8 +36,8 @@ public class Stalker : MonoBehaviour, IViewable
 
     public void OnView()
     {
-        SetIsActive(false);
-        ev_disappeared.Invoke();
+        StartCoroutine(HideCoroutine());
+        
     }
 
     public void RandomlyAppear()
@@ -49,5 +49,16 @@ public class Stalker : MonoBehaviour, IViewable
             SetIsActive(true);
             ev_appeared.Invoke();
         }
+    }
+    IEnumerator HideCoroutine()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SetIsActive(false);
+        ev_disappeared.Invoke();
+    }
+
+    public void OnLookAway()
+    {
+        return;
     }
 }

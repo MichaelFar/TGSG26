@@ -109,4 +109,9 @@ public class Bed : MonoBehaviour, IInteractable
     {
         allChoresCompletedToday = false;
     }
+
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
+    }
 }

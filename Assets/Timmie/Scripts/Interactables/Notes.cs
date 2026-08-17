@@ -13,6 +13,11 @@ public class Notes : MonoBehaviour, IInteractable
         return true;
     }
 
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void OnInteract(GameObject object_interacting = null)
     {
         itemPickUp.Invoke();

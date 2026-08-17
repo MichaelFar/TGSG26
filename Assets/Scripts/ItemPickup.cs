@@ -124,6 +124,11 @@ public class ItemPickup : MonoBehaviour, IInteractable//,ISaveable
     {
         return !isHeld;
     }
+
+    public void LookedAway()
+    {
+        return;
+    }
 }
 /*
 [Serializable]

@@ -9,6 +9,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.Events;
 using GlobalDataTypes;
 public class InventoryComponent : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class InventoryComponent : MonoBehaviour
     private Vector3 leftSlotPosition;
     private Vector3 rightSlotPosition;
     private int activeSlotIndex = 1;
+
+    public UnityEvent ev_SwitchedHands;
+    public UnityEvent ev_RightHandPickedUp;
+    public UnityEvent ev_LeftHandPickedUp;
+    public UnityEvent ev_TwoHandedItemPickedUp;
+    public UnityEvent ev_DroppedItem;
 
     private enum e_Hands {LeftHand, RightHand};
     void Start()
@@ -69,17 +76,35 @@ public class InventoryComponent : MonoBehaviour
             }
             
             PickupItem(this_item, twoHandedSlot);
+            InteractPrompt item_prompt = this_item.GetComponent<InteractPrompt>();
+            if(item_prompt)
+            {
+                item_prompt.SetAbleToShowPrompt(false);
+            }
             activeSlot = twoHandedSlot;
+            ev_TwoHandedItemPickedUp.Invoke();
         }
         else if (!twoHandedSlot.GetSlotIsOccupied())
         {
             if(!activeSlot.isOccupied)
             {
                 PickupItem(this_item, activeSlot);
+                InteractPrompt item_prompt = this_item.GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(false);
+                }
+                ev_RightHandPickedUp.Invoke();
             }
             else if(!dropSlot.isOccupied)
             {
                 PickupItem(this_item, dropSlot);
+                InteractPrompt item_prompt = this_item.GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(false);
+                }
+                ev_LeftHandPickedUp.Invoke();
             }
             
         }
@@ -92,6 +117,8 @@ public class InventoryComponent : MonoBehaviour
         {
             return;
         }
+
+        ev_SwitchedHands.Invoke();
 
         Vector3 stored_pos = Vector3.zero;
 
@@ -120,26 +147,46 @@ public class InventoryComponent : MonoBehaviour
     {
         if(twoHandedSlot.GetSlotIsOccupied())
         {
+            InteractPrompt item_prompt = twoHandedSlot.GetHeldItem().GetComponent<InteractPrompt>();
+            if (item_prompt)
+            {
+                item_prompt.SetAbleToShowPrompt(true);
+            }
+            
             twoHandedSlot.DropItemFromSlot();
             foreach(InventorySlot i in inventorySlotList)
             {
                 if(GetWhichHand(i) == e_Hands.RightHand)
                 {
                     activeSlot = i;
+                    ev_DroppedItem.Invoke();
                     return;
                 }
             }
+            
         }
         else
         {
             //Drops from the left hand if it has an item, but if the active hand is the only one that has one it drops one from there
             if (!dropSlot.isOccupied)
             {
+                InteractPrompt item_prompt = activeSlot.GetHeldItem().GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(true);
+                }
                 activeSlot.DropItemFromSlot();
+                ev_DroppedItem.Invoke();
             }
             else
             {
+                InteractPrompt item_prompt = dropSlot.GetHeldItem().GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(true);
+                }
                 dropSlot.DropItemFromSlot();
+                ev_DroppedItem.Invoke();
             }
 
         }
