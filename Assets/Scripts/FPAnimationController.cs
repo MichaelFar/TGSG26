@@ -58,13 +58,27 @@ public class FPAnimationController : MonoBehaviour
         InventoryItemData data_to_check = null;
         if (inventoryController.GetTwoHandedSlot().GetHeldItem() != null)
         {
-            data_to_check = inventoryController.GetTwoHandedSlot().GetHeldItem().itemData;
-            lastHeldItem = inventoryController.GetTwoHandedSlot().GetHeldItem();
+            data_to_check = inventoryController.GetActiveSlot().GetHeldItem().itemData;
+            lastHeldItem = inventoryController.GetActiveSlot().GetHeldItem();
         }
 
         if(data_to_check == null)
         {
-            lastHeldItem.GetComponent<ColliderRendererController>().EnableCollidersAndHideRenderers();
+            ColliderRendererController render_controller = null;
+            if (lastHeldItem)
+            {
+                render_controller = lastHeldItem.GetComponent<ColliderRendererController>();
+            }
+            
+            if(!lastHeldItem)
+            {
+                print("Last held item is null");
+            }
+            if(render_controller)
+            {
+                render_controller.EnableCollidersAndHideRenderers();
+            }
+            
             foreach (FPArmsAnimator i in armsList)
             {
                  
@@ -74,11 +88,17 @@ public class FPAnimationController : MonoBehaviour
         }
         else
         {
-            lastHeldItem.GetComponent<ColliderRendererController>().DisableCollidersAndHideRenderers();
+
+            ColliderRendererController render_controller = lastHeldItem.GetComponent<ColliderRendererController>();
+            
             foreach (FPArmsAnimator i in armsList)
             {
                 if (i.GetItemData() == data_to_check)
                 {
+                    if (render_controller)
+                    {
+                        render_controller.DisableCollidersAndHideRenderers();
+                    }
                     i.GetComponent<ColliderRendererController>().EnableCollidersAndHideRenderers();
                     print("Showing arms");
                 }

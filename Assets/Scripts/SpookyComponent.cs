@@ -108,4 +108,9 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
     {
         canTrigger = false;
     }
+
+    public void OnLookAway()
+    {
+        return;
+    }
 }

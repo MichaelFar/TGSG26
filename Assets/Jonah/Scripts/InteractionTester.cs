@@ -1,8 +1,10 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Linq;
 
-public class Interaction: MonoBehaviour
+public class InteractionChecker: MonoBehaviour
 {
     private Camera playerCam;
     [SerializeField]
@@ -20,6 +22,9 @@ public class Interaction: MonoBehaviour
     private LayerMask interactionLayer;
 
 
+    private List<IInteractable> previousInteractables = new List<IInteractable>();
+    
+    private List<IInteractable> currentInteractables = new List<IInteractable>();
     //Jonah added
     /*public Text interactionText;
 
@@ -41,16 +46,34 @@ public class Interaction: MonoBehaviour
 
         RaycastHit[] hits = Physics.RaycastAll(ray_origin, playerCam.transform.forward, interactionRange);
         
-        
+        if(hits.Length < 1)
+        {
+            foreach (IInteractable interactable in previousInteractables)
+            {
+                
+                interactable?.LookedAway();
+                
+            }
+        }
         //Jonah added
         //bool hitSomething = false;
 
         Debug.DrawRay(ray_origin, playerCam.transform.forward * interactionRange, Color.red, 2, false);
         foreach (RaycastHit hit in hits)
         {
-            IInteractable[] interactables = hit.collider.GetComponents<IInteractable>();
+            currentInteractables = hit.collider.GetComponents<IInteractable>().ToList();
+
+            foreach(IInteractable interactable in previousInteractables)
+            {
+                if(!currentInteractables.Contains(interactable))
+                {
+                    interactable?.LookedAway();
+                }
+                
+            }
+            previousInteractables = currentInteractables;
             //checks if interacted item is not null
-            foreach(IInteractable interactable in interactables) 
+            foreach(IInteractable interactable in currentInteractables) 
             {
                 if (gameObject)
                 {

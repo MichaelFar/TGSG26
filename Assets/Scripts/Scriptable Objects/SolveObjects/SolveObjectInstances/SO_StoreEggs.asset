@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: SO_StoreEggs
   m_EditorClassIdentifier: Assembly-CSharp::SolveObjectDeleteObjectInHand
   requiredData: {fileID: 11400000, guid: 7e1adef76523dfc429a31187b7fb4801, type: 2}
-  triggerOnce: 0
+  triggerOnce: 1
   ev_OnSolve:
     m_PersistentCalls:
       m_Calls: []
   triggerOncePerDay: 0
-  hasBeenTriggered: 0
   requirementsMetToSolve: 0
   activateOnEmptyHand: 0

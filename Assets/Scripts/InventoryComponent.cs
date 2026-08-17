@@ -76,6 +76,11 @@ public class InventoryComponent : MonoBehaviour
             }
             
             PickupItem(this_item, twoHandedSlot);
+            InteractPrompt item_prompt = this_item.GetComponent<InteractPrompt>();
+            if(item_prompt)
+            {
+                item_prompt.SetAbleToShowPrompt(false);
+            }
             activeSlot = twoHandedSlot;
             ev_TwoHandedItemPickedUp.Invoke();
         }
@@ -84,11 +89,21 @@ public class InventoryComponent : MonoBehaviour
             if(!activeSlot.isOccupied)
             {
                 PickupItem(this_item, activeSlot);
+                InteractPrompt item_prompt = this_item.GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(false);
+                }
                 ev_RightHandPickedUp.Invoke();
             }
             else if(!dropSlot.isOccupied)
             {
                 PickupItem(this_item, dropSlot);
+                InteractPrompt item_prompt = this_item.GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(false);
+                }
                 ev_LeftHandPickedUp.Invoke();
             }
             
@@ -132,6 +147,11 @@ public class InventoryComponent : MonoBehaviour
     {
         if(twoHandedSlot.GetSlotIsOccupied())
         {
+            InteractPrompt item_prompt = twoHandedSlot.GetHeldItem().GetComponent<InteractPrompt>();
+            if (item_prompt)
+            {
+                item_prompt.SetAbleToShowPrompt(true);
+            }
             
             twoHandedSlot.DropItemFromSlot();
             foreach(InventorySlot i in inventorySlotList)
@@ -150,11 +170,21 @@ public class InventoryComponent : MonoBehaviour
             //Drops from the left hand if it has an item, but if the active hand is the only one that has one it drops one from there
             if (!dropSlot.isOccupied)
             {
+                InteractPrompt item_prompt = activeSlot.GetHeldItem().GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(true);
+                }
                 activeSlot.DropItemFromSlot();
                 ev_DroppedItem.Invoke();
             }
             else
             {
+                InteractPrompt item_prompt = dropSlot.GetHeldItem().GetComponent<InteractPrompt>();
+                if (item_prompt)
+                {
+                    item_prompt.SetAbleToShowPrompt(true);
+                }
                 dropSlot.DropItemFromSlot();
                 ev_DroppedItem.Invoke();
             }

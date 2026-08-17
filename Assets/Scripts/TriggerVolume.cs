@@ -11,10 +11,15 @@ public class TriggerVolume : MonoBehaviour, IViewable
 
     public UnityEvent ev_Viewed;
 
+    
 
     public void Awake()
     {
-        GetComponent<MeshRenderer>().enabled = false;
+        if(GetComponent<MeshRenderer>())
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+        
         if(ev_Viewed.GetPersistentEventCount() > 0)
         {
             SetLayerToViewLayer();
@@ -44,5 +49,10 @@ public class TriggerVolume : MonoBehaviour, IViewable
     public void SetLayerToViewLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("ViewLayer");
+    }
+
+    public void OnLookAway()
+    {
+        return;
     }
 }

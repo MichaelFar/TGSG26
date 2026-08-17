@@ -61,4 +61,9 @@ public class Door : MonoBehaviour, IInteractable
     {
         return true;
     }
+
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
+    }
 }
