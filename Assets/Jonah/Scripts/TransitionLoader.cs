@@ -33,11 +33,7 @@ public class TransitionLoader : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            StartTransition("This thing here");
-        }
-
+        
         //Transition.GetCurrentAnimatorStateInfo(0).
 
 
