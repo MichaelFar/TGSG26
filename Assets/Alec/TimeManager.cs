@@ -68,6 +68,8 @@ public class TimeManager : MonoBehaviour
 
     private UnityEvent[] dayEventArray;
 
+    private UnityEvent[] nightEventArray;
+
     public UnityEvent ev_dayHasChanged;
 
     private bool timeIsPaused = false;
@@ -91,6 +93,7 @@ public class TimeManager : MonoBehaviour
     private void Awake()
     {
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
+        nightEventArray = InitializeArray<UnityEvent>(maxDays);
         if(_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -128,13 +131,14 @@ public class TimeManager : MonoBehaviour
     public void Update()
     {
         totalTimeElapsed += Time.deltaTime;
+        /*
         if(!timeIsPaused)
         {
             tempSecond += Time.deltaTime;
             secondsCountToday += Time.deltaTime;
             secondsUntilTextureChange += Time.deltaTime;
         }
-        
+        */
         if(timerRunning)
         {
             if(totalTimeElapsed >= pauseTimeTimerGoal)
@@ -143,20 +147,50 @@ public class TimeManager : MonoBehaviour
                 SetPauseTime(false);
             }
         }
-        
+        /*
         if (tempSecond >= minuteLength)
         {
             tempSecond = 0;
             Minutes++;
         }
-        ProcessSkyBoxTransition();
+        */
+        //ProcessSkyBoxTransition();
         
-        if(Input.GetButtonUp("DebugTimeStop"))
-        {
-            //SetPauseTime(true);
-            ResetDayToBeginning();
-        }
+        
 
+    }
+    public void SetTimeToEarlyMorning()
+    {
+        SetSkyboxTexture(skyboxArray[0], skyboxArray[0]);
+        SetGlobalLightRotation(0);
+        print("Early morning");
+    }
+
+    public void SetTimeToMidDay()
+    {
+        SetSkyboxTexture(skyboxArray[1], skyboxArray[1]);
+        SetGlobalLightRotation(1);
+        print("Midday");
+    }
+
+    public void SetTimeToAfternoon()
+    {
+        SetSkyboxTexture(skyboxArray[2], skyboxArray[2]);
+        print("Afternoon");
+        SetGlobalLightRotation(2);
+    }
+
+    public void SetTimeToNight()
+    {
+        SetSkyboxTexture(skyboxArray[3], skyboxArray[3]);
+        print("Night");
+        SetGlobalLightRotation(3);
+    }
+
+    private void SetGlobalLightRotation(int coefficient)
+    {
+        float rotation = coefficient * .25f;
+        globalLight.transform.rotation = Quaternion.Euler((rotation) * 360.0f, 0.0f, 0.0f);
     }
     //Note does not pause the game, just stops the time manager tick
     public void SetPauseTime(bool new_value)
@@ -170,11 +204,18 @@ public class TimeManager : MonoBehaviour
         {
             return;
         }
+
+        
         timerRunning = true;
         SetPauseTime(true);
         pauseTimeTimerGoal = totalTimeElapsed + duration;
     }
 
+    public void ResumeTime()
+    {
+        pauseTimeTimerGoal = 0;
+    }
+    
     private void ProcessSkyBoxTransition()
     {
         total_seconds_before_text_change = (hoursThreshold * minutesThreshold * minuteLength) * 0.25f;
@@ -185,6 +226,7 @@ public class TimeManager : MonoBehaviour
         globalLight.transform.rotation = Quaternion.Euler((secondsCountToday / total_seconds_before_text_change) * 90.0f, 0.0f, 0.0f);
         if (isNight == true && !hasInvokedNight)
         {
+            nightEventArray[GetDay() - 1].Invoke();
             nightText.text = "Night";
             ev_NightTime.Invoke();
             hasInvokedNight = true;
@@ -262,9 +304,6 @@ public class TimeManager : MonoBehaviour
     {
         bool isNight = value >= hoursThreshold * .75; //|| value < 2;
 
-        
-
-
     }
 
     private void OnDayChange(int value)
@@ -339,7 +378,14 @@ public class TimeManager : MonoBehaviour
             dayEventArray[day_to_connect].AddListener(action_to_connect);
         }
         
-
+    }
+    public void ConnectToNightEvent(int night_to_connect, UnityAction action_to_connect)
+    {
+        if (night_to_connect < GetMaxDays())
+        {
+            nightEventArray[night_to_connect].AddListener(action_to_connect);
+            print("Connecting action to night event index " + night_to_connect);
+        }
     }
     //Returns a new array of type T with given length
     T[] InitializeArray<T>(int length) where T : new()

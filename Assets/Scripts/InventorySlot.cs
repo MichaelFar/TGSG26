@@ -37,7 +37,11 @@ public class InventorySlot : MonoBehaviour//,ISaveable
     public void DropItemFromSlot()
     {
         //itemData.ev_DroppedItem.Invoke();
-        itemHeld.DropItemBehavior();
+        if(itemHeld)
+        {
+            itemHeld.DropItemBehavior();
+        }
+            
         isOccupied = false;
         //itemHeld.DropItemBehavior();
         

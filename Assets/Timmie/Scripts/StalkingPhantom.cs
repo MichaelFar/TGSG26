@@ -16,4 +16,8 @@ public class StalkingPhantom : MonoBehaviour, IViewable
         Destroy(gameObject);
     }
 
+    public void OnLookAway()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -11,4 +11,6 @@ public interface IInteractable
     void OnInteract(GameObject object_interacting = null);
 
     bool CanInteract();
+
+    void LookedAway();
 }

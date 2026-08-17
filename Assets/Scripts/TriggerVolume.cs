@@ -12,20 +12,47 @@ public class TriggerVolume : MonoBehaviour, IViewable
     public UnityEvent ev_Viewed;
 
     
+
+    public void Awake()
+    {
+        if(GetComponent<MeshRenderer>())
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+        
+        if(ev_Viewed.GetPersistentEventCount() > 0)
+        {
+            SetLayerToViewLayer();
+        }
+            
+    }
+
     public void OnView()
     {
-        
+        print("Viewed trigger volume");
         ev_Viewed.Invoke();
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Player entered trigger volume");
         ev_EnteredVolume.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
+        print("Player left trigger volume");
         ev_ExitedVolume.Invoke();
+    }
+
+    public void SetLayerToViewLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("ViewLayer");
+    }
+
+    public void OnLookAway()
+    {
+        return;
     }
 }

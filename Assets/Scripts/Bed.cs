@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Bed : MonoBehaviour, IInteractable
@@ -22,7 +23,7 @@ public class Bed : MonoBehaviour, IInteractable
     void Start()
     {
         TimeManager.Instance.ev_dayHasChanged.AddListener(CheckIfHasBeenUsedThenTeleport);
-        
+
     }
 
     // Update is called once per frame
@@ -30,22 +31,24 @@ public class Bed : MonoBehaviour, IInteractable
     {
         //Remove this later, this is just for prototype
         debugTimer += Time.deltaTime;
-        if(debugTimer > 1)
+        if (debugTimer > 1)
         {
             debugTimer = 0.0f;
             allChoresCompletedToday = ChoreManager.Instance.CheckIfCurrentDayCompleted();
-            
+
         }
     }
     public void OnInteract(GameObject object_interacting = null)
     {
-        if(!TimeManager.Instance.isNight)
+        if (!TimeManager.Instance.isNight)
         {
             subtitleController.DisplaySubtitlesWithTimer("It is too early to go to bed...", 5.0f);
         }
         else
         {
             hasBeenUsed = true;
+            transitionObject.SetHasPlayerSlept(hasBeenUsed);
+            print("Set PlayerSlept to " + hasBeenUsed);
             TimeManager.Instance.SkipToNextDay();
             DisplayNewDayTransition();
         }
@@ -54,20 +57,20 @@ public class Bed : MonoBehaviour, IInteractable
     public void CheckIfHasBeenUsedThenTeleport()
     {
         print("Checking if bed has been used");
-        if(hasBeenUsed)
+        if (hasBeenUsed)
         {
             hasBeenUsed = false;
             return;
         }
 
-        if(shouldTeleportAtEOD)
+        if (shouldTeleportAtEOD)
         {
             print("Teleporting player");
             Physics.SyncTransforms();
             player.transform.position = spawnPoint.transform.position;
             DisplayTeleportNewDayTransition();
         }
-            
+
 
     }
 
@@ -82,7 +85,7 @@ public class Bed : MonoBehaviour, IInteractable
             transitionObject.StartTransition("Day " + TimeManager.Instance.GetDay().ToString() + " but you didn't complete all chores yesterday you bozo");
         }
         ResetChoresCompleted();
-            
+
     }
     public void DisplayTeleportNewDayTransition()
     {
@@ -105,5 +108,10 @@ public class Bed : MonoBehaviour, IInteractable
     private void ResetChoresCompleted()
     {
         allChoresCompletedToday = false;
+    }
+
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
     }
 }

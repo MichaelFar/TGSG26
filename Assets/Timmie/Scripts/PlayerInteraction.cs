@@ -1,6 +1,7 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System.Collections.Generic;
 
 /*
 Contributor(s): Timmie Xiong
@@ -25,6 +26,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private LayerMask interactionLayer;
 
+    
 
     private float viewRaycastTimeTracker = 0.0f;
     void Start()
@@ -45,6 +47,7 @@ public class PlayerInteraction : MonoBehaviour
             foreach (RaycastHit hit in hits)
             {
                 IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                
                 //checks if interacted item is not null
                 if (gameObject)
                 {
@@ -70,7 +73,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         viewRaycastTimeTracker += Time.deltaTime;
-        if(viewRaycastTimeTracker >= viewRaycastInterval)
+        if(viewRaycastTimeTracker >= viewRaycastInterval && !PauseMenu.Instance.GetGamePaused())
         {
             viewRaycastTimeTracker = 0.0f;
             RaycastHit[] hits = Physics.SphereCastAll(playerCam.transform.position, 3.0f, playerCam.transform.forward, passiveInteractionRange, passiveInteractionLayer);
@@ -79,14 +82,20 @@ public class PlayerInteraction : MonoBehaviour
             foreach (RaycastHit hit in hits)
             {
                 IViewable[] viewables = hit.collider.GetComponents<IViewable>();
+                
+                
+                
                 //checks if interacted item is not null
-                foreach(IViewable viewable in viewables)
+                foreach (IViewable viewable in viewables)
+                {
+                    
                     if (gameObject)
                     {
 
                         viewable?.OnView();
 
                     }
+                }
             }
         }
 

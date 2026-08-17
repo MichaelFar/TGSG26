@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class InteractPrompt : MonoBehaviour, IInteractable
 {
     private PromptController promptController;
@@ -10,28 +10,28 @@ public class InteractPrompt : MonoBehaviour, IInteractable
 
     private int frameCount = 0;
 
+    private bool ableToDisplayPrompt = true;
+    
     public void SetNotVisible(bool new_value)
     {
-        print("prompt should hide");
-        promptCanvas.gameObject.SetActive(!new_value);
-    }
-    public bool CanInteract()
-    {
-        if (!PauseMenu.Instance.GetGamePaused())
+        if (new_value)
         {
-            promptCanvas.gameObject.SetActive(true);
-            promptController.SetText(description);
+            print("prompt should hide");
+            if(!ableToDisplayPrompt)
+            {
+                return;
+            }
+        }
+        else
+        {
+            print("prompt should show");
         }
         
-        
-        
-        return true;
+        promptCanvas.gameObject.SetActive(new_value);
     }
+    
 
-    public void OnInteract(GameObject object_interacting = null)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,17 +40,46 @@ public class InteractPrompt : MonoBehaviour, IInteractable
         promptCanvas = promptController.GetComponent<Canvas>();
         //PauseMenu.Instance.ev_GamePaused.AddListener(HidePrompt);
         UIHandler.Instance.OnPauseMenuToggled += SetNotVisible;
+        SetNotVisible(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        frameCount += 1;
+        
+    }
+    
+    
+    
 
-        if(frameCount% 2 == 0)
+    
+
+    public void OnInteract(GameObject object_interacting = null)
+    {
+        return;
+    }
+
+    public bool CanInteract()
+    {
+        if (!PauseMenu.Instance.GetGamePaused())
         {
-            promptCanvas.gameObject.SetActive(false);
-           
+
+            SetNotVisible(true);
+            promptController.SetText(description);
+            print("Setting prompt active to true");
+            //StartCoroutine(HidePrompt());
+
         }
+        return true;
+    }
+
+    public void LookedAway()
+    {
+        SetNotVisible(false);
+    }
+
+    public void SetAbleToShowPrompt(bool new_value)
+    {
+        ableToDisplayPrompt = new_value;
     }
 }

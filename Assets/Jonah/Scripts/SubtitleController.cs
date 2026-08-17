@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SubtitleController : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class SubtitleController : MonoBehaviour
     private float timeTracker = 0;
 
     private bool timerRunning = false;
-    void Start()
+    void Awake()
     {
-
+        PlayerGlobal.Instance.subController = this;
     }
 
     void Update()
@@ -45,17 +46,37 @@ public class SubtitleController : MonoBehaviour
         if(!timerRunning)
         {
             ToggleSubtitleVisibility();
-            SetSubtitleText(text);
-            timeTarget = duration;
-            timerRunning = true;
+            
         }
-        
+        SetSubtitleText(text);
+        timeTarget = duration;
+        timerRunning = true;
+        timeTracker = 0.0f;
+
     }
 
+    
+    public IEnumerator ProcessSubtitleList(SubtitleSequence this_sequence)
+    {
+        if(timerRunning)
+        {
+            timerRunning = false;
+            timeTracker = 0;
+        }
+        for (int i = 0; i < this_sequence.subtitleArray.Length; i++)
+        {
+            print("Subtitle text is: " + this_sequence.subtitleArray[i]);
+            hideHudObject.SetVisibility(true);
+            SetSubtitleText(this_sequence.subtitleArray[i]);
+            yield return new WaitForSeconds(this_sequence.GetDurationOfLine(i));
+        }
+        hideHudObject.SetVisibility(false);
+
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+
 
     // Update is called once per frame
-    
+
 }

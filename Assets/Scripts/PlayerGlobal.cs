@@ -25,8 +25,14 @@ public class PlayerGlobal : MonoBehaviour
     }
     [HideInInspector]
     public GameObject playerRootObject;
-
+    [HideInInspector]
     public ScaredSense scareStingController;
 
-    public PromptController promptController; 
+    public PromptController promptController;
+    [HideInInspector]
+    public TransitionLoader transitionController;
+    [HideInInspector]
+    public Bed bedController;
+    [HideInInspector]
+    public SubtitleController subController;
 }
