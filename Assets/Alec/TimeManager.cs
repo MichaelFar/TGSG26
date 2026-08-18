@@ -51,7 +51,29 @@ public class TimeManager : MonoBehaviour
     private int days;
     public int Days { get { return days; } set { days = value; OnDayChange(value);} }
 
+    public int minutesPerHour = 5;
+    public int hoursPerDay = 10;
     public int maxDays = 5;
+    
+    private float sunriseHour
+    {
+        get { return hoursPerDay * 1/4; }
+    }
+
+    private float dayHour
+    {
+        get { return hoursPerDay * 2/5; }
+    }
+
+    private float sunsetHour
+    {
+        get { return hoursPerDay * 3/4; }
+    }
+
+    private float nightHour
+    {
+        get { return hoursPerDay * 4/5; }
+    }
 
     private float tempSecond;
 
@@ -92,6 +114,7 @@ public class TimeManager : MonoBehaviour
     public bool isNight = false;
     private void Awake()
     {
+
         dayEventArray = InitializeArray<UnityEvent>(maxDays);
         nightEventArray = InitializeArray<UnityEvent>(maxDays);
         if(_instance != null && _instance != this)
@@ -118,7 +141,6 @@ public class TimeManager : MonoBehaviour
     
     public void Start()
     {
-        
         dayChangeText.text = "Day " + days.ToString();
         Days = 1;
         //This line visually syncs the skybox with the typical experience the player encounters per subsequent day
