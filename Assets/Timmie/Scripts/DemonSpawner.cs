@@ -93,18 +93,7 @@ public class DemonSpawner : MonoBehaviour
 
     void Update()
     {
-        /*
-        Timer += Time.deltaTime;
-        if (Timer >= Interval)
-        {
-            Timer = 0f;
-            if(spawnEnabled)
-            {
-                ev_CheckForSpawn.Invoke();
-            }
-                
-        }
-        */
+        
     }
 
     public void SetSpawnEnabled(bool new_value)
