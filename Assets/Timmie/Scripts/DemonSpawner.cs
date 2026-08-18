@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+using System.Collections.Generic;
+using System.Collections;
+
 /*
 Contributor(s): Timmie Xiong
 Brief Description: Determines an area around the player that is safe to spawn in the demon. Will periodically choose a random spot within the bounds
@@ -17,8 +20,21 @@ public class DemonSpawner : MonoBehaviour
     public LayerMask GroundLayer;
     private float Timer = 0.0f;
     public float Interval = 10.0f;
+
+    [SerializeField]
+    private bool spawnEnabled = false;
+
+    private Coroutine activeTimerCoroutine;
+    
     public UnityEvent ev_CheckForSpawn;
 
+
+    private void Start()
+    {
+
+        SetSpawnEnabled(spawnEnabled);
+        
+    }
     public void SpawnDemon()
     {
         if (ActiveDemon != null)
@@ -55,11 +71,47 @@ public class DemonSpawner : MonoBehaviour
 
     void Update()
     {
+        /*
         Timer += Time.deltaTime;
         if (Timer >= Interval)
         {
             Timer = 0f;
+            if(spawnEnabled)
+            {
+                ev_CheckForSpawn.Invoke();
+            }
+                
+        }
+        */
+    }
+
+    public void SetSpawnEnabled(bool new_value)
+    {
+        spawnEnabled = new_value;
+        if (spawnEnabled)
+        {
+            if (activeTimerCoroutine != null)
+            {
+                StopCoroutine(activeTimerCoroutine);
+            }
+            activeTimerCoroutine = StartCoroutine(SpawnTimerCoroutine());
+        }
+        else
+        {
+            if (activeTimerCoroutine != null)
+            {
+                StopCoroutine(activeTimerCoroutine);
+            }
+        }
+    }
+
+    IEnumerator SpawnTimerCoroutine()
+    {
+        yield return new WaitForSeconds(Interval);
+        if (spawnEnabled)
+        {
             ev_CheckForSpawn.Invoke();
+            activeTimerCoroutine = StartCoroutine(SpawnTimerCoroutine());
         }
     }
 }

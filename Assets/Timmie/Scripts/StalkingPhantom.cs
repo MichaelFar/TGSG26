@@ -3,7 +3,7 @@ using UnityEngine;
 public class StalkingPhantom : MonoBehaviour, IViewable
 {
 
-
+    public bool shouldDieOnView = true;
     // Update is called once per frame
     void Update()
     {
@@ -13,7 +13,10 @@ public class StalkingPhantom : MonoBehaviour, IViewable
 
     public void OnView()
     {
-        Destroy(gameObject);
+        if(shouldDieOnView)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnLookAway()

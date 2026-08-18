@@ -16,6 +16,10 @@ public class InteractPrompt : MonoBehaviour, IInteractable
     {
         if (new_value)
         {
+            if(promptController.promptText.text == "New Text")
+            {
+                return;
+            }
             print("prompt should hide");
             if(!ableToDisplayPrompt)
             {

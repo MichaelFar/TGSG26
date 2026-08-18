@@ -24,7 +24,7 @@ public class TransitionLoader : MonoBehaviour
 
     public void Start()
     {
-        StartNewGameTransition("Day 1");
+        //StartNewGameTransition("Day 1");
         PlayerCamAnimator = PlayerCam.GetComponent<Animator>();
         PlayerCamAnimator.enabled = false;
         MoveCam = PlayerCam.GetComponent<MoveCamera>();
