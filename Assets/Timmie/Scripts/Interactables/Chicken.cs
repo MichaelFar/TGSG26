@@ -89,4 +89,9 @@ public class Chicken : MonoBehaviour, IInteractable
         }
         wasHeld = isHeld;
     }
+
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
+    }
 }
