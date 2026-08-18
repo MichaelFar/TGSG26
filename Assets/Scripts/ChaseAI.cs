@@ -19,6 +19,8 @@ public class ChaseAI : MonoBehaviour
     private bool hasReachedPlayer = false;
 
     public UnityEvent ev_ReachedPlayer;
+
+    private bool isMoving = false;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -34,6 +36,7 @@ public class ChaseAI : MonoBehaviour
     private void Update()
     {
         ChasePlayer();
+        
         if(Vector3.Distance(gameObject.transform.position, playerGameObject.transform.position) <= reachedPlayerThreshold)
         {
             if (!hasReachedPlayer)
@@ -53,7 +56,12 @@ public class ChaseAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(playerGameObject.transform.position);
+        isMoving = Mathf.Abs(agent.velocity.magnitude) > 0.0f;
     }
 
+    public bool GetIsMoving()
+    {
+        return isMoving;
+    }
     
 }

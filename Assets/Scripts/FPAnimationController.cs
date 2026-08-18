@@ -8,7 +8,7 @@ public class FPAnimationController : MonoBehaviour
     private InventoryComponent inventoryController;
 
     [SerializeField]
-    private FPArmsAnimator[] armsList;
+    private WalkAndIdleAnimator[] armsList;
 
     private ItemPickup lastHeldItem;
 
@@ -40,14 +40,14 @@ public class FPAnimationController : MonoBehaviour
     private void AllWalkToIdle()
     {
         
-        foreach (FPArmsAnimator i in armsList)
+        foreach (WalkAndIdleAnimator i in armsList)
         {
             i.PlayWalkToIdle();
         }
     }
     private void AllIdleToWalk()
     {
-        foreach (FPArmsAnimator i in armsList)
+        foreach (WalkAndIdleAnimator i in armsList)
         {
             i.PlayIdleToWalk();
         }
@@ -79,7 +79,7 @@ public class FPAnimationController : MonoBehaviour
                 render_controller.EnableCollidersAndHideRenderers();
             }
             
-            foreach (FPArmsAnimator i in armsList)
+            foreach (WalkAndIdleAnimator i in armsList)
             {
                  
                 i.GetComponent<ColliderRendererController>().DisableCollidersAndHideRenderers();
@@ -91,7 +91,7 @@ public class FPAnimationController : MonoBehaviour
 
             ColliderRendererController render_controller = lastHeldItem.GetComponent<ColliderRendererController>();
             
-            foreach (FPArmsAnimator i in armsList)
+            foreach (WalkAndIdleAnimator i in armsList)
             {
                 if (i.GetItemData() == data_to_check)
                 {

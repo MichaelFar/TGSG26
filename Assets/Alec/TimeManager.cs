@@ -185,6 +185,7 @@ public class TimeManager : MonoBehaviour
         SetSkyboxTexture(skyboxArray[3], skyboxArray[3]);
         print("Night");
         SetGlobalLightRotation(3);
+        ev_NightTime.Invoke();
     }
 
     private void SetGlobalLightRotation(int coefficient)
