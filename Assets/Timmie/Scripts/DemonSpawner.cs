@@ -9,7 +9,7 @@ Date: 7/31/2026
 */
 public class DemonSpawner : MonoBehaviour
 {
-    public GameObject DemonPrefab;
+    public GameObject DemonPrefab, StalkerPrefab;
     private GameObject ActiveDemon;
     public Transform Player;
     public float MinSpawnDist = 20.0f;
@@ -18,6 +18,7 @@ public class DemonSpawner : MonoBehaviour
     private float Timer = 0.0f;
     public float Interval = 10.0f;
     public UnityEvent ev_CheckForSpawn;
+    private enum SpawnType { Stalker, Demon };
 
     public void SpawnDemon()
     {
@@ -26,11 +27,31 @@ public class DemonSpawner : MonoBehaviour
             print("Demon is already spawned");
             return;
         }
-        Vector3 spawnPos = GetValidSpawnPosition();
+        Vector3 spawnPos = GetValidSpawnPosition(SpawnType.Demon);
+        print("Demon spawnPos: " + spawnPos);
         ActiveDemon = Instantiate(DemonPrefab, spawnPos, Quaternion.identity);
     }
 
-    private Vector3 GetValidSpawnPosition()
+    public void SpawnStalker()
+    {
+        Vector3 spawnPos = GetValidSpawnPosition(SpawnType.Stalker);
+        print("Stalker spawnPos: " + spawnPos);
+        Instantiate(StalkerPrefab, spawnPos, Quaternion.identity);
+    }
+
+    // Set the spawn height of the prefab depending on what type of entitiy it is
+    private Vector3 GetSpawnHeight(SpawnType type)
+    {
+        switch (type)
+        {
+            case SpawnType.Demon:
+                return new Vector3(0, Player.position.y, 0);
+            case SpawnType.Stalker:
+                return new Vector3(0, Player.position.y + Random.Range(4f, 8f), 0);
+        }
+        return Vector3.zero;
+    }
+    private Vector3 GetValidSpawnPosition(SpawnType type)
     {
         for (int attempt = 0; attempt < 10; attempt++)
         {
@@ -47,10 +68,11 @@ public class DemonSpawner : MonoBehaviour
             // checks if the spawn location is not within the player's POV
             if (dot < 0.3f)
             {
+                spawnLocation.y = GetSpawnHeight(type).y;
                 return spawnLocation;
             }
         }
-        return Player.position + Player.forward * -MaxSpawnDist;
+        return GetSpawnHeight(type) + (Player.position + Player.forward * -MaxSpawnDist);
     }
 
     void Update()
@@ -59,7 +81,7 @@ public class DemonSpawner : MonoBehaviour
         if (Timer >= Interval)
         {
             Timer = 0f;
-            ev_CheckForSpawn.Invoke();
+            // ev_CheckForSpawn.Invoke();
         }
     }
 }

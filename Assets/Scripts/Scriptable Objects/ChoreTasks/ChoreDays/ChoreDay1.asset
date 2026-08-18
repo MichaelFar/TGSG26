@@ -17,4 +17,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e6dc45c15f979df4ca6a295c1852ec26, type: 2}
   - {fileID: 11400000, guid: 5e7e9d7a63ad844458892a748a0b5ac6, type: 2}
   - {fileID: 11400000, guid: 5e7768f6072823a44b649940b7e3af5f, type: 2}
+  - {fileID: 11400000, guid: 3c9a778b11aad02469ba84f37e04c138, type: 2}
   allChoresCompletedToday: 0
