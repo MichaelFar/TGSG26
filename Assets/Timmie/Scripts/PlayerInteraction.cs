@@ -42,30 +42,31 @@ public class PlayerInteraction : MonoBehaviour
         {
             RaycastHit[] hits = Physics.RaycastAll(ray_origin, playerCam.transform.forward, interactionRange);
 
-            
+
             Debug.DrawRay(ray_origin, playerCam.transform.forward * interactionRange, Color.red, 2, false);
             foreach (RaycastHit hit in hits)
             {
-                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-                
-                //checks if interacted item is not null
-                if (gameObject)
+                foreach (IInteractable interactable in hit.collider.GetComponents<IInteractable>())
                 {
-                    if(interactable != null)
+                    //checks if interacted item is not null
+                    if (gameObject)
                     {
-                        if(!interactable.CanInteract())
+                        if (interactable != null)
                         {
-                            
-                            continue;
-                        }
-                        else
-                        {
-                            print("Interactable is able to interact");
-                        }
-                    }
+                            if (!interactable.CanInteract())
+                            {
 
-                    interactable?.OnInteract(gameObject);
-                    
+                                continue;
+                            }
+                            else
+                            {
+                                print("Interactable is able to interact");
+                            }
+                        }
+
+                        interactable?.OnInteract(gameObject);
+
+                    }
                 }
             }
 
@@ -78,7 +79,7 @@ public class PlayerInteraction : MonoBehaviour
             viewRaycastTimeTracker = 0.0f;
             RaycastHit[] hits = Physics.SphereCastAll(playerCam.transform.position, 3.0f, playerCam.transform.forward, passiveInteractionRange, passiveInteractionLayer);
 
-            Debug.DrawRay(ray_origin, playerCam.transform.forward * passiveInteractionRange, Color.red, 2, false);
+            Debug.DrawRay(ray_origin, playerCam.transform.forward * passiveInteractionRange, Color.blue, 2, false);
             foreach (RaycastHit hit in hits)
             {
                 IViewable[] viewables = hit.collider.GetComponents<IViewable>();
