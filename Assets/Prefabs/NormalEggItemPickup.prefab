@@ -128,6 +128,9 @@ GameObject:
   - component: {fileID: 9060090973754209685}
   - component: {fileID: 386438661337127504}
   - component: {fileID: 3048214232206645915}
+  - component: {fileID: 3294800195248491092}
+  - component: {fileID: 1863024719684317267}
+  - component: {fileID: 6730146528526274951}
   m_Layer: 7
   m_Name: NormalEggItemPickup
   m_TagString: Untagged
@@ -308,3 +311,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea26f84ea744a84886fe05104939901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectDataSaver
+--- !u!114 &3294800195248491092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364898736719544289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bb2c11d5bfa344ea6b8a15a33be4f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColliderRendererController
+  startHidden: 0
+--- !u!114 &1863024719684317267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364898736719544289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b415488b96d13c446aa53ee938626cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectSpawner
+  spawnPointObject: {fileID: 4364898736719544289}
+  prefabToSpawn: {fileID: 6594668608368735494, guid: 1e9a40d5b3a3955429a4652e0e0e2e06, type: 3}
+--- !u!114 &6730146528526274951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364898736719544289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d228341ae9ff2fc44bde0161b058f327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
+  description: Take

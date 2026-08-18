@@ -52,4 +52,9 @@ public class InspectObjects : MonoBehaviour, IInteractable
             isBeingInteractWith = false;
         }
     }
+
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
+    }
 }

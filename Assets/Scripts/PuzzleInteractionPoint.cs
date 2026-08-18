@@ -324,4 +324,9 @@ public class PuzzleInteractionPoint : MonoBehaviour, IInteractable
     {
         return true;
     }
+
+    public void LookedAway()
+    {
+        return;
+    }
 }

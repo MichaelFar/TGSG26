@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c681aeb2e4292cb45805855831752127, type: 3}
   m_Name: EggData
   m_EditorClassIdentifier: Assembly-CSharp::InventoryItemData
-  numSlotsUsed: 1
+  numSlotsUsed: 2
   ev_DroppedItem:
     m_PersistentCalls:
       m_Calls: []

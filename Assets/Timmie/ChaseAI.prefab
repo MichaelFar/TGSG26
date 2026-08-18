@@ -129,7 +129,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a06ec120eedf37e478a446b2504581db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseAI
-  stopDistance: 6
 --- !u!114 &-8190276089802581996
 MonoBehaviour:
   m_ObjectHideFlags: 0

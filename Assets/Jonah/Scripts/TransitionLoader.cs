@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -5,10 +6,16 @@ public class TransitionLoader : MonoBehaviour
 {
 
     [SerializeField] private Animator Transition;
-    
+    [SerializeField] private Transform PlayerCamAnchor, BedCamAnchor;
+    [SerializeField] private Camera PlayerCam;
+    private Animator PlayerCamAnimator;
+    private MoveCamera MoveCam;
+    private Transform CameraTransform;
+    private bool PlayerSlept;
+
     public ChangeText TransitionText;
 
-    
+
 
     public void SetTransitionText(string text)
     {
@@ -18,12 +25,23 @@ public class TransitionLoader : MonoBehaviour
     public void Start()
     {
         StartNewGameTransition("Day 1");
-        PlayerGlobal.Instance.transitionController = this;
+        PlayerCamAnimator = PlayerCam.GetComponent<Animator>();
+        PlayerCamAnimator.enabled = false;
+        MoveCam = PlayerCam.GetComponent<MoveCamera>();
+        CameraTransform = PlayerCam.transform;
     }
 
     public void Update()
     {
-      
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            StartTransition("This thing here");
+        }
+
+        //Transition.GetCurrentAnimatorStateInfo(0).
+
+
+
     }
 
 
@@ -37,7 +55,9 @@ public class TransitionLoader : MonoBehaviour
     }
     public void StartTransition(string text)
     {
-        
+        //Enable camera's animator component and disable move camera component at the start of animation
+
+
         Transition.SetTrigger("FadeTrigger");
 
         print(Transition.GetCurrentAnimatorStateInfo(Transition.GetLayerIndex("Base Layer")).length + " is the duration of the fade");
@@ -45,5 +65,26 @@ public class TransitionLoader : MonoBehaviour
         TimeManager.Instance.PauseTimeForDuration(3.15f);
         SetTransitionText(text);
     }
-    
+
+    public void WakeUp()
+    {
+        print("WakeUp called, PlayerSlept = " + PlayerSlept);
+        if (PlayerSlept)
+        {
+            PlayerCamAnimator.enabled = true;
+            MoveCam.enabled = false;
+
+            CameraTransform.SetParent(BedCamAnchor);
+            CameraTransform.localPosition = Vector3.zero;
+            CameraTransform.localRotation = Quaternion.identity;
+            PlayerCamAnimator.Play("WakeUp", 0, 0f);
+            print("Waking up");
+        }
+    }
+
+    public void SetHasPlayerSlept(bool hasPlayerSlept)
+    {
+        PlayerSlept = hasPlayerSlept;
+    }
+
 }

@@ -15,6 +15,11 @@ public class TestItem : MonoBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
+    public void LookedAway()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void OnInteract(GameObject interacting_object)
     {
         print("Picked up item");
