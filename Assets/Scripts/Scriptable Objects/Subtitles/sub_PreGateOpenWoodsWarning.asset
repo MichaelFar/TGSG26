@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d873128c6569fb24a92427b3d860c330, type: 3}
-  m_Name: NoteData
-  m_EditorClassIdentifier: Assembly-CSharp::NoteData
-  body: Yo whats up dawg
-  noteSprite: {fileID: 21300000, guid: db4c45de17daf0f4889b971d26d79231, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a18341d8cbe30244b54979c81cd77cb, type: 3}
+  m_Name: sub_PreGateOpenWoodsWarning
+  m_EditorClassIdentifier: Assembly-CSharp::SubtitleSequence
+  subtitleArray:
+  - It's dangerous to go into the woods when I don't need to...

@@ -48,6 +48,8 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
     public bool triggerOnce = true;
 
     private bool canTrigger = true;
+
+    public float distanceLimit = 50.0f;
     private void Start()
     {
         
@@ -68,29 +70,26 @@ public class SpookyOnViewComponent : MonoBehaviour, IViewable
 
     private void Update()
     {    
-        if(effectActive)
-        {
-            effectTimer += Time.deltaTime;
-            print("Vignette effect timer running");
-            if(effectTimer >= effectLength)
-            {
-                effectTimer = 0.0f;
-                effectActive = false;
-                StopEffect();
-                print("Stopping effect");
-                canTrigger = !triggerOnce;
-            }
-        }
+        
     }
 
+
+    IEnumerator EffectTimerCoroutine()
+    {
+        print("Vignette effect timer running");
+        yield return new WaitForSeconds(effectLength);
+        StopEffect();
+        print("Stopping vignette effect");
+        canTrigger = !triggerOnce;
+    }
     public void OnView()
     {
-        if(canTrigger)
+        if(canTrigger && (Vector3.Distance(gameObject.transform.position, PlayerGlobal.Instance.playerRootObject.transform.position) < distanceLimit))
         {
             print("Vignette effect started");
             PlayerGlobal.Instance.scareStingController.FadeVignette(maxVignetteAlpha);
             PlayerGlobal.Instance.scareStingController.PlaySuspenseAudio();
-            effectActive = true;
+            StartCoroutine(EffectTimerCoroutine());
         }
             
     }

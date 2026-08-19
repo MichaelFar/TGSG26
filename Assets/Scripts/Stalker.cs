@@ -13,6 +13,8 @@ public class Stalker : MonoBehaviour, IViewable
 
     public UnityEvent ev_appeared;
     public UnityEvent ev_disappeared;
+
+    public float distanceLimit = 50.0f;
     void Start()
     {
         SetIsActive(isActive);
@@ -36,7 +38,8 @@ public class Stalker : MonoBehaviour, IViewable
 
     public void OnView()
     {
-        StartCoroutine(HideCoroutine());
+        if(Vector3.Distance(gameObject.transform.position, PlayerGlobal.Instance.playerRootObject.transform.position) < distanceLimit)
+            StartCoroutine(HideCoroutine());
         
     }
 
@@ -46,8 +49,7 @@ public class Stalker : MonoBehaviour, IViewable
         print("Rolling to reappear");
         if (roll <= 5.0f)
         {
-            SetIsActive(true);
-            ev_appeared.Invoke();
+            ShowStalker();
         }
     }
     IEnumerator HideCoroutine()
@@ -60,5 +62,11 @@ public class Stalker : MonoBehaviour, IViewable
     public void OnLookAway()
     {
         return;
+    }
+
+    public void ShowStalker()
+    {
+        SetIsActive(true);
+        ev_appeared.Invoke();
     }
 }

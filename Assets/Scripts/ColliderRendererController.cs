@@ -16,6 +16,7 @@ public class ColliderRendererController : MonoBehaviour
     private SkinnedMeshRenderer[] childSkinRenderers;
 
     public bool startHidden = false;
+    public bool startWithNoCollision = false;
     private void Awake()
     {
         thisRenderer = GetComponent<MeshRenderer>();
@@ -31,7 +32,11 @@ public class ColliderRendererController : MonoBehaviour
     {
         if(startHidden)
         {
-            DisableCollidersAndHideRenderers();
+            HideRenderers();
+        }
+        if(startWithNoCollision)
+        {
+            DisableColliders();
         }
     }
 
@@ -41,14 +46,9 @@ public class ColliderRendererController : MonoBehaviour
         
     }
 
-    public void DisableCollidersAndHideRenderers()
+    public void HideRenderers()
     {
-        print("Disabling renderer");
         foreach (MeshRenderer i in childRenderers)
-        {
-            i.enabled = false;
-        }
-        foreach (Collider i in childColliders)
         {
             i.enabled = false;
         }
@@ -56,35 +56,64 @@ public class ColliderRendererController : MonoBehaviour
         {
             i.enabled = false;
         }
-        if(thisSkinRenderer)
+        if (thisSkinRenderer)
             thisSkinRenderer.enabled = false;
-        if(thisRenderer)
+        if (thisRenderer)
             thisRenderer.enabled = false;
-        if(thisCollider)
-            thisCollider.enabled = false;
     }
 
-    public void EnableCollidersAndHideRenderers()
+    public void EnableRenderers()
     {
-        foreach (MeshRenderer i in childRenderers)
-        {
-            i.enabled = true;
-        }
-        foreach (Collider i in childColliders)
-        {
-            i.enabled = true;
-        }
         foreach (SkinnedMeshRenderer i in childSkinRenderers)
         {
             i.enabled = true;
         }
-
+        foreach (MeshRenderer i in childRenderers)
+        {
+            i.enabled = true;
+        }
         if (thisSkinRenderer)
             thisSkinRenderer.enabled = true;
         if (thisRenderer)
             thisRenderer.enabled = true;
+    }
+
+    public void EnableColliders()
+    {
+        foreach (Collider i in childColliders)
+        {
+            i.enabled = true;
+        }
+
         if (thisCollider)
             thisCollider.enabled = true;
+    }
+
+    public void DisableColliders()
+    {
+        foreach (Collider i in childColliders)
+        {
+            i.enabled = false;
+        }
+
+        if (thisCollider)
+            thisCollider.enabled = false;
+    }
+
+    public void DisableCollidersAndHideRenderers()
+    {
+        print("Disabling renderer");
+
+        DisableColliders();
+
+        HideRenderers();
+    }
+    //Misnamed, enables both
+    public void EnableCollidersAndHideRenderers()
+    {
+        EnableColliders();
+        EnableRenderers();
+        
     }
 
 }
