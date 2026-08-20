@@ -15,7 +15,7 @@ public class Notes : MonoBehaviour, IInteractable
 
     public void LookedAway()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public void OnInteract(GameObject object_interacting = null)

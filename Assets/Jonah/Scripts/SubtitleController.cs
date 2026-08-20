@@ -55,7 +55,18 @@ public class SubtitleController : MonoBehaviour
 
     }
 
-    
+    public IEnumerator SubtitleTimerCoroutine()
+    {
+
+
+        yield return new WaitForSeconds(timeTarget);
+            
+        ToggleSubtitleVisibility();
+            
+            
+        
+        
+    }
     public IEnumerator ProcessSubtitleList(SubtitleSequence this_sequence)
     {
         if(timerRunning)
