@@ -26,7 +26,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private LayerMask interactionLayer;
 
-    
+
 
     private float viewRaycastTimeTracker = 0.0f;
     void Start()
@@ -46,26 +46,37 @@ public class PlayerInteraction : MonoBehaviour
             Debug.DrawRay(ray_origin, playerCam.transform.forward * interactionRange, Color.red, 2, false);
             foreach (RaycastHit hit in hits)
             {
+                var found = hit.collider.GetComponents<IInteractable>();
+                print($"Found {found.Length} interactables: " + string.Join(", ", System.Array.ConvertAll(found, i => i.GetType().Name)));
                 foreach (IInteractable interactable in hit.collider.GetComponents<IInteractable>())
                 {
                     //checks if interacted item is not null
+                    print("Loop iteration: " + interactable.GetType().Name);
                     if (gameObject)
                     {
                         if (interactable != null)
                         {
                             if (!interactable.CanInteract())
                             {
-
+                                print(interactable.GetType().Name + " CanInteract() returned false, skipping");
                                 continue;
                             }
                             else
                             {
-                                print("Interactable is able to interact");
+                                print(interactable.GetType().Name + " is able to interact");
                             }
                         }
+                        print("About to call OnInteract on " + interactable.GetType().Name);
+                        try
+                        {
+                            interactable?.OnInteract(gameObject);
 
-                        interactable?.OnInteract(gameObject);
-
+                        }
+                        catch (System.Exception e)
+                        {
+                            print("EXCEPTION in " + interactable.GetType().Name + ": " + e.Message + "\n" + e.StackTrace);
+                        }
+                        print("Finished OnInteract on " + interactable.GetType().Name);
                     }
                 }
             }
@@ -74,7 +85,7 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         viewRaycastTimeTracker += Time.deltaTime;
-        if(viewRaycastTimeTracker >= viewRaycastInterval && !PauseMenu.Instance.GetGamePaused())
+        if (viewRaycastTimeTracker >= viewRaycastInterval && !PauseMenu.Instance.GetGamePaused())
         {
             viewRaycastTimeTracker = 0.0f;
             RaycastHit[] hits = Physics.SphereCastAll(playerCam.transform.position, 3.0f, playerCam.transform.forward, passiveInteractionRange, passiveInteractionLayer);
@@ -83,13 +94,13 @@ public class PlayerInteraction : MonoBehaviour
             foreach (RaycastHit hit in hits)
             {
                 IViewable[] viewables = hit.collider.GetComponents<IViewable>();
-                
-                
-                
+
+
+
                 //checks if interacted item is not null
                 foreach (IViewable viewable in viewables)
                 {
-                    
+
                     if (gameObject)
                     {
 

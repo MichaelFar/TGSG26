@@ -21,8 +21,16 @@ public class Chicken : MonoBehaviour, IInteractable
         chickenLeg = GetComponentInChildren<CapsuleCollider>();
     }
 
+    void Start()
+    {
+        print("chickenNavMeshAgent: " + chickenNavMeshAgent);
+        print("chickenAI: " + chickenAI);
+        print("chickenRigidBody: " + chickenRigidBody);
+        print("chickenLeg: " + chickenLeg);
+    }
     public void OnInteract(GameObject object_Interacting = null)
     {
+        print("CHICKEN ONINTERACT CALLED");
         itemPickUp.Invoke();
         StartEvent();
     }
@@ -34,6 +42,7 @@ public class Chicken : MonoBehaviour, IInteractable
 
     public void DisableAIComponents()
     {
+        print("disabling components");
         chickenNavMeshAgent.enabled = false;
         chickenAI.enabled = false;
         chickenLeg.isTrigger = true;

@@ -644,7 +644,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -720,6 +720,7 @@ GameObject:
   - component: {fileID: 4769746154648847608}
   - component: {fileID: 6239969658402914770}
   - component: {fileID: 4358193689797296098}
+  - component: {fileID: 7360297996562041295}
   m_Layer: 0
   m_Name: Capsule (2)
   m_TagString: Untagged
