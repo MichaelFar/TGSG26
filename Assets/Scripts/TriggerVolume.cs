@@ -36,14 +36,21 @@ public class TriggerVolume : MonoBehaviour, IViewable
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Player entered trigger volume");
-        ev_EnteredVolume.Invoke();
+        if(other.gameObject == PlayerGlobal.Instance.playerRootObject)
+        {
+            print("Player entered trigger volume");
+            ev_EnteredVolume.Invoke();
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        print("Player left trigger volume");
-        ev_ExitedVolume.Invoke();
+        if (other.gameObject == PlayerGlobal.Instance.playerRootObject)
+        {
+            print("Player left trigger volume");
+            ev_ExitedVolume.Invoke();
+        }
     }
 
     public void SetLayerToViewLayer()

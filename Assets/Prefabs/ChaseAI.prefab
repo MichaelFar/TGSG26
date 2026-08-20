@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1609026007667560489}
   - component: {fileID: 1123756316990814176}
   - component: {fileID: 3559729890707332607}
+  - component: {fileID: 4741779625710662137}
   m_Layer: 0
   m_Name: ChaseAI
   m_TagString: Untagged
@@ -168,6 +169,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ai: {fileID: 1123756316990814176}
   walkAndIdleAnimator: {fileID: 1670095633696626966}
+--- !u!114 &4741779625710662137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7977874188586117135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fea49350c72f6d43a4b2d52087c2297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StalkingPhantom
+  shouldDieOnView: 1
 --- !u!1001 &5732019229574218887
 PrefabInstance:
   m_ObjectHideFlags: 0
