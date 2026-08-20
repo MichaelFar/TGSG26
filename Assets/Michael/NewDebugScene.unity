@@ -5891,6 +5891,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2214684961241389541, guid: 8b8541faff560d74fac9990974347f26, type: 3}
+      propertyPath: PlayerCamAnchor
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2548939767681665376, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5906,13 +5910,9 @@ PrefabInstance:
     - target: {fileID: 3227541968960483878, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: ev_DroppedItem.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3227541968960483878, guid: 8b8541faff560d74fac9990974347f26, type: 3}
-      propertyPath: ev_TwoHandedItemPickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
       objectReference: {fileID: 335965135}
     - target: {fileID: 3227541968960483878, guid: 8b8541faff560d74fac9990974347f26, type: 3}
-      propertyPath: ev_TwoHandedItemPickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: ev_DroppedItem.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CheckArmsAndHide
       objectReference: {fileID: 0}
     - target: {fileID: 6985409444028584776, guid: 8b8541faff560d74fac9990974347f26, type: 3}
@@ -5963,10 +5963,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2414668589090497657, guid: 8b8541faff560d74fac9990974347f26, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 4545162085644844303, guid: 8b8541faff560d74fac9990974347f26, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b8541faff560d74fac9990974347f26, type: 3}
@@ -21627,7 +21625,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: aff23b7bdb3b79e4287e34d40570964a, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 9f420d71b6cf3d0428f968f2bbf8a3ad, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &2081248464
 PrefabInstance:
