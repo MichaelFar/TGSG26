@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 public class SubtitleController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class SubtitleController : MonoBehaviour
     private float timeTracker = 0;
 
     private bool timerRunning = false;
+
+    public UnityEvent ev_SubtitlesEnded;
     void Awake()
     {
         PlayerGlobal.Instance.subController = this;
@@ -81,6 +84,7 @@ public class SubtitleController : MonoBehaviour
             SetSubtitleText(this_sequence.subtitleArray[i]);
             yield return new WaitForSeconds(this_sequence.GetDurationOfLine(i));
         }
+        ev_SubtitlesEnded.Invoke();
         hideHudObject.SetVisibility(false);
 
     }
