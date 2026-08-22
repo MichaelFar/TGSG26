@@ -349,8 +349,40 @@ Transform:
   - {fileID: 5301226994503128620}
   - {fileID: 4769746154648847608}
   - {fileID: 8222876581106641855}
+  - {fileID: 7616063004701649718}
   m_Father: {fileID: 2035311078467538392}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &4362262284204691634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7616063004701649718}
+  m_Layer: 0
+  m_Name: SubtitleAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7616063004701649718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362262284204691634}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4598927530979340572}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5657776309037286173
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +489,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -481,7 +513,8 @@ GameObject:
   - component: {fileID: 4066783105370136164}
   - component: {fileID: -360289640787424821}
   - component: {fileID: 1714620945345262556}
-  - component: {fileID: 5584478655194107893}
+  - component: {fileID: 4088938605736405509}
+  - component: {fileID: 3628930384416510525}
   m_Layer: 0
   m_Name: ChickenAI
   m_TagString: Untagged
@@ -667,7 +700,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isInitialized: 0
---- !u!114 &5584478655194107893
+--- !u!114 &4088938605736405509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -682,7 +715,7 @@ MonoBehaviour:
   itemPickUp:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5584478655194107893}
+      - m_Target: {fileID: 4088938605736405509}
         m_TargetAssemblyTypeName: Chicken, Assembly-CSharp
         m_MethodName: DisableAIComponents
         m_Mode: 1
@@ -697,7 +730,7 @@ MonoBehaviour:
   itemDrop:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5584478655194107893}
+      - m_Target: {fileID: 4088938605736405509}
         m_TargetAssemblyTypeName: Chicken, Assembly-CSharp
         m_MethodName: ResetChickenAI
         m_Mode: 1
@@ -709,6 +742,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ChickenSubtitleAnchor: {fileID: 4362262284204691634}
+  SubtitleObject: {fileID: 4712873789607807365, guid: a32fac95a8794d248a6f38c6fe9fd0a1, type: 3}
+--- !u!114 &3628930384416510525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6151858107727985852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d228341ae9ff2fc44bde0161b058f327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
+  description: Chicken
 --- !u!1 &7597546232417613472
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +768,7 @@ GameObject:
   - component: {fileID: 4769746154648847608}
   - component: {fileID: 6239969658402914770}
   - component: {fileID: 4358193689797296098}
+  - component: {fileID: 7360297996562041295}
   m_Layer: 0
   m_Name: Capsule (2)
   m_TagString: Untagged
@@ -814,7 +863,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
