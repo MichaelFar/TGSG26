@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.094905
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.094905
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.094905
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -60,10 +60,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -75,31 +71,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -2336369695110286936}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
---- !u!1 &6436624135032561479 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b2778dd2f020104997640de1eb51a7b, type: 3}
-  m_PrefabInstance: {fileID: 6166011033507815958}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-2336369695110286936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6436624135032561479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0c94ea3a1b6c9444841d7b0af4c0aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SoftbodyGenerator
-  runOptimizedVersion: 0
-  _collissionSurfaceOffset: 0.1
-  _softness: 1
-  _damp: 0.2
-  _mass: 1
-  centerOfMasObj: {fileID: 0}

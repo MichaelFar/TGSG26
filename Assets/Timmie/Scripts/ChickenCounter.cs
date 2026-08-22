@@ -4,7 +4,7 @@ public class ChickenCounter : MonoBehaviour
 {
     public static ChickenCounter Instance;
     private int ChickensCollected;
-    [SerializeField] GameObject CaveWall;
+    [SerializeField] GameObject CaveWall, BloodDecals;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +28,7 @@ public class ChickenCounter : MonoBehaviour
         if (ChickensCollected == 4)
         {
             CaveWall.SetActive(false);
+            BloodDecals.SetActive(true);
         }
     }
 

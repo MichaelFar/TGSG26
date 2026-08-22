@@ -349,8 +349,40 @@ Transform:
   - {fileID: 5301226994503128620}
   - {fileID: 4769746154648847608}
   - {fileID: 8222876581106641855}
+  - {fileID: 7616063004701649718}
   m_Father: {fileID: 2035311078467538392}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &4362262284204691634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7616063004701649718}
+  m_Layer: 0
+  m_Name: SubtitleAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7616063004701649718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362262284204691634}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4598927530979340572}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5657776309037286173
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,6 +742,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ChickenSubtitleAnchor: {fileID: 4362262284204691634}
+  SubtitleObject: {fileID: 4712873789607807365, guid: a32fac95a8794d248a6f38c6fe9fd0a1, type: 3}
 --- !u!114 &3628930384416510525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,7 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d228341ae9ff2fc44bde0161b058f327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
-  description: chicken
+  description: Chicken
 --- !u!1 &7597546232417613472
 GameObject:
   m_ObjectHideFlags: 0

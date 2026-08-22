@@ -11,6 +11,8 @@ public class Chicken : MonoBehaviour, IInteractable
     private Rigidbody chickenRigidBody;
     private bool wasHeld, waitingToLand;
     private Collider chickenLeg;
+    [SerializeField] private GameObject ChickenSubtitleAnchor, SubtitleObject;
+    private GameObject SpawnedSubObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -19,6 +21,7 @@ public class Chicken : MonoBehaviour, IInteractable
         chickenRigidBody = GetComponent<Rigidbody>();
         chickenRigidBody.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         chickenLeg = GetComponentInChildren<CapsuleCollider>();
+
     }
 
     void Start()
@@ -60,6 +63,13 @@ public class Chicken : MonoBehaviour, IInteractable
         print("StartEvent number of chickens collected prior to picking up chicken: " + ChickenCounter.Instance.GetChickensCollected());
         switch (ChickenCounter.Instance.GetChickensCollected())
         {
+            case 0:
+                print("showing tutorial text");
+                if (SpawnedSubObject == null)
+                {
+                    SpawnedSubObject = Instantiate(SubtitleObject, ChickenSubtitleAnchor.transform.position, Quaternion.identity);
+                }
+                break;
             case 1:
                 print("Spawning chasing demon");
                 PlayerGlobal.Instance.GetComponent<DemonSpawner>().SpawnDemon();
