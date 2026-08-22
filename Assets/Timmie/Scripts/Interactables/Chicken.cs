@@ -11,8 +11,7 @@ public class Chicken : MonoBehaviour, IInteractable
     private Rigidbody chickenRigidBody;
     private bool wasHeld, waitingToLand;
     private Collider chickenLeg;
-    [SerializeField] private GameObject ChickenSubtitleAnchor, SubtitleObject;
-    private GameObject SpawnedSubObject;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -47,6 +46,7 @@ public class Chicken : MonoBehaviour, IInteractable
     {
         print("disabling components");
         chickenNavMeshAgent.enabled = false;
+        chickenAI.StopAllCoroutines();
         chickenAI.enabled = false;
         chickenLeg.isTrigger = true;
     }
@@ -65,10 +65,7 @@ public class Chicken : MonoBehaviour, IInteractable
         {
             case 0:
                 print("showing tutorial text");
-                if (SpawnedSubObject == null)
-                {
-                    SpawnedSubObject = Instantiate(SubtitleObject, ChickenSubtitleAnchor.transform.position, Quaternion.identity);
-                }
+                
                 break;
             case 1:
                 print("Spawning chasing demon");
@@ -111,6 +108,6 @@ public class Chicken : MonoBehaviour, IInteractable
 
     public void LookedAway()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 }
