@@ -2210,6 +2210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1863024719684317267, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 4364898736719544289, guid: a532a8e3c9773f84fb01bb2f9cc05dbe, type: 3}
     - target: {fileID: 4364898736719544289, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
       propertyPath: m_Name
       value: NormalEggItemPickup (3)
@@ -2335,6 +2339,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1863024719684317267, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 4364898736719544289, guid: a532a8e3c9773f84fb01bb2f9cc05dbe, type: 3}
     - target: {fileID: 4364898736719544289, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
       propertyPath: m_Name
       value: NormalEggItemPickup (2)
@@ -4513,10 +4521,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1180749802261703432, guid: a2976461542ec454db870ab6a4279f84, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 533179623}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2976461542ec454db870ab6a4279f84, type: 3}
 --- !u!1001 &481252905
 PrefabInstance:
@@ -5084,25 +5089,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4897008867947346941, guid: 4abe51e24c3baf14f95002f6ed11c13f, type: 3}
   m_PrefabInstance: {fileID: 1697039351}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &533179621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1180749802261703432, guid: a2976461542ec454db870ab6a4279f84, type: 3}
-  m_PrefabInstance: {fileID: 475111011}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &533179623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533179621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93bb2c11d5bfa344ea6b8a15a33be4f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ColliderRendererController
-  startHidden: 1
-  startWithNoCollision: 0
 --- !u!1001 &538318279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6014,11 +6000,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1953523910971389349, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.6
+      value: 4.56
       objectReference: {fileID: 0}
     - target: {fileID: 1953523910971389349, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.32
+      value: -57.65
       objectReference: {fileID: 0}
     - target: {fileID: 1953523910971389349, guid: 8b8541faff560d74fac9990974347f26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9643,6 +9629,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1863024719684317267, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 4364898736719544289, guid: a532a8e3c9773f84fb01bb2f9cc05dbe, type: 3}
     - target: {fileID: 4364898736719544289, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
       propertyPath: m_Name
       value: NormalEggItemPickup
@@ -10577,6 +10567,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1863024719684317267, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 4364898736719544289, guid: a532a8e3c9773f84fb01bb2f9cc05dbe, type: 3}
     - target: {fileID: 4364898736719544289, guid: b09cd7437f665ab4a90d75e2b7f4fc1d, type: 3}
       propertyPath: m_Name
       value: NormalEggItemPickup (1)
