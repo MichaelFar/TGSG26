@@ -7,8 +7,8 @@ public class SubtitleSequence : ScriptableObject
 
     public float GetDurationOfLine(int index)
     {
-        float time_val = 0.15f;
+        float time_val = 0.8f;
         
-        return Mathf.Clamp(subtitleArray[index].Length * time_val, 1.0f, 10.0f);
+        return Mathf.Clamp(subtitleArray[index].Length * time_val, .75f, 10.0f);
     }
 }

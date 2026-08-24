@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 5172274614211556073}
   - component: {fileID: 9080898157219612174}
   - component: {fileID: 2893039885536254700}
+  - component: {fileID: 795797009640577717}
   m_Layer: 0
   m_Name: AxeTest
   m_TagString: Untagged
@@ -341,3 +342,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColliderRendererController
   startHidden: 0
+  startWithNoCollision: 0
+--- !u!114 &795797009640577717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733592065733716304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d228341ae9ff2fc44bde0161b058f327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractPrompt
+  description: Axe
